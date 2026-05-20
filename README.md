@@ -4,6 +4,7 @@
 
 [![Deploy with Vercel](https://vercelbadge.vercel.app/api/Arshdeep-Yadav/arshdeep-portfolio)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FArshdeep-Yadav%2Farshdeep-portfolio)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/arshdeep-yadav)
+[![Live Site](https://img.shields.io/badge/Live_Site-arshdeepyadav.me-0026FF?style=flat-square&logo=vercel)](https://arshdeepyadav.me)
 
 **Location:** Lucknow, Uttar Pradesh, India  
 **Status:** Open to Opportunities  
