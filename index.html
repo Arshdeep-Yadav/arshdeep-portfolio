@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Arshdeep Yadav — AI/ML Engineer & Builder</title>
+  <meta name="description" content="Portfolio of Arshdeep Yadav. CSE graduate (AI/ML Honors) from Chandigarh University, incoming MBA at IIT Patna. Building across computer vision, explainable AI, robotics, and deep-tech.">
+
+  <!-- Security -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Arshdeep Yadav — AI/ML Engineer & Builder">
+  <meta property="og:description" content="CSE graduate building intelligent systems across computer vision, explainable AI, robotics, and fintech. Incoming MBA at IIT Patna.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Arshdeep Yadav — AI/ML Engineer & Builder">
+  <meta name="twitter:description" content="CSE graduate building intelligent systems across computer vision, explainable AI, robotics, and fintech.">
+
+  <!-- Theme -->
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="light">
+
+  <!-- Performance: DNS prefetch + preconnect -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Boot Sequence Overlay -->
+  <div id="boot-overlay" style="
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #050505; z-index: 99999; display: flex;
+    flex-direction: column; justify-content: center; align-items: center;
+    font-family: 'JetBrains Mono', monospace; color: #0026FF;
+    transition: opacity 0.3s;
+  ">
+    <div id="boot-text" style="font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; text-align: left; line-height: 2;"></div>
+  </div>
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress" style="
+    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+    background: #0026FF; z-index: 10001; transition: width 0.1s;
+  "></div>
+
+  <!-- Cursor Trail Dot -->
+  <div id="cursor-dot" style="
+    position: fixed; width: 6px; height: 6px; background: #0026FF;
+    border-radius: 50%; pointer-events: none; z-index: 99998;
+    opacity: 0; transition: opacity 0.3s; mix-blend-mode: difference;
+  "></div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- NAVIGATION -->
+  <!-- ═══════════════════════════════════════════ -->
+  <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
+    <!-- Orbiting Rocket -->
+    <div class="nav-rocket" aria-hidden="true">🚀</div>
+    <!-- Floating Satellites -->
+    <div class="nav-satellite sat-1" aria-hidden="true">🛰️</div>
+    <div class="nav-satellite sat-2" aria-hidden="true">🛰️</div>
+    <div class="nav-satellite sat-3" aria-hidden="true">⭐</div>
+
+    <div class="nav-logo" data-screen="home" tabindex="0" role="button" aria-label="Go to home">ARSHDEEP YADAV</div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-links" id="nav-links-container">
+      <a class="nav-link active" data-screen="home" id="nav-home" tabindex="0" role="link">Home</a>
+      <a class="nav-link" data-screen="strategy" id="nav-strategy" tabindex="0" role="link">Vision</a>
+      <a class="nav-link" data-screen="dossier" id="nav-dossier" tabindex="0" role="link">Dossier</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SCREEN: HOME -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="screen active" id="screen-home">
+    <div class="home">
+      <!-- Left Panel: Hero -->
+      <div class="hero-panel">
+        <div class="hero-statement">
+          <h1 data-text="Building intelligent systems that see, learn, and explain.">Building intelligent systems that see, learn, and explain.</h1>
+        </div>
+        <div class="hero-meta">
+          <div>AI/ML Engineer & Builder</div>
+          <div class="mt-1" id="time-greeting" style="color: var(--color-accent); font-size: 0.75rem;"></div>
+          <div class="mt-1">Lucknow, Uttar Pradesh, India</div>
+          <div class="mt-1" style="color: var(--color-accent);">arshdeep.yadav.work@gmail.com</div>
+          <div class="mt-2" style="color: var(--color-muted); font-size: 0.75rem; line-height: 1.8; max-width: 380px;">
+            CSE graduate (AI/ML Honors) → incoming MBA candidate at IIT Patna (Gen AI & Product Management). Shipping across computer vision, explainable AI, robotics, and fintech.
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Project Matrix -->
+      <div class="project-matrix">
+        <div class="matrix-header">
+          <span>Project Index</span>
+          <span class="text-muted">[<span class="scramble" data-final="06">06</span>] Entries</span>
+        </div>
+
+        <div class="matrix-row" data-case="xai-satellite">
+          <div class="matrix-left">
+            <div class="matrix-title">Explainable Vision Transformer for Satellite Analysis</div>
+            <div class="matrix-pitch">XAI framework for satellite image classification using Vision Transformers with Grad-CAM interpretability. Published at IEEE RMKMATE'26.</div>
+          </div>
+          <div class="matrix-right">
+            <div class="matrix-year">2026</div>
+          </div>
+        </div>
+
+        <div class="matrix-row" data-case="ipo-platform">
+          <div class="matrix-left">
+            <div class="matrix-title">Real-Time IPO Tracking Platform</div>
+            <div class="matrix-pitch">Full-stack fintech platform for live IPO data workflows with real-time tracking, built during Bluestock Fintech internship.</div>
+          </div>
+          <div class="matrix-right">
+            <div class="matrix-year">2025</div>
+          </div>
+        </div>
+
+        <div class="matrix-row" data-case="plant-disease">
+          <div class="matrix-left">
+            <div class="matrix-title">Plant Disease Detection System</div>
+            <div class="matrix-pitch">CNN-based crop disease detection with Streamlit interface for real-time prediction and visualization from image datasets.</div>
+          </div>
+          <div class="matrix-right">
+            <div class="matrix-year">2025</div>
+          </div>
+        </div>
+
+        <div class="matrix-row" data-case="object-detection">
+          <div class="matrix-left">
+            <div class="matrix-title">Deep Learning Object Detection</div>
+            <div class="matrix-pitch">Real-time object detection and classification system using YOLO architecture with OpenCV tracking and transfer learning.</div>
+          </div>
+          <div class="matrix-right">
+            <div class="matrix-year">2024</div>
+          </div>
+        </div>
+
+        <div class="matrix-row" data-case="stress-detection">
+          <div class="matrix-left">
+            <div class="matrix-title">Stress Detection via Medical Data</div>
+            <div class="matrix-pitch">ML models for stress prediction using physiological datasets with feature engineering and classification optimization.</div>
+          </div>
+          <div class="matrix-right">
+            <div class="matrix-year">2023</div>
+          </div>
+        </div>
+
+        <div class="matrix-row" data-case="iot-systems">
+          <div class="matrix-left">
+            <div class="matrix-title">IoT-Based Smart Systems</div>
+            <div class="matrix-pitch">Suite of embedded systems — Smart Blind Stick, GPS Tracker, Room Monitor — built with ESP32, Arduino, and wireless protocols.</div>
+          </div>
+          <div class="matrix-right">
+            <div class="matrix-year">2023</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SCREEN: CASE STUDY -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="screen" id="screen-case-study">
+    <div class="container">
+      <a class="back-link" data-screen="home" tabindex="0" role="link" aria-label="Back to project index">← BACK TO INDEX</a>
+
+      <div class="case-study-header">
+        <h1 id="case-title">Explainable Vision Transformer for Satellite Analysis</h1>
+      </div>
+
+      <div class="meta-bar">
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-value" id="case-role">Lead Researcher</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Timeline</div>
+          <div class="meta-value" id="case-timeline">2025 — 2026</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Domain</div>
+          <div class="meta-value" id="case-team">Explainable AI · Remote Sensing</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Tech Stack</div>
+          <div class="meta-value" id="case-stack">Vision Transformers, Grad-CAM, Python, PyTorch</div>
+        </div>
+      </div>
+
+      <div class="case-content">
+        <!-- Column 1: Problem Space -->
+        <div class="case-column">
+          <h3>Problem Space</h3>
+          <p>Satellite image classification is increasingly powered by deep learning, but most models operate as black boxes. Decision-makers in urban planning, agriculture, and defense need to understand <strong>why</strong> a model classifies a region a certain way — not just the label.</p>
+          <p class="mt-2">Traditional CNNs lack the global context needed for large satellite images, and their feature maps don't provide human-readable explanations. Vision Transformers capture long-range spatial dependencies but their attention mechanisms are opaque.</p>
+          <p class="mt-2">The core challenge: build a classification pipeline that achieves state-of-the-art accuracy on satellite imagery <strong>and</strong> generates interpretable visual explanations that domain experts can trust and audit.</p>
+        </div>
+
+        <!-- Column 2: Architecture -->
+        <div class="case-column">
+          <h3>Model Architecture</h3>
+          <div class="architecture-diagram">
+┌──────────────────────────────────┐
+│      SATELLITE IMAGE INPUT       │
+│      (Multi-spectral Patches)    │
+└───────────────┬──────────────────┘
+                │
+┌───────────────▼──────────────────┐
+│     VISION TRANSFORMER (ViT)     │
+│  ┌────────────────────────────┐  │
+│  │  Patch Embedding (16×16)   │  │
+│  │  + Positional Encoding     │  │
+│  ├────────────────────────────┤  │
+│  │  Multi-Head Self-Attention │  │
+│  │  × 12 Transformer Blocks  │  │
+│  ├────────────────────────────┤  │
+│  │  [CLS] Token → Classifier │  │
+│  └────────────────────────────┘  │
+└───────────────┬──────────────────┘
+                │
+┌───────────────▼──────────────────┐
+│       EXPLAINABILITY LAYER       │
+│  ┌──────────┐  ┌──────────────┐  │
+│  │ GRAD-CAM │  │  ATTENTION   │  │
+│  │ Heatmaps │  │  ROLLOUT     │  │
+│  └──────────┘  └──────────────┘  │
+│        INTERPRETABLE OUTPUT      │
+└──────────────────────────────────┘</div>
+        </div>
+
+        <!-- Column 3: Impact -->
+        <div class="case-column">
+          <h3>Impact</h3>
+          <div class="metrics-board">
+            <div class="metric-block">
+              <div class="metric-value"><span class="scramble" data-final="IEEE">IEEE</span></div>
+              <div class="metric-label">To Be Presented</div>
+            </div>
+            <div class="metric-block">
+              <div class="metric-value"><span class="scramble" data-final="ViT">ViT</span></div>
+              <div class="metric-label">Architecture</div>
+            </div>
+            <div class="metric-block">
+              <div class="metric-value"><span class="scramble" data-final="XAI">XAI</span></div>
+              <div class="metric-label">Grad-CAM Integrated</div>
+            </div>
+            <div class="metric-block">
+              <div class="metric-value"><span class="scramble" data-final="2026">2026</span></div>
+              <div class="metric-label">RMKMATE'26 Conf</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ CASE STUDY TEMPLATES ═══ -->
+
+      <template id="case-ipo-platform">
+        <div data-title="Real-Time IPO Tracking Platform" data-role="Software Development Intern" data-timeline="May 2025 — Jun 2025" data-team="Fintech · Full-Stack" data-stack="Python, JavaScript, REST APIs, Frontend/Backend">
+          <div class="case-column" data-col="problem">
+            <h3>Problem Space</h3>
+            <p>Retail investors tracking IPO markets lacked a unified, real-time platform. Existing tools were fragmented — some tracked listings but not performance, others had data delays of hours.</p>
+            <p class="mt-2">Bluestock Fintech needed a platform that could ingest live financial data, display IPO status in real-time, and provide actionable insights for investors during the critical listing window.</p>
+            <p class="mt-2">The engineering challenge: build reliable data pipelines from multiple financial APIs, present real-time updates with minimal latency, and maintain platform stability during high-traffic IPO listing days.</p>
+          </div>
+          <div class="case-column" data-col="architecture">
+            <h3>System Architecture</h3>
+            <div class="architecture-diagram">
+┌──────────────────────────────┐
+│     FINANCIAL DATA SOURCES   │
+│   BSE API │ NSE API │ Feeds  │
+└──────┬───────────────────────┘
+       │
+┌──────▼───────────────────────┐
+│      PYTHON BACKEND          │
+│  ┌─────────────────────┐     │
+│  │  Data Ingestion     │     │
+│  │  + Normalization    │     │
+│  ├─────────────────────┤     │
+│  │  IPO Status Engine  │     │
+│  │  (Live Tracking)    │     │
+│  ├─────────────────────┤     │
+│  │  REST API Layer     │     │
+│  └──────────┬──────────┘     │
+└─────────────┼────────────────┘
+              │
+┌─────────────▼────────────────┐
+│      JAVASCRIPT FRONTEND     │
+│  Real-time Dashboard         │
+│  IPO Cards + Status Updates  │
+│  Performance Metrics         │
+└──────────────────────────────┘</div>
+          </div>
+          <div class="case-column" data-col="impact">
+            <h3>Impact</h3>
+            <div class="metrics-board">
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="LIVE">LIVE</span></div><div class="metric-label">Real-Time Data</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="F+B">F+B</span></div><div class="metric-label">Full-Stack</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="API">API</span></div><div class="metric-label">Integrations Built</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="AGILE">AGILE</span></div><div class="metric-label">Sprint-Based Dev</div></div>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <template id="case-plant-disease">
+        <div data-title="Plant Disease Detection System" data-role="ML Engineer" data-timeline="2025" data-team="Computer Vision · AgriTech" data-stack="Python, CNN, TensorFlow, Streamlit">
+          <div class="case-column" data-col="problem">
+            <h3>Problem Space</h3>
+            <p>Crop diseases cause billions in agricultural losses annually. Farmers in developing regions lack access to plant pathologists, and by the time diseases are visually obvious, the damage is often irreversible.</p>
+            <p class="mt-2">Existing detection methods required expert knowledge or expensive lab analysis. A mobile-friendly, image-based diagnostic tool could democratize early disease detection for smallholder farmers.</p>
+            <p class="mt-2">The ML challenge: build a convolutional neural network that generalizes across crop types, lighting conditions, and disease stages from relatively small image datasets — while keeping inference fast enough for a web-based real-time interface.</p>
+          </div>
+          <div class="case-column" data-col="architecture">
+            <h3>Model Architecture</h3>
+            <div class="architecture-diagram">
+┌──────────────────────────────┐
+│      IMAGE INPUT (RGB)       │
+│   Crop Leaf Photographs      │
+└──────────┬───────────────────┘
+           │
+┌──────────▼───────────────────┐
+│    PREPROCESSING PIPELINE    │
+│  Resize → Normalize →       │
+│  Augmentation (Flip, Rotate, │
+│  Color Jitter, Crop)         │
+└──────────┬───────────────────┘
+           │
+┌──────────▼───────────────────┐
+│    CNN CLASSIFIER            │
+│  ┌─────────────────────────┐ │
+│  │ Conv2D × 4 Blocks       │ │
+│  │ BatchNorm + ReLU        │ │
+│  │ MaxPool (2×2)           │ │
+│  ├─────────────────────────┤ │
+│  │ Global Avg Pool         │ │
+│  │ Dense → Softmax         │ │
+│  └─────────────────────────┘ │
+└──────────┬───────────────────┘
+           │
+┌──────────▼───────────────────┐
+│    STREAMLIT INTERFACE       │
+│  Upload → Predict → Display  │
+└──────────────────────────────┘</div>
+          </div>
+          <div class="case-column" data-col="impact">
+            <h3>Impact</h3>
+            <div class="metrics-board">
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="CNN">CNN</span></div><div class="metric-label">Deep Learning</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="LIVE">LIVE</span></div><div class="metric-label">Real-Time UI</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="AUG">AUG</span></div><div class="metric-label">Data Augmentation</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="WEB">WEB</span></div><div class="metric-label">Streamlit Deploy</div></div>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <template id="case-object-detection">
+        <div data-title="Deep Learning Object Detection" data-role="ML Engineer" data-timeline="2024" data-team="Computer Vision" data-stack="Python, OpenCV, YOLO, Transfer Learning">
+          <div class="case-column" data-col="problem">
+            <h3>Problem Space</h3>
+            <p>Real-time object detection is a cornerstone of autonomous systems, surveillance, and industrial automation. Existing solutions either sacrificed speed for accuracy or vice versa.</p>
+            <p class="mt-2">The goal was to build a detection system that could identify and track multiple object classes in real-time video streams with high accuracy, while remaining lightweight enough for edge deployment scenarios.</p>
+            <p class="mt-2">Key challenges included handling occlusion, varying scales, and real-world lighting conditions while maintaining >30 FPS inference speed through efficient architecture choices and transfer learning from pre-trained YOLO weights.</p>
+          </div>
+          <div class="case-column" data-col="architecture">
+            <h3>Model Architecture</h3>
+            <div class="architecture-diagram">
+┌──────────────────────────────┐
+│     VIDEO STREAM INPUT       │
+│   Webcam / File / RTSP       │
+└──────────┬───────────────────┘
+           │
+┌──────────▼───────────────────┐
+│     YOLO DETECTOR            │
+│  ┌─────────────────────────┐ │
+│  │  Backbone (Darknet/CSP) │ │
+│  │  Feature Pyramid (FPN)  │ │
+│  │  Detection Head (3 sc.) │ │
+│  └──────────┬──────────────┘ │
+│             │                │
+│  ┌──────────▼──────────────┐ │
+│  │  Non-Max Suppression    │ │
+│  │  Confidence Threshold   │ │
+│  └──────────┬──────────────┘ │
+└─────────────┼────────────────┘
+              │
+┌─────────────▼────────────────┐
+│     OPENCV TRACKER           │
+│  Bounding Box Rendering      │
+│  Class Label Overlay         │
+│  FPS Counter                 │
+└──────────────────────────────┘</div>
+          </div>
+          <div class="case-column" data-col="impact">
+            <h3>Impact</h3>
+            <div class="metrics-board">
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="YOLO">YOLO</span></div><div class="metric-label">Architecture</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="RT">RT</span></div><div class="metric-label">Real-Time FPS</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="TL">TL</span></div><div class="metric-label">Transfer Learning</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="CV">CV</span></div><div class="metric-label">OpenCV Integrated</div></div>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <template id="case-stress-detection">
+        <div data-title="Stress Detection via Medical Data" data-role="ML Engineer" data-timeline="2023" data-team="Health AI · Predictive Analytics" data-stack="Python, Scikit-learn, Pandas, NumPy">
+          <div class="case-column" data-col="problem">
+            <h3>Problem Space</h3>
+            <p>Chronic stress is a silent contributor to cardiovascular disease, anxiety disorders, and burnout — yet clinical detection relies on subjective self-reporting. Physiological signals like heart rate variability, skin conductance, and cortisol proxies contain objective stress markers.</p>
+            <p class="mt-2">The challenge: build ML models that can reliably predict stress levels from noisy physiological sensor data, handling missing values, temporal dependencies, and individual baseline variation.</p>
+            <p class="mt-2">Feature engineering was critical — raw sensor readings needed to be transformed into meaningful statistical descriptors (rolling means, spectral features, inter-beat intervals) that capture stress signatures across different individuals.</p>
+          </div>
+          <div class="case-column" data-col="architecture">
+            <h3>Model Architecture</h3>
+            <div class="architecture-diagram">
+┌──────────────────────────────┐
+│   PHYSIOLOGICAL DATASETS     │
+│   HR │ EDA │ Temp │ Accel    │
+└──────────┬───────────────────┘
+           │
+┌──────────▼───────────────────┐
+│   FEATURE ENGINEERING        │
+│  ┌─────────────────────────┐ │
+│  │ Statistical Features    │ │
+│  │ (Mean, Std, Kurtosis)   │ │
+│  ├─────────────────────────┤ │
+│  │ Temporal Features       │ │
+│  │ (Rolling, Lag, Diff)    │ │
+│  ├─────────────────────────┤ │
+│  │ Normalization + Impute  │ │
+│  └──────────┬──────────────┘ │
+└─────────────┼────────────────┘
+              │
+┌─────────────▼────────────────┐
+│   CLASSIFICATION ENSEMBLE    │
+│  RF │ SVM │ XGBoost │ KNN    │
+│  ────────────────────────    │
+│  Cross-Validation + Tuning   │
+│  → Best Model Selection      │
+└──────────────────────────────┘</div>
+          </div>
+          <div class="case-column" data-col="impact">
+            <h3>Impact</h3>
+            <div class="metrics-board">
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="ML">ML</span></div><div class="metric-label">Multi-Model</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="FE">FE</span></div><div class="metric-label">Feature Engineering</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="CV">CV</span></div><div class="metric-label">Cross-Validated</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="OPT">OPT</span></div><div class="metric-label">Hyperparameter Tuned</div></div>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <template id="case-iot-systems">
+        <div data-title="IoT-Based Smart Systems" data-role="Embedded Systems Engineer" data-timeline="2023" data-team="IoT · Accessibility · Automation" data-stack="Arduino, ESP32, IoT Sensors, Wireless Protocols">
+          <div class="case-column" data-col="problem">
+            <h3>Problem Space</h3>
+            <p>Assistive technology and smart monitoring systems remain expensive and inaccessible for many users. Off-the-shelf IoT solutions lack customization for specific use cases like navigation aid for visually impaired users or low-cost environmental monitoring.</p>
+            <p class="mt-2">Three distinct problems were addressed: (1) obstacle detection and navigation for blind users, (2) real-time GPS tracking for safety-critical applications, and (3) automated room condition monitoring for energy efficiency and comfort.</p>
+            <p class="mt-2">Each system was designed for reliability, low power consumption, and practical deployment — prioritizing sensor accuracy and wireless communication stability in real-world conditions over lab-perfect metrics.</p>
+          </div>
+          <div class="case-column" data-col="architecture">
+            <h3>System Architecture</h3>
+            <div class="architecture-diagram">
+┌──────────────────────────────────┐
+│   SMART BLIND STICK              │
+│   Ultrasonic + Vibration Motor   │
+│   Arduino Nano │ Battery Pack    │
+├──────────────────────────────────┤
+│   GPS TRACKER                    │
+│   NEO-6M GPS + GSM Module        │
+│   ESP32 │ MQTT │ Cloud Relay     │
+├──────────────────────────────────┤
+│   ROOM MONITORING SYSTEM         │
+│   DHT22 │ MQ-135 │ LDR │ PIR    │
+│   ESP32 → WiFi → Dashboard      │
+└──────────────────────────────────┘
+     │           │           │
+  [SENSORS]  [WIRELESS]  [ACTUATORS]
+  Ultra/IR   WiFi/BLE    Motor/LED
+  Temp/Gas   MQTT/HTTP   Buzzer/LCD</div>
+          </div>
+          <div class="case-column" data-col="impact">
+            <h3>Impact</h3>
+            <div class="metrics-board">
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="3">3</span></div><div class="metric-label">Systems Built</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="IoT">IoT</span></div><div class="metric-label">End-to-End</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="ESP">ESP</span></div><div class="metric-label">ESP32 + Arduino</div></div>
+              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="A11Y">A11Y</span></div><div class="metric-label">Accessibility Focus</div></div>
+            </div>
+          </div>
+        </div>
+      </template>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SCREEN: STRATEGY & ROADMAP -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="screen" id="screen-strategy">
+    <div class="container">
+      <div class="strategy-header">
+        <h1>Vision & Roadmap</h1>
+      </div>
+
+      <div class="vision-block">
+        <div class="vision-column">
+          <h3>Strategic Thesis</h3>
+          <p>The next decade of AI impact won't come from bigger models — it'll come from <strong>intelligent integration</strong>. The gap between research breakthroughs and real-world deployment is where builders create the most value.</p>
+          <p class="mt-2">I focus on applied AI that crosses domain boundaries: computer vision for agriculture, explainable AI for defense and policy, embedded intelligence for accessibility, and data-driven analytics for business decisions.</p>
+          <p class="mt-2">My conviction: the most impactful AI systems are the ones users can <strong>trust, understand, and correct</strong>. That's why explainability, robustness, and practical deployment are central to every project I build.</p>
+        </div>
+        <div class="vision-column">
+          <h3>Operating Principles</h3>
+          <p><strong>1. Build to deploy, not to demo.</strong> Every model should work outside a Jupyter notebook. If it can't run on a Streamlit app or an ESP32, it's not done.</p>
+          <p class="mt-2"><strong>2. Explain what you build.</strong> Black-box AI erodes trust. Integrate interpretability (Grad-CAM, attention visualization, SHAP) as a first-class feature, not an afterthought.</p>
+          <p class="mt-2"><strong>3. Cross-pollinate domains.</strong> The best solutions come from applying techniques across boundaries — computer vision for agriculture, NLP for healthcare, embedded systems for accessibility.</p>
+          <p class="mt-2"><strong>4. Ship fast, measure everything.</strong> Agile sprints, version control, CI/CD pipelines. Treat ML projects with the same engineering rigor as production software.</p>
+        </div>
+      </div>
+
+      <div class="section-header">Growth Roadmap — 2025-2027 Horizons</div>
+
+      <div class="roadmap-table-wrapper">
+        <table class="roadmap-table">
+          <thead>
+            <tr>
+              <th>Horizon</th>
+              <th>Initiative</th>
+              <th>AI Capability</th>
+              <th>Focus Area</th>
+              <th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">H1 — NOW</td>
+              <td>Explainable AI Research</td>
+              <td>Vision Transformers + Grad-CAM for interpretable classification</td>
+              <td>IEEE publication; remote sensing; satellite imagery</td>
+              <td><span class="confidence-bar">[████░]</span></td>
+            </tr>
+            <tr>
+              <td class="mono">H1 — NOW</td>
+              <td>Full-Stack AI Product Development</td>
+              <td>End-to-end ML pipelines with web deployment (Streamlit, Flask)</td>
+              <td>AgriTech, FinTech, HealthTech applications</td>
+              <td><span class="confidence-bar">[████░]</span></td>
+            </tr>
+            <tr>
+              <td class="mono">H2 — NEXT</td>
+              <td>Generative AI Systems</td>
+              <td>LLM fine-tuning, RAG pipelines, prompt engineering at scale</td>
+              <td>AWS GenAI certified; applied use cases</td>
+              <td><span class="confidence-bar">[███░░]</span></td>
+            </tr>
+            <tr>
+              <td class="mono">H2 — NEXT</td>
+              <td>Hybrid MBA — Gen AI & Product Management</td>
+              <td>AI product strategy, go-to-market, stakeholder coordination, data-driven roadmapping</td>
+              <td>IIT Patna (Jul 2026 — 2028); McKinsey Forward; Google PM certified</td>
+              <td><span class="confidence-bar">[█████]</span></td>
+            </tr>
+            <tr>
+              <td class="mono">H3 — LATER</td>
+              <td>Autonomous Systems & Robotics</td>
+              <td>Perception + planning stacks for autonomous navigation</td>
+              <td>Computer vision + embedded systems convergence</td>
+              <td><span class="confidence-bar">[██░░░]</span></td>
+            </tr>
+            <tr>
+              <td class="mono">H3 — LATER</td>
+              <td>Space Technology AI</td>
+              <td>ML for satellite data analysis, orbital mechanics optimization</td>
+              <td>ISRO IIRS certified; remote sensing research</td>
+              <td><span class="confidence-bar">[█░░░░]</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-header">Certifications & Credentials</div>
+
+      <div class="cert-grid">
+        <div class="cert-item">
+          <div class="cert-issuer">Amazon Web Services</div>
+          <div class="cert-name">AWS Academy Graduate — Generative AI Foundations</div>
+          <div class="cert-year">2026</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-issuer">McKinsey & Company</div>
+          <div class="cert-name">McKinsey Forward Program</div>
+          <div class="cert-year">2025</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-issuer">Microsoft</div>
+          <div class="cert-name">Azure AI Fundamentals (AI-900)</div>
+          <div class="cert-year">2024</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-issuer">Google</div>
+          <div class="cert-name">Foundations of Project Management</div>
+          <div class="cert-year">2025</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-issuer">Microsoft</div>
+          <div class="cert-name">Generative AI for Data Analysis</div>
+          <div class="cert-year">2025</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-issuer">University of Michigan</div>
+          <div class="cert-name">Applied Machine Learning in Python</div>
+          <div class="cert-year">2024</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-issuer">IBM</div>
+          <div class="cert-name">Computer Vision and Image Processing</div>
+          <div class="cert-year">2025</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-issuer">ISRO IIRS</div>
+          <div class="cert-name">Archival & Access of Space Science Data</div>
+          <div class="cert-year">2025</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-issuer">Chandigarh University</div>
+          <div class="cert-name">Artificial Intelligence Analyst</div>
+          <div class="cert-year">2025</div>
+        </div>
+        <div class="cert-item">
+          <div class="cert-issuer">Chandigarh University</div>
+          <div class="cert-name">Predictive Analytics using IBM SPSS Modeler — Advanced</div>
+          <div class="cert-year">2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- SCREEN: PROFESSIONAL DOSSIER (CV) -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="screen" id="screen-dossier">
+    <div class="container">
+      <div class="dossier-header">
+        <h1>Dossier</h1>
+      </div>
+
+      <div class="section-header">Experience Ledger</div>
+
+      <div class="ledger-row">
+        <div class="ledger-year">May — Jun 2025</div>
+        <div class="ledger-content">
+          <div class="ledger-title">Software Development Intern</div>
+          <div class="ledger-company">Bluestock Fintech · Remote</div>
+          <div class="ledger-bullet">Contributed to development of a real-time IPO tracking platform using Python and JavaScript</div>
+          <div class="ledger-bullet">Worked on feature integration across frontend and backend systems for live financial data workflows</div>
+          <div class="ledger-bullet">Collaborated with engineering and product teams during sprint-based development cycles</div>
+          <div class="ledger-bullet">Supported debugging, testing, and optimization of user-facing platform components</div>
+        </div>
+      </div>
+
+      <div class="ledger-row">
+        <div class="ledger-year">Feb — Mar 2025</div>
+        <div class="ledger-content">
+          <div class="ledger-title">AI Data Analyst Intern</div>
+          <div class="ledger-company">Excelerate × Rochester Institute of Technology · Remote</div>
+          <div class="ledger-bullet">Cleaned and engineered datasets to improve predictive analysis workflows</div>
+          <div class="ledger-bullet">Applied machine learning techniques for student engagement and churn prediction</div>
+          <div class="ledger-bullet">Developed visualizations and analytical insights using Python-based libraries</div>
+          <div class="ledger-bullet">Presented findings and recommendations based on trend analysis and model outputs</div>
+        </div>
+      </div>
+
+      <div class="ledger-row">
+        <div class="ledger-year">Jan — Feb 2025</div>
+        <div class="ledger-content">
+          <div class="ledger-title">Data Analyst Intern</div>
+          <div class="ledger-company">Excelerate × Saint Louis University · Remote</div>
+          <div class="ledger-bullet">Analyzed social media campaign datasets to identify optimization and cost-saving opportunities</div>
+          <div class="ledger-bullet">Built dashboards and reports for stakeholder presentations and strategic insights</div>
+          <div class="ledger-bullet">Generated actionable recommendations using data-driven analysis techniques</div>
+        </div>
+      </div>
+
+      <div class="ledger-row">
+        <div class="ledger-year">Dec 2024</div>
+        <div class="ledger-content">
+          <div class="ledger-title">Associate Project Management Intern</div>
+          <div class="ledger-company">Excelerate × Saint Louis University · Remote</div>
+          <div class="ledger-bullet">Developed roadmap, budgeting, and execution strategy for a global hackathon initiative</div>
+          <div class="ledger-bullet">Coordinated workflows using Jira and Kanban methodologies</div>
+          <div class="ledger-bullet">Evaluated project feasibility, risks, and resource allocation strategies</div>
+          <div class="ledger-bullet">Presented structured project proposals to stakeholders and leadership teams</div>
+        </div>
+      </div>
+
+      <div class="section-header">Research</div>
+
+      <div class="ledger-row">
+        <div class="ledger-year">2025 — 2026</div>
+        <div class="ledger-content">
+          <div class="ledger-title">Explainable Vision Transformer for Satellite Image Analysis</div>
+          <div class="ledger-company">IEEE RMKMATE'26 International Conference</div>
+          <div class="ledger-bullet">Developed an explainable AI framework for satellite image classification using Vision Transformers</div>
+          <div class="ledger-bullet">Integrated Grad-CAM based interpretability methods to improve transparency in model predictions</div>
+          <div class="ledger-bullet">Presented research work at IEEE RMKMATE'26 International Conference</div>
+          <div class="ledger-bullet">Focused on improving trust and interpretability in AI-driven remote sensing systems</div>
+        </div>
+      </div>
+
+      <div class="section-header">Education</div>
+
+      <div class="ledger-row">
+        <div class="ledger-year">Jul 2026 — 2028</div>
+        <div class="ledger-content">
+          <div class="ledger-title">Hybrid MBA — Gen AI & Product Management</div>
+          <div class="ledger-company">Indian Institute of Technology (IIT) Patna</div>
+          <div class="ledger-bullet">2-year hybrid program focused on Generative AI and AI Product Management</div>
+          <div class="ledger-bullet">Incoming — starting July 2026</div>
+        </div>
+      </div>
+
+      <div class="ledger-row">
+        <div class="ledger-year">2022 — Jun 2026</div>
+        <div class="ledger-content">
+          <div class="ledger-title">B.E. Computer Science Engineering (Honors in AI/ML)</div>
+          <div class="ledger-company">Chandigarh University · Mohali, Punjab</div>
+          <div class="ledger-bullet">Machine Learning, Deep Learning, Computer Vision, Artificial Neural Networks</div>
+          <div class="ledger-bullet">Robotics, Data Analytics, Data Structures & Algorithms</div>
+        </div>
+      </div>
+
+      <div class="section-header">Skill Matrix</div>
+
+      <div class="skill-matrix">
+        <div class="skill-group">
+          <div class="skill-group-title">AI / Machine Learning</div>
+          <div class="skill-list">TensorFlow, PyTorch, Scikit-learn, OpenCV, YOLO, CNNs, NLP Fundamentals, Vision Transformers, Grad-CAM, Explainable AI</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Programming</div>
+          <div class="skill-list">Python, SQL, Java, C/C++, JavaScript, Git, GitHub, Docker</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Data & Analytics</div>
+          <div class="skill-list">Pandas, NumPy, Matplotlib, Tableau, Data Visualization, Predictive Analytics, Feature Engineering</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Cloud & Infrastructure</div>
+          <div class="skill-list">AWS, Microsoft Azure, Google Cloud Platform, Streamlit, Flask, Docker, CI/CD</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Product & Project Management</div>
+          <div class="skill-list">Jira, Agile/Scrum, Kanban, Product Research, Roadmapping, Stakeholder Coordination</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Robotics & Embedded</div>
+          <div class="skill-list">Arduino, ESP32, IoT Systems, Sensor Integration, Wireless Communication, MQTT</div>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="print-cta" id="print-btn">[CTRL+P] EXPORT PDF</button>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FOOTER -->
+  <!-- ═══════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-label">Contact</div>
+        <div class="footer-value">arshdeep.yadav.work@gmail.com</div>
+        <div class="footer-value">+91 8115237909</div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-label">Social</div>
+        <a href="https://linkedin.com/in/arshdeep-yadav" target="_blank" rel="noopener" class="footer-link">LinkedIn ↗</a>
+        <a href="https://github.com/Arshdeep-Yadav" target="_blank" rel="noopener" class="footer-link">GitHub ↗</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-label">Location</div>
+        <div class="footer-value">Lucknow, Uttar Pradesh, India</div>
+        <div class="footer-value text-muted">CU '26 → IIT Patna '28</div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-label">Status</div>
+        <div class="footer-status">
+          <span class="status-dot"></span>
+          Open to Opportunities
+        </div>
+        <div class="footer-value text-muted">MBA @ IIT Patna · Jul 2026</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 ARSHDEEP YADAV</div>
+      <div class="footer-tagline">BUILT WITH PRECISION. NO FLUFF.</div>
+    </div>
+
+    <!-- Robot Meet Animation -->
+    <div class="footer-robots" aria-hidden="true">
+      <div class="footer-robot robot-left">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-muted)" stroke-width="1.5" stroke-linecap="square">
+          <path d="M12 2v4M8 6h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/>
+          <path d="M2 12h4M18 12h4M9 11v2M15 11v2M10 15h4"/>
+        </svg>
+      </div>
+      <div class="robot-speech" id="robot-speech">Hi! 👋</div>
+      <div class="footer-robot robot-right">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-muted)" stroke-width="1.5" stroke-linecap="square">
+          <path d="M12 2v4M8 6h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/>
+          <path d="M2 12h4M18 12h4M9 11v2M15 11v2M10 15h4"/>
+        </svg>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Easter Egg: Robot ASCII Overlay -->
+  <div class="robot-overlay" id="robot-overlay">
+    ┌───────────────┐
+    │   ┌───────┐   │
+    │   │ ●   ● │   │
+    │   │  ───  │   │
+    │   └───────┘   │
+    │ ┌─┴───────┴─┐ │
+    │ │ HELLO!    │ │
+    │ │ I BUILD   │ │
+    │ │  ROBOTS.  │ │
+    │ └───────────┘ │
+    │   ││   ││    │
+    │   └┘   └┘    │
+    └───────────────┘
+  </div>
+
+  <!-- Easter Egg Hint -->
+  <div class="easter-egg-hint" id="easter-hint">
+    <span style="opacity: 0.4;">SECRETS:</span> ↑↑↓↓←→←→BA · TRIPLE-CLICK LOGO · TYPE "LAUNCH" · PRESS <span style="color: var(--color-accent); opacity: 0.6;">`</span>
+  </div>
+
+  <!-- Mini Terminal Easter Egg -->
+  <div id="mini-terminal" style="
+    position: fixed; bottom: 0; left: 0; right: 0; height: 0;
+    background: #050505; z-index: 10002; overflow: hidden;
+    transition: height 0.3s ease-out; border-top: 3px solid #0026FF;
+    font-family: 'JetBrains Mono', monospace; color: #0026FF;
+    font-size: 0.8rem; padding: 0;
+  ">
+    <div style="padding: 16px; height: 100%; display: flex; flex-direction: column;">
+      <div id="terminal-output" style="flex: 1; overflow-y: auto; line-height: 1.8; white-space: pre-wrap;"></div>
+      <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
+        <span style="color: #00FF41;">arshdeep@portfolio:~$</span>
+        <input id="terminal-input" type="text" autocomplete="off" spellcheck="false" style="
+          background: none; border: none; color: #F4F4F0; font-family: inherit;
+          font-size: inherit; flex: 1; outline: none; caret-color: #00FF41;
+        " />
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- JAVASCRIPT -->
+  <!-- ═══════════════════════════════════════════ -->
+  <script>
+    'use strict';
+
+    // ─────────────────────────────────────────────
+    // UTILITIES
+    // ─────────────────────────────────────────────
+    const $ = (sel, ctx = document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+    // Sanitize text
+    function safeSetText(el, text) {
+      if (el) el.textContent = text;
+    }
+
+    // ─────────────────────────────────────────────
+    // HAMBURGER MENU (MOBILE)
+    // ─────────────────────────────────────────────
+    const hamburger = document.getElementById('nav-hamburger');
+    const navLinksContainer = document.getElementById('nav-links-container');
+
+    if (hamburger && navLinksContainer) {
+      hamburger.addEventListener('click', () => {
+        const isOpen = navLinksContainer.classList.toggle('open');
+        hamburger.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+
+      // Close menu on link click
+      $$('.nav-link', navLinksContainer).forEach(link => {
+        link.addEventListener('click', () => {
+          navLinksContainer.classList.remove('open');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+
+    // Hide cursor dot on touch devices
+    if (isTouchDevice) {
+      const dot = document.getElementById('cursor-dot');
+      if (dot) dot.style.display = 'none';
+    }
+
+    // ─────────────────────────────────────────────
+    // SPA ROUTER
+    // ─────────────────────────────────────────────
+    const screens = $$('.screen');
+    const navLinks = $$('.nav-link');
+    const validScreens = new Set(['home', 'case-study', 'strategy', 'dossier']);
+
+    function showScreen(screenId) {
+      // Validate screen ID to prevent DOM clobbering
+      if (!validScreens.has(screenId)) screenId = 'home';
+
+      screens.forEach(s => s.classList.remove('active'));
+      navLinks.forEach(l => l.classList.remove('active'));
+
+      const target = document.getElementById('screen-' + screenId);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo(0, 0);
+
+        // Trigger reveal animations
+        requestAnimationFrame(() => {
+          $$('.reveal', target).forEach((el, i) => {
+            setTimeout(() => el.classList.add('visible'), i * 60);
+          });
+        });
+      }
+
+      // Update nav active state
+      const navLink = $(`.nav-link[data-screen="${screenId}"]`);
+      if (navLink) navLink.classList.add('active');
+
+      // If showing case study, mark home as active in nav
+      if (screenId === 'case-study') {
+        const homeNav = $('.nav-link[data-screen="home"]');
+        if (homeNav) homeNav.classList.add('active');
+      }
+
+      // Trigger scramble animations for visible elements
+      if (target) {
+        $$('.scramble', target).forEach((el, i) => {
+          setTimeout(() => scrambleText(el), i * 80);
+        });
+      }
+    }
+
+    // Nav link clicks + keyboard support
+    function handleNavClick(e) {
+      e.preventDefault();
+      const screen = this.dataset.screen;
+      if (screen) window.location.hash = screen;
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', handleNavClick);
+      link.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleNavClick.call(link, e);
+        }
+      });
+    });
+
+    // Nav logo click → home
+    const navLogo = $('.nav-logo');
+    if (navLogo) {
+      navLogo.addEventListener('click', () => { window.location.hash = 'home'; });
+      navLogo.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          window.location.hash = 'home';
+        }
+      });
+    }
+
+    // Back links
+    $$('.back-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.hash = link.dataset.screen;
+      });
+      link.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          window.location.hash = link.dataset.screen;
+        }
+      });
+    });
+
+    // Hash routing with validation
+    function handleRoute() {
+      const rawHash = window.location.hash.slice(1) || 'home';
+      const hash = validScreens.has(rawHash) ? rawHash : 'home';
+      showScreen(hash);
+    }
+    window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('DOMContentLoaded', handleRoute);
+
+    // ─────────────────────────────────────────────
+    // PROJECT MATRIX — Click to Case Study
+    // ─────────────────────────────────────────────
+    const originalCaseContent = $('.case-content').innerHTML;
+    const originalMeta = {
+      title: $('#case-title').textContent,
+      role: $('#case-role').textContent,
+      timeline: $('#case-timeline').textContent,
+      team: $('#case-team').textContent,
+      stack: $('#case-stack').textContent
+    };
+
+    $$('.matrix-row').forEach(row => {
+      // Make rows keyboard accessible
+      row.setAttribute('tabindex', '0');
+      row.setAttribute('role', 'link');
+
+      function activateRow() {
+        const caseId = row.dataset.case;
+        // Validate case ID format (alphanumeric + hyphens only)
+        if (!/^[a-z0-9-]+$/.test(caseId)) return;
+
+        const template = document.getElementById('case-' + caseId);
+
+        if (template && template.tagName === 'TEMPLATE') {
+          const content = template.content.cloneNode(true);
+          const wrapper = content.querySelector('div');
+
+          safeSetText($('#case-title'), wrapper.dataset.title);
+          safeSetText($('#case-role'), wrapper.dataset.role);
+          safeSetText($('#case-timeline'), wrapper.dataset.timeline);
+          safeSetText($('#case-team'), wrapper.dataset.team);
+          safeSetText($('#case-stack'), wrapper.dataset.stack);
+
+          const caseContent = $('.case-content');
+          caseContent.innerHTML = '';
+          $$('.case-column', wrapper).forEach(col => {
+            caseContent.appendChild(col.cloneNode(true));
+          });
+        } else if (caseId === 'xai-satellite') {
+          safeSetText($('#case-title'), originalMeta.title);
+          safeSetText($('#case-role'), originalMeta.role);
+          safeSetText($('#case-timeline'), originalMeta.timeline);
+          safeSetText($('#case-team'), originalMeta.team);
+          safeSetText($('#case-stack'), originalMeta.stack);
+          $('.case-content').innerHTML = originalCaseContent;
+        }
+
+        window.location.hash = 'case-study';
+      }
+
+      row.addEventListener('click', activateRow);
+      row.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activateRow();
+        }
+      });
+    });
+
+    // ─────────────────────────────────────────────
+    // ASCII SCRAMBLE ANIMATION (enhanced)
+    // ─────────────────────────────────────────────
+    const scrambleChars = '█▓▒░─│┌┐└┘├┤┬┴┼0123456789ABCDEF%+-.';
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function scrambleText(el) {
+      const finalText = el.dataset.final;
+      if (!finalText) return;
+
+      // Respect reduced motion preferences
+      if (prefersReducedMotion) {
+        el.textContent = finalText;
+        return;
+      }
+
+      const duration = 500;
+      const startTime = performance.now();
+
+      function animate(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        let display = '';
+        for (let i = 0; i < finalText.length; i++) {
+          // Characters resolve left-to-right with eased timing
+          const charThreshold = (i / finalText.length) * 0.7;
+          if (progress > charThreshold + 0.2) {
+            display += finalText[i];
+          } else {
+            display += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+          }
+        }
+
+        el.textContent = display;
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          el.textContent = finalText;
+        }
+      }
+
+      el.textContent = '░'.repeat(finalText.length);
+      requestAnimationFrame(animate);
+    }
+
+    // ─────────────────────────────────────────────
+    // INTERSECTION OBSERVER — Reveal on scroll
+    // ─────────────────────────────────────────────
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    // Observe reveal elements
+    $$('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ─────────────────────────────────────────────
+    // PRINT CTA
+    // ─────────────────────────────────────────────
+    const printBtn = document.getElementById('print-btn');
+    if (printBtn) {
+      printBtn.addEventListener('click', () => window.print());
+    }
+
+    // ─────────────────────────────────────────────
+    // KEYBOARD SHORTCUTS
+    // ─────────────────────────────────────────────
+    document.addEventListener('keydown', (e) => {
+      // Ctrl+P / Cmd+P → handled by browser
+      // 1, 2, 3 → quick nav (when not typing)
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      switch (e.key) {
+        case '1': window.location.hash = 'home'; break;
+        case '2': window.location.hash = 'strategy'; break;
+        case '3': window.location.hash = 'dossier'; break;
+        case 'Escape':
+          if (window.location.hash === '#case-study') {
+            window.location.hash = 'home';
+          }
+          break;
+      }
+    });
+
+    // ─────────────────────────────────────────────
+    // PERFORMANCE: Hero scroll fade
+    // ─────────────────────────────────────────────
+    let ticking = false;
+    const heroPanel = $('.hero-panel');
+    if (heroPanel) {
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            if (scrollY < window.innerHeight) {
+              heroPanel.style.opacity = Math.max(1 - scrollY / (window.innerHeight * 0.8), 0.3);
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+
+    // ─────────────────────────────────────────────
+    // EASTER EGG: KONAMI CODE → ROCKET LAUNCH
+    // ↑↑↓↓←→←→BA
+    // ─────────────────────────────────────────────
+    const konamiSequence = [
+      'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+      'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+      'b', 'a'
+    ];
+    let konamiIndex = 0;
+    let rocketLaunching = false;
+
+    function launchRocket() {
+      if (rocketLaunching) return;
+      rocketLaunching = true;
+
+      // Flash text
+      const launchText = document.createElement('div');
+      launchText.className = 'launch-text';
+      launchText.textContent = '🚀 SYSTEMS GO — LAUNCHING';
+      document.body.appendChild(launchText);
+
+      // Rocket overlay
+      setTimeout(() => {
+        const overlay = document.createElement('div');
+        overlay.className = 'rocket-overlay';
+        overlay.innerHTML = `
+          <div class="rocket">🚀</div>
+          <div class="rocket-trail"></div>
+        `;
+        document.body.appendChild(overlay);
+
+        // Cleanup after animation
+        setTimeout(() => {
+          overlay.remove();
+          launchText.remove();
+          rocketLaunching = false;
+        }, 3000);
+      }, 600);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      // Konami code detection
+      if (e.key === konamiSequence[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiSequence.length) {
+          konamiIndex = 0;
+          launchRocket();
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    });
+
+    // ─────────────────────────────────────────────
+    // EASTER EGG: TRIPLE-CLICK LOGO → ROBOT
+    // ─────────────────────────────────────────────
+    let logoClicks = 0;
+    let logoClickTimer = null;
+    const robotOverlay = document.getElementById('robot-overlay');
+
+    if (navLogo && robotOverlay) {
+      navLogo.addEventListener('click', (e) => {
+        logoClicks++;
+        clearTimeout(logoClickTimer);
+
+        logoClickTimer = setTimeout(() => {
+          if (logoClicks >= 3) {
+            // Toggle robot
+            robotOverlay.classList.toggle('visible');
+
+            // Auto-hide after 4 seconds
+            if (robotOverlay.classList.contains('visible')) {
+              setTimeout(() => robotOverlay.classList.remove('visible'), 4000);
+            }
+          }
+          logoClicks = 0;
+        }, 400);
+      });
+    }
+
+    // ─────────────────────────────────────────────
+    // EASTER EGG: Type "launch" anywhere
+    // ─────────────────────────────────────────────
+    let typedBuffer = '';
+    document.addEventListener('keypress', (e) => {
+      if (terminalOpen) return; // Don't capture when terminal is focused
+      typedBuffer += e.key.toLowerCase();
+      if (typedBuffer.length > 10) typedBuffer = typedBuffer.slice(-10);
+
+      if (typedBuffer.includes('launch')) {
+        typedBuffer = '';
+        launchRocket();
+      }
+
+      if (typedBuffer.includes('robot')) {
+        typedBuffer = '';
+        if (robotOverlay) {
+          robotOverlay.classList.toggle('visible');
+          if (robotOverlay.classList.contains('visible')) {
+            setTimeout(() => robotOverlay.classList.remove('visible'), 4000);
+          }
+        }
+      }
+    });
+
+    // ─────────────────────────────────────────────
+    // BOOT SEQUENCE
+    // ─────────────────────────────────────────────
+    const bootLines = [
+      '> INITIALIZING PORTFOLIO OS v2.0...',
+      '> LOADING DESIGN SYSTEM.......... OK',
+      '> MOUNTING BRUTALIST GRID........ OK',
+      '> SCANNING PROJECT MATRIX........ OK',
+      '> AUTHENTICATING HUMAN........... OK',
+      '> WELCOME, VISITOR.',
+      '',
+      '> ARSHDEEP YADAV // AI SYSTEMS ENGINEER',
+      '> STATUS: OPEN TO OPPORTUNITIES',
+      '',
+      '> LAUNCHING INTERFACE...'
+    ];
+
+    const bootOverlay = document.getElementById('boot-overlay');
+    const bootText = document.getElementById('boot-text');
+
+    if (bootOverlay && bootText && !prefersReducedMotion) {
+      let lineIndex = 0;
+
+      function typeLine() {
+        if (lineIndex >= bootLines.length) {
+          setTimeout(() => {
+            bootOverlay.style.opacity = '0';
+            setTimeout(() => {
+              bootOverlay.style.display = 'none';
+            }, 300);
+          }, 400);
+          return;
+        }
+
+        const line = bootLines[lineIndex];
+        bootText.innerHTML += line + '\n';
+        lineIndex++;
+        setTimeout(typeLine, line === '' ? 100 : 120 + Math.random() * 80);
+      }
+
+      typeLine();
+    } else if (bootOverlay) {
+      bootOverlay.style.display = 'none';
+    }
+
+    // ─────────────────────────────────────────────
+    // CURSOR DOT TRAIL
+    // ─────────────────────────────────────────────
+    const cursorDot = document.getElementById('cursor-dot');
+    if (cursorDot && !prefersReducedMotion && !isTouchDevice) {
+      let dotX = 0, dotY = 0, targetX = 0, targetY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+        cursorDot.style.opacity = '0.6';
+      });
+
+      document.addEventListener('mouseleave', () => {
+        cursorDot.style.opacity = '0';
+      });
+
+      function animateDot() {
+        dotX += (targetX - dotX) * 0.15;
+        dotY += (targetY - dotY) * 0.15;
+        cursorDot.style.left = dotX - 3 + 'px';
+        cursorDot.style.top = dotY - 3 + 'px';
+        requestAnimationFrame(animateDot);
+      }
+      animateDot();
+    }
+
+    // ─────────────────────────────────────────────
+    // SCROLL PROGRESS BAR
+    // ─────────────────────────────────────────────
+    const scrollProgress = document.getElementById('scroll-progress');
+    if (scrollProgress) {
+      window.addEventListener('scroll', () => {
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight > 0) {
+          const percent = (window.scrollY / docHeight) * 100;
+          scrollProgress.style.width = percent + '%';
+        }
+      }, { passive: true });
+    }
+
+    // ─────────────────────────────────────────────
+    // TIME-BASED GREETING
+    // ─────────────────────────────────────────────
+    const greetingEl = document.getElementById('time-greeting');
+    if (greetingEl) {
+      const hour = new Date().getHours();
+      let greeting;
+      if (hour < 6)       greeting = '// LATE NIGHT MODE — BUILDING IN THE DARK';
+      else if (hour < 12) greeting = '// GOOD MORNING — SYSTEMS ONLINE';
+      else if (hour < 17) greeting = '// GOOD AFTERNOON — EXECUTING';
+      else if (hour < 21) greeting = '// GOOD EVENING — DEPLOYING IDEAS';
+      else                greeting = '// NIGHT OWL MODE — SHIPPING CODE';
+      greetingEl.textContent = greeting;
+    }
+
+    // ─────────────────────────────────────────────
+    // MINI TERMINAL EASTER EGG
+    // Press ` (backtick) to toggle
+    // ─────────────────────────────────────────────
+    const miniTerminal = document.getElementById('mini-terminal');
+    const terminalInput = document.getElementById('terminal-input');
+    const terminalOutput = document.getElementById('terminal-output');
+    let terminalOpen = false;
+
+    const terminalCommands = {
+      help: () => [
+        'AVAILABLE COMMANDS:',
+        '  help      — show this menu',
+        '  about     — who is arshdeep?',
+        '  skills    — technical stack',
+        '  contact   — reach out',
+        '  launch    — 🚀 launch a rocket',
+        '  robot     — 🤖 summon the robot',
+        '  secret    — ???',
+        '  clear     — clear terminal',
+        '  exit      — close terminal',
+      ].join('\n'),
+      about: () => [
+        'ARSHDEEP YADAV',
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+        'CSE Graduate (AI/ML Honors) — Chandigarh University \'26',
+        'Incoming MBA — IIT Patna \'28 (Gen AI & Product Mgmt)',
+        'Location: Lucknow, Uttar Pradesh, India',
+        '',
+        'Building intelligent systems that see, learn, and explain.',
+        'Domains: Computer Vision · XAI · Robotics · Fintech · IoT',
+      ].join('\n'),
+      skills: () => [
+        'TECHNICAL STACK',
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+        'Languages:  Python · JavaScript · C++ · SQL · R',
+        'ML/AI:      PyTorch · TensorFlow · Scikit-learn · OpenCV',
+        'Data:       Pandas · NumPy · Tableau · Power BI · SPSS',
+        'Cloud:      AWS · Azure · GCP · Docker',
+        'PM:         Jira · Notion · Figma · Agile/Scrum',
+      ].join('\n'),
+      contact: () => [
+        'GET IN TOUCH',
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+        'Email:    arshdeep.yadav.work@gmail.com',
+        'Phone:    +91 8115237909',
+        'LinkedIn: linkedin.com/in/arshdeep-yadav',
+        'GitHub:   github.com/Arshdeep-Yadav',
+      ].join('\n'),
+      launch: () => {
+        launchRocket();
+        return '🚀 ROCKET LAUNCHED! LOOK UP!';
+      },
+      robot: () => {
+        if (robotOverlay) {
+          robotOverlay.classList.add('visible');
+          setTimeout(() => robotOverlay.classList.remove('visible'), 4000);
+        }
+        return '🤖 ROBOT DEPLOYED! CHECK BOTTOM-LEFT.';
+      },
+      secret: () => [
+        '╔════════════════════════════════════╗',
+        '║  YOU FOUND THE SECRET!             ║',
+        '║                                    ║',
+        '║  "The best product is the one      ║',
+        '║   that ships." — Arshdeep          ║',
+        '║                                    ║',
+        '║  Fun fact: This entire portfolio   ║',
+        '║  is a single HTML file. No React.  ║',
+        '║  No frameworks. Pure craft.        ║',
+        '╚════════════════════════════════════╝',
+      ].join('\n'),
+      clear: () => { terminalOutput.textContent = ''; return ''; },
+      exit: () => { toggleTerminal(); return ''; },
+    };
+
+    function toggleTerminal() {
+      terminalOpen = !terminalOpen;
+      if (miniTerminal) {
+        miniTerminal.style.height = terminalOpen ? '280px' : '0';
+        miniTerminal.style.padding = terminalOpen ? '0' : '0';
+        if (terminalOpen) {
+          setTimeout(() => terminalInput.focus(), 300);
+          if (!terminalOutput.textContent) {
+            terminalOutput.textContent = 'ARSHDEEP PORTFOLIO TERMINAL v1.0\nType "help" for available commands.\n\n';
+          }
+        }
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === '`' && !e.ctrlKey && !e.metaKey) {
+        if (e.target.tagName !== 'INPUT' || e.target.id === 'terminal-input') {
+          e.preventDefault();
+          toggleTerminal();
+        }
+      }
+    });
+
+    if (terminalInput) {
+      terminalInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const cmd = terminalInput.value.trim().toLowerCase();
+          terminalInput.value = '';
+
+          if (cmd) {
+            terminalOutput.textContent += '> ' + cmd + '\n';
+            const handler = terminalCommands[cmd];
+            if (handler) {
+              const result = handler();
+              if (result) terminalOutput.textContent += result + '\n\n';
+            } else {
+              terminalOutput.textContent += 'Command not found: "' + cmd + '". Type "help" for available commands.\n\n';
+            }
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+          }
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
