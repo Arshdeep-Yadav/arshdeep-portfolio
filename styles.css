@@ -8,11 +8,28 @@
    ---------------------------------------------------------- */
 :root {
   --color-primary: #050505;
-  --color-background: #F4F4F0;
-  --color-surface: #F4F4F0;
+  --color-background: #F5F2EB;
+  --color-surface: #F5F2EB;
   --color-text: #050505;
   --color-muted: #8B7355;
   --color-accent: #0026FF;
+  
+  /* Global theme override helpers */
+  --color-nav-bg: rgba(245, 242, 235, 0.95);
+  --color-dot-grid: rgba(5, 5, 5, 0.06);
+
+  /* Terminal theme variables */
+  --term-bg: #050505;
+  --term-accent: #0026FF;
+  --term-text: #E5E5E5;
+  --term-prompt: #00FF41;
+  --term-input: #F5F2EB;
+  
+  --term-success: #00FF41;
+  --term-error: #FF3B30;
+  --term-info: #00DFFF;
+  --term-accent-color: #FFE600;
+  --term-muted: #888888;
 
   --font-heading: 'Cormorant Garamond', serif;
   --font-body: 'Satoshi', sans-serif;
@@ -67,12 +84,25 @@ body::before {
   height: 100%;
   background-image: radial-gradient(
     circle,
-    rgba(5, 5, 5, 0.06) 1px,
+    var(--color-dot-grid, rgba(5, 5, 5, 0.06)) 1px,
     transparent 1px
   );
   background-size: 24px 24px;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Global Paper Texture Overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 10001; /* Overlay on top of everything, just under terminal */
 }
 
 ::selection {
@@ -195,7 +225,7 @@ p {
   padding: 1rem var(--spacing);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  background: rgba(244, 244, 240, 0.95);
+  background: var(--color-nav-bg, rgba(244, 244, 240, 0.95));
 }
 
 .nav-logo {
@@ -788,10 +818,9 @@ p {
 }
 
 /* ----------------------------------------------------------
-   PRINT & TERMINAL CTAS
+   PRINT CTA
    ---------------------------------------------------------- */
-.print-cta,
-.terminal-cta {
+.print-cta {
   position: fixed;
   bottom: var(--spacing);
   right: var(--spacing);
@@ -806,13 +835,20 @@ p {
   color: var(--color-text);
   cursor: pointer;
   z-index: 999;
+  box-shadow: 4px 4px 0px var(--color-primary);
+  transition: all 0.15s ease-out;
 }
 
-.print-cta:hover,
-.terminal-cta:hover {
+.print-cta:hover {
   background: var(--color-accent);
   color: var(--color-background);
   border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--color-accent);
+}
+
+.print-cta:active {
+  transform: translateY(0);
 }
 
 /* ----------------------------------------------------------
@@ -1115,9 +1151,8 @@ p {
     display: none;
   }
 
-  /* Print & Terminal buttons smaller */
-  .print-cta,
-  .terminal-cta {
+  /* Print button smaller */
+  .print-cta {
     padding: 0.5rem 0.75rem;
     font-size: 0.75rem;
   }
@@ -1239,7 +1274,7 @@ p {
 @media print {
   .nav,
   .print-cta,
-  .terminal-cta {
+  .terminal-trigger {
     display: none;
   }
 
@@ -1535,7 +1570,7 @@ p {
 .matrix-row:focus-visible,
 .back-link:focus-visible,
 .print-cta:focus-visible,
-.terminal-cta:focus-visible,
+.terminal-trigger:focus-visible,
 .footer-link:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
@@ -1565,7 +1600,7 @@ p {
 /* ----------------------------------------------------------
    CURSOR OVERRIDES
    ---------------------------------------------------------- */
-a, button, .nav-link, .matrix-row, .back-link, .print-cta, .terminal-cta,
+a, button, .nav-link, .matrix-row, .back-link, .print-cta, .terminal-trigger,
 .footer-link, .nav-logo, [role="link"], [role="button"] {
   cursor: pointer;
 }
@@ -1696,16 +1731,20 @@ a, button, .nav-link, .matrix-row, .back-link, .print-cta, .terminal-cta,
    ---------------------------------------------------------- */
 .easter-egg-hint {
   position: fixed;
-  bottom: 8px;
-  left: 8px;
+  bottom: 12px;
+  left: 12px;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--color-muted);
-  opacity: 0.65;
+  color: var(--color-text);
+  border: 1px solid var(--color-primary);
+  background: var(--color-surface);
+  padding: 6px 12px;
+  opacity: 0.95;
   z-index: 998;
   letter-spacing: 0.05em;
-  pointer-events: none;
+  pointer-events: auto;
   text-transform: uppercase;
+  box-shadow: 2px 2px 0px var(--color-primary);
 }
 
 /* ----------------------------------------------------------
@@ -1864,4 +1903,158 @@ a, button, .nav-link, .matrix-row, .back-link, .print-cta, .terminal-cta,
   .footer-robot {
     font-size: 1.4rem;
   }
+}
+
+/* ----------------------------------------------------------
+   DEVELOPER TERMINAL STYLES
+   ---------------------------------------------------------- */
+#mini-terminal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: var(--term-bg);
+  z-index: 10002;
+  overflow: hidden;
+  transition: all 0.3s ease-out;
+  border-top: 0px solid var(--term-accent);
+  font-family: var(--font-mono), monospace;
+  color: var(--term-text);
+  font-size: 0.8rem;
+  padding: 0;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0);
+}
+
+#mini-terminal.open {
+  height: 280px;
+  border-top-width: 3px;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.term-container {
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#terminal-output {
+  flex: 1;
+  overflow-y: auto;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  margin-bottom: 8px;
+}
+
+.term-input-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.term-prompt {
+  color: var(--term-prompt);
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+#terminal-input {
+  background: none;
+  border: none;
+  color: var(--term-input);
+  font-family: inherit;
+  font-size: inherit;
+  flex: 1;
+  outline: none;
+  caret-color: var(--term-prompt);
+}
+
+/* Color Coding helper classes */
+.term-cmd-line {
+  color: var(--term-input);
+  opacity: 0.75;
+  font-weight: bold;
+}
+.term-success {
+  color: var(--term-success);
+}
+.term-error {
+  color: var(--term-error);
+}
+.term-info {
+  color: var(--term-info);
+}
+.term-accent-text {
+  color: var(--term-accent-color);
+}
+.term-muted-text {
+  color: var(--term-muted);
+}
+.term-bold {
+  font-weight: bold;
+}
+.term-underline {
+  text-decoration: underline;
+}
+.term-link {
+  color: var(--term-info);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.term-link:hover {
+  color: var(--term-success);
+}
+
+/* ----------------------------------------------------------
+   INLINE TERMINAL TRIGGER (HOME ONLY)
+   ---------------------------------------------------------- */
+.terminal-trigger {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  padding: 10px 14px;
+  border: var(--border-thin);
+  background: var(--color-primary);
+  color: var(--color-background);
+  text-transform: uppercase;
+  transition: all 0.15s ease-out;
+  margin-top: 1.5rem;
+  user-select: none;
+  border-color: var(--color-primary);
+  text-align: left;
+}
+
+.terminal-trigger:hover {
+  background: var(--color-accent);
+  color: var(--color-background);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.terminal-trigger:active {
+  transform: translateY(0);
+}
+
+.terminal-trigger .key-hint {
+  background: var(--color-background);
+  color: var(--color-primary);
+  padding: 1px 5px;
+  border: 1px solid var(--color-primary);
+  margin: 0 4px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 2px;
+  transition: all 0.15s ease-out;
+}
+
+.terminal-trigger:hover .key-hint {
+  background: var(--color-background);
+  color: var(--color-accent);
+  border-color: var(--color-background);
 }

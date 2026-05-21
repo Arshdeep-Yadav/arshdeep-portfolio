@@ -105,6 +105,11 @@
           <div class="mt-2" style="color: var(--color-muted); font-size: 0.75rem; line-height: 1.8; max-width: 380px;">
             CSE graduate (AI/ML Honors) → incoming MBA candidate at IIT Patna (Gen AI & Product Management). Shipping across computer vision, explainable AI, robotics, and fintech.
           </div>
+          <div class="mt-3">
+            <button class="terminal-trigger" id="terminal-btn" aria-label="Open developer terminal">
+              <span style="color: var(--color-accent); font-weight: bold; margin-right: 4px;">&gt;_</span> PRESS <kbd class="key-hint">`</kbd> TO EXECUTE
+            </button>
+          </div>
         </div>
       </div>
 
@@ -176,7 +181,6 @@
         </div>
       </div>
     </div>
-    <button class="terminal-cta" id="terminal-btn">[ ` ] DEVELOPER TERMINAL</button>
   </section>
 
   <!-- ═══════════════════════════════════════════ -->
@@ -995,21 +999,12 @@
   </div>
 
   <!-- Mini Terminal Easter Egg -->
-  <div id="mini-terminal" style="
-    position: fixed; bottom: 0; left: 0; right: 0; height: 0;
-    background: #050505; z-index: 10002; overflow: hidden;
-    transition: height 0.3s ease-out; border-top: 3px solid #0026FF;
-    font-family: 'JetBrains Mono', monospace; color: #0026FF;
-    font-size: 0.8rem; padding: 0;
-  ">
-    <div style="padding: 16px; height: 100%; display: flex; flex-direction: column;">
-      <div id="terminal-output" style="flex: 1; overflow-y: auto; line-height: 1.8; white-space: pre-wrap;"></div>
-      <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
-        <span style="color: #00FF41;">arshdeep@portfolio:~$</span>
-        <input id="terminal-input" type="text" autocomplete="off" spellcheck="false" style="
-          background: none; border: none; color: #F4F4F0; font-family: inherit;
-          font-size: inherit; flex: 1; outline: none; caret-color: #00FF41;
-        " />
+  <div id="mini-terminal">
+    <div class="term-container">
+      <div id="terminal-output"></div>
+      <div class="term-input-line">
+        <span class="term-prompt">arshdeep@portfolio:~$</span>
+        <input id="terminal-input" type="text" autocomplete="off" spellcheck="false" />
       </div>
     </div>
   </div>
@@ -1031,6 +1026,134 @@
     function safeSetText(el, text) {
       if (el) el.textContent = text;
     }
+
+    // ─────────────────────────────────────────────
+    // THEME ENGINE
+    // ─────────────────────────────────────────────
+    const THEMES = {
+      default: {
+        '--color-primary': '#050505',
+        '--color-background': '#F5F2EB',
+        '--color-surface': '#F5F2EB',
+        '--color-text': '#050505',
+        '--color-muted': '#8B7355',
+        '--color-accent': '#0026FF',
+        '--color-nav-bg': 'rgba(245, 242, 235, 0.95)',
+        '--color-dot-grid': 'rgba(5, 5, 5, 0.06)',
+        '--term-bg': '#050505',
+        '--term-accent': '#0026FF',
+        '--term-text': '#E5E5E5',
+        '--term-prompt': '#00FF41',
+        '--term-input': '#F5F2EB',
+        '--term-success': '#00FF41',
+        '--term-error': '#FF3B30',
+        '--term-info': '#00DFFF',
+        '--term-accent-color': '#FFE600',
+        '--term-muted': '#888888'
+      },
+      dark: {
+        '--color-primary': '#F5F2EB',
+        '--color-background': '#0D0D0D',
+        '--color-surface': '#1A1A1A',
+        '--color-text': '#E5E5E5',
+        '--color-muted': '#9E9E9E',
+        '--color-accent': '#FF3B30',
+        '--color-nav-bg': 'rgba(13, 13, 13, 0.95)',
+        '--color-dot-grid': 'rgba(245, 242, 235, 0.08)',
+        '--term-bg': '#0A0A0A',
+        '--term-accent': '#FF3B30',
+        '--term-text': '#E5E5E5',
+        '--term-prompt': '#FF3B30',
+        '--term-input': '#F5F2EB',
+        '--term-success': '#34C759',
+        '--term-error': '#FF3B30',
+        '--term-info': '#5AC8FA',
+        '--term-accent-color': '#FF9500',
+        '--term-muted': '#8E8E93'
+      },
+      cyberpunk: {
+        '--color-primary': '#FFE600',
+        '--color-background': '#0B0014',
+        '--color-surface': '#1D0030',
+        '--color-text': '#00F0FF',
+        '--color-muted': '#FF0055',
+        '--color-accent': '#FFE600',
+        '--color-nav-bg': 'rgba(11, 0, 20, 0.95)',
+        '--color-dot-grid': 'rgba(0, 240, 255, 0.08)',
+        '--term-bg': '#0B0014',
+        '--term-accent': '#FFE600',
+        '--term-text': '#00F0FF',
+        '--term-prompt': '#FF0055',
+        '--term-input': '#00F0FF',
+        '--term-success': '#00F0FF',
+        '--term-error': '#FF0055',
+        '--term-info': '#FFE600',
+        '--term-accent-color': '#FF0055',
+        '--term-muted': '#881188'
+      },
+      matrix: {
+        '--color-primary': '#00FF41',
+        '--color-background': '#000000',
+        '--color-surface': '#0A0A0A',
+        '--color-text': '#00FF41',
+        '--color-muted': '#008F11',
+        '--color-accent': '#00FF41',
+        '--color-nav-bg': 'rgba(0, 0, 0, 0.95)',
+        '--color-dot-grid': 'rgba(0, 255, 65, 0.08)',
+        '--term-bg': '#000000',
+        '--term-accent': '#00FF41',
+        '--term-text': '#00FF41',
+        '--term-prompt': '#00FF41',
+        '--term-input': '#00FF41',
+        '--term-success': '#00FF41',
+        '--term-error': '#00FF41',
+        '--term-info': '#00FF41',
+        '--term-accent-color': '#00FF41',
+        '--term-muted': '#008F11'
+      }
+    };
+
+    function setTheme(themeName) {
+      const theme = THEMES[themeName];
+      if (!theme) return false;
+      
+      const root = document.documentElement;
+      Object.keys(theme).forEach(key => {
+        root.style.setProperty(key, theme[key]);
+      });
+      
+      localStorage.setItem('portfolio-theme', themeName);
+      
+      // Update theme-color meta tag
+      const metaThemeColor = $('meta[name="theme-color"]');
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', theme['--color-background']);
+      }
+      
+      // Update color-scheme meta
+      const metaColorScheme = $('meta[name="color-scheme"]');
+      if (metaColorScheme) {
+        metaColorScheme.setAttribute('content', themeName === 'default' ? 'light' : 'dark');
+      }
+      
+      // Force re-scramble of active screen headers if scramble function exists
+      try {
+        const activeScreen = $('.screen.active');
+        if (activeScreen) {
+          $$('.scramble', activeScreen).forEach(el => scrambleText(el));
+        }
+      } catch(e) {}
+      
+      return true;
+    }
+
+    // Apply saved theme immediately
+    (function() {
+      const savedTheme = localStorage.getItem('portfolio-theme') || 'default';
+      if (savedTheme !== 'default') {
+        setTheme(savedTheme);
+      }
+    })();
 
     // ─────────────────────────────────────────────
     // HAMBURGER MENU (MOBILE)
@@ -1314,130 +1437,469 @@
     });
 
     // ─────────────────────────────────────────────
-    // PERFORMANCE: Hero scroll fade
+    // ADVANCED TERMINAL OS v2.0
     // ─────────────────────────────────────────────
-    let ticking = false;
-    const heroPanel = $('.hero-panel');
-    if (heroPanel) {
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            const scrollY = window.scrollY;
-            if (scrollY < window.innerHeight) {
-              heroPanel.style.opacity = Math.max(1 - scrollY / (window.innerHeight * 0.8), 0.3);
-            }
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }, { passive: true });
+    const miniTerminal = document.getElementById('mini-terminal');
+    const terminalInput = document.getElementById('terminal-input');
+    const terminalOutput = document.getElementById('terminal-output');
+    let terminalOpen = false;
+
+    // Command History Persistence
+    let commandHistory = [];
+    try {
+      const savedHistory = localStorage.getItem('term-history');
+      if (savedHistory) commandHistory = JSON.parse(savedHistory);
+    } catch (e) {
+      console.error('Failed to load history', e);
+    }
+    let historyIndex = commandHistory.length;
+
+    // Helper functions for terminal writing
+    function writeHTML(html) {
+      if (!terminalOutput) return;
+      const lineEl = document.createElement('div');
+      lineEl.innerHTML = html;
+      terminalOutput.appendChild(lineEl);
+      terminalOutput.scrollTop = terminalOutput.scrollHeight;
     }
 
-    // ─────────────────────────────────────────────
-    // EASTER EGG: KONAMI CODE → ROCKET LAUNCH
-    // ↑↑↓↓←→←→BA
-    // ─────────────────────────────────────────────
-    const konamiSequence = [
-      'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-      'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-      'b', 'a'
+    function writeLine(text, styleClass = '') {
+      const escaped = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+      const span = styleClass ? `<span class="${styleClass}">${escaped}</span>` : escaped;
+      writeHTML(span);
+    }
+
+    // Projects mapping
+    const projectsList = [
+      { id: 'xai-satellite', num: 1, title: 'Explainable Vision Transformer for Satellite Analysis', year: '2026' },
+      { id: 'ipo-platform', num: 2, title: 'Real-Time IPO Tracking Platform', year: '2025' },
+      { id: 'plant-disease', num: 3, title: 'Plant Disease Detection System', year: '2025' },
+      { id: 'object-detection', num: 4, title: 'Deep Learning Object Detection', year: '2024' },
+      { id: 'stress-detection', num: 5, title: 'Stress Detection via Medical Data', year: '2023' },
+      { id: 'iot-systems', num: 6, title: 'IoT-Based Smart Systems', year: '2023' }
     ];
-    let konamiIndex = 0;
-    let rocketLaunching = false;
 
-    function launchRocket() {
-      if (rocketLaunching) return;
-      rocketLaunching = true;
+    // Terminal Commands definitions
+    const terminalCommands = {
+      help: () => {
+        writeHTML('<span class="term-bold term-accent-text">ARSHDEEP PORTFOLIO SHELL v2.0 - HELP MENU</span>');
+        writeLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        writeHTML('<span class="term-success">help</span>              - Show this menu');
+        writeHTML('<span class="term-success">about</span>             - Who is Arshdeep? Bio & education');
+        writeHTML('<span class="term-success">skills</span>            - View details of technical skillset');
+        writeHTML('<span class="term-success">contact</span>           - View contact info & clickable links');
+        writeHTML('<span class="term-success">projects [open]</span>   - List projects or open one (e.g. <span class="term-info">projects open 1</span>)');
+        writeHTML('<span class="term-success">theme [name]</span>      - Switch visual theme (<span class="term-info">default</span>, <span class="term-info">dark</span>, <span class="term-info">cyberpunk</span>, <span class="term-info">matrix</span>)');
+        writeHTML('<span class="term-success">neofetch / system</span> - Print hardware/system specifications & info');
+        writeHTML('<span class="term-success">cowsay [msg]</span>      - Make the terminal cow speak a message');
+        writeHTML('<span class="term-success">sudo [cmd]</span>        - Run a command as superuser (joke)');
+        writeHTML('<span class="term-success">launch</span>            - Trigger the 🚀 rocket animation');
+        writeHTML('<span class="term-success">robot</span>             - Toggle the 🤖 robot overlay');
+        writeHTML('<span class="term-success">secret</span>            - Access easter egg information');
+        writeHTML('<span class="term-success">clear</span>             - Clear terminal logs');
+        writeHTML('<span class="term-success">exit</span>              - Close terminal console');
+        writeLine('');
+      },
+      about: () => {
+        writeHTML('<span class="term-bold term-accent-text">ARSHDEEP YADAV - BIOGRAPHY</span>');
+        writeLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        writeHTML('<span class="term-bold">Role:</span>       AI/ML Systems Engineer & Builder');
+        writeHTML('<span class="term-bold">Education:</span>  B.E. Computer Science (Honors in AI/ML) - Chandigarh University \'26');
+        writeHTML('            Incoming MBA - IIT Patna \'28 (Gen AI & Product Management)');
+        writeHTML('<span class="term-bold">Location:</span>   Lucknow, Uttar Pradesh, India');
+        writeLine('');
+        writeLine('Building intelligent systems that see, learn, and explain. Expertise across');
+        writeLine('Computer Vision, Explainable AI, Robotics, Fintech, and IoT systems.');
+        writeLine('');
+      },
+      skills: () => {
+        writeHTML('<span class="term-bold term-accent-text">TECHNICAL SKILLSET MATRIX</span>');
+        writeLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        writeHTML('<span class="term-success">AI / Machine Learning:</span>     PyTorch, TensorFlow, OpenCV, CNNs, Vision Transformers,');
+        writeHTML('                            Grad-CAM, YOLO Object Detection, XAI Methods');
+        writeHTML('<span class="term-success">Languages:</span>               Python, JavaScript (ES6+), C++, SQL, R');
+        writeHTML('<span class="term-success">Data & Cloud Infrastructure:</span> AWS, Azure, GCP, Docker, Pandas, NumPy, Tableau,');
+        writeHTML('                            Power BI, Streamlit, Flask');
+        writeHTML('<span class="term-success">Product Management:</span>       Jira, Agile/Scrum, Kanban, Roadmapping, Figma,');
+        writeHTML('                            Stakeholder Coordination');
+        writeHTML('<span class="term-success">Robotics & Embedded:</span>     Arduino, ESP32, IoT Sensors, Wireless Protocols (MQTT)');
+        writeLine('');
+      },
+      contact: () => {
+        writeHTML('<span class="term-bold term-accent-text">CONNECT WITH ME</span>');
+        writeLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        writeHTML('<span class="term-bold">Email:</span>    <a href="mailto:arshdeep.yadav.work@gmail.com" class="term-link">arshdeep.yadav.work@gmail.com</a>');
+        writeHTML('<span class="term-bold">Phone:</span>    +91 8115237909');
+        writeHTML('<span class="term-bold">LinkedIn:</span> <a href="https://linkedin.com/in/arshdeep-yadav" target="_blank" rel="noopener" class="term-link">linkedin.com/in/arshdeep-yadav</a>');
+        writeHTML('<span class="term-bold">GitHub:</span>   <a href="https://github.com/Arshdeep-Yadav" target="_blank" rel="noopener" class="term-link">github.com/Arshdeep-Yadav</a>');
+        writeLine('');
+      },
+      projects: (args) => {
+        if (args && args.length >= 2 && args[0] === 'open') {
+          const target = args.slice(1).join(' ').trim().toLowerCase();
+          // Find project by number or name
+          let found = null;
+          if (/^\d+$/.test(target)) {
+            const num = parseInt(target, 10);
+            found = projectsList.find(p => p.num === num);
+          } else {
+            found = projectsList.find(p => p.id.includes(target) || p.title.toLowerCase().includes(target));
+          }
 
-      // Flash text
-      const launchText = document.createElement('div');
-      launchText.className = 'launch-text';
-      launchText.textContent = '🚀 SYSTEMS GO — LAUNCHING';
-      document.body.appendChild(launchText);
+          if (found) {
+            writeHTML(`<span class="term-success">Opening project ${found.num}: "${found.title}"...</span>`);
+            // Trigger navigation after a short delay
+            setTimeout(() => {
+              const row = $(`.matrix-row[data-case="${found.id}"]`);
+              if (row) {
+                // Trigger the click event
+                row.click();
+              } else {
+                // Fallback direct hash set
+                window.location.hash = 'case-study';
+              }
+              toggleTerminal();
+            }, 600);
+          } else {
+            writeHTML(`<span class="term-error">Project not found matching: "${target}". Type "projects" to list all.</span>`);
+          }
+          return;
+        }
 
-      // Rocket overlay
-      setTimeout(() => {
-        const overlay = document.createElement('div');
-        overlay.className = 'rocket-overlay';
-        overlay.innerHTML = `
-          <div class="rocket">🚀</div>
-          <div class="rocket-trail"></div>
-        `;
-        document.body.appendChild(overlay);
+        // List projects
+        writeHTML('<span class="term-bold term-accent-text">PROJECT INDEX</span>');
+        writeLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        writeLine('Use "projects open <number|name>" to navigate directly to case studies.');
+        writeLine('');
+        projectsList.forEach(p => {
+          writeHTML(`  [<span class="term-info">${p.num}</span>] <span class="term-bold">${p.title}</span> (${p.year})`);
+        });
+        writeLine('');
+      },
+      theme: (args) => {
+        if (args && args.length > 0) {
+          const themeName = args[0].trim().toLowerCase();
+          if (THEMES[themeName]) {
+            setTheme(themeName);
+            writeHTML(`<span class="term-success">Theme changed successfully to <span class="term-bold">${themeName}</span>.</span>`);
+          } else {
+            writeHTML(`<span class="term-error">Invalid theme: "${themeName}". Available themes: default, dark, cyberpunk, matrix.</span>`);
+          }
+          return;
+        }
+        
+        // Show current theme
+        const currentTheme = localStorage.getItem('portfolio-theme') || 'default';
+        writeHTML('<span class="term-bold term-accent-text">THEME ENGINE</span>');
+        writeLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        writeLine(`Current Theme: ${currentTheme}`);
+        writeHTML('Available Themes: <span class="term-info">default</span>, <span class="term-info">dark</span>, <span class="term-info">cyberpunk</span>, <span class="term-info">matrix</span>');
+        writeLine('Usage: theme <name>  (e.g. theme cyberpunk)');
+        writeLine('');
+      },
+      neofetch: () => {
+        const uptimeSeconds = Math.floor(performance.now() / 1000);
+        const hrs = Math.floor(uptimeSeconds / 3600);
+        const mins = Math.floor((uptimeSeconds % 3600) / 60);
+        const secs = uptimeSeconds % 60;
+        const uptimeStr = `${hrs > 0 ? hrs + 'h ' : ''}${mins > 0 ? mins + 'm ' : ''}${secs}s (session)`;
 
-        // Cleanup after animation
-        setTimeout(() => {
-          overlay.remove();
-          launchText.remove();
-          rocketLaunching = false;
-        }, 3000);
-      }, 600);
+        const screenRes = `${window.screen.width}x${window.screen.height}`;
+        const currentTheme = localStorage.getItem('portfolio-theme') || 'default';
+
+        const lines = [
+          `     <span class="term-success">/\\</span>              <span class="term-bold term-accent-text">arshdeep@portfolio</span>`,
+          `    <span class="term-success">/  \\</span>             -------------------`,
+          `   <span class="term-success">/ /\\ \\</span>            <span class="term-bold">OS:</span> Portfolio OS v2.0`,
+          `  <span class="term-success">| |  | |</span>           <span class="term-bold">Host:</span> arshdeepyadav.me`,
+          `  <span class="term-success">| |  | |</span>           <span class="term-bold">Kernel:</span> WebKit / Blink Engine`,
+          `  <span class="term-success">| |__| |</span>           <span class="term-bold">Uptime:</span> ${uptimeStr}`,
+          `  <span class="term-success">/      \\</span>           <span class="term-bold">Shell:</span> Antigravity Shell v2.0`,
+          ` <span class="term-success">/        \\</span>          <span class="term-bold">Resolution:</span> ${screenRes}`,
+          `<span class="term-success">/|   /\\   |\\</span>         <span class="term-bold">Theme:</span> ${currentTheme}`,
+          `<span class="term-success">\\|  /  \\  |/</span>         <span class="term-bold">Diagnostics:</span> Memory OK`,
+          ` <span class="term-success">\\_/    \\_/</span>          <span class="term-bold">Status:</span> Open to Opportunities`,
+          `                     <span class="term-bold">MBA Candidate:</span> IIT Patna '28`
+        ];
+        
+        lines.forEach(l => writeHTML(l));
+        writeLine('');
+      },
+      system: () => {
+        terminalCommands.neofetch();
+      },
+      cowsay: (args) => {
+        const msg = (args && args.length > 0) ? args.join(' ') : 'Moouu!';
+        const border = '-'.repeat(msg.length + 2);
+        writeHTML(`  ${border}`);
+        writeHTML(`&lt; ${msg} &gt;`);
+        writeHTML(`  ${border}`);
+        writeHTML('         \\   ^__^');
+        writeHTML('          \\  (oo)\\_______');
+        writeHTML('             (__)\\       )\\/\\');
+        writeHTML('                 ||----w |');
+        writeHTML('                 ||     ||');
+        writeLine('');
+      },
+      sudo: (args) => {
+        const cmd = (args && args.length > 0) ? args.join(' ') : 'action';
+        writeHTML(`<span class="term-error">arshdeep is not in the sudoers file. This incident will be reported to the sysadmin.</span>`);
+        writeLine('');
+      },
+      launch: () => {
+        launchRocket();
+        writeHTML('<span class="term-success">🚀 Rocket launched successfully. Systems green.</span>');
+        writeLine('');
+      },
+      robot: () => {
+        if (robotOverlay) {
+          robotOverlay.classList.toggle('visible');
+        }
+        writeHTML('<span class="term-success">🤖 Summoning robot companion overlays...</span>');
+        writeLine('');
+      },
+      secret: () => {
+        writeHTML('<span class="term-accent-text">╔════════════════════════════════════╗</span>');
+        writeHTML('<span class="term-accent-text">║  YOU FOUND THE SECRET!             ║</span>');
+        writeHTML('<span class="term-accent-text">║                                    ║</span>');
+        writeHTML('<span class="term-accent-text">║  "The best product is the one      ║</span>');
+        writeHTML('<span class="term-accent-text">║   that ships." — Arshdeep          ║</span>');
+        writeHTML('<span class="term-accent-text">║                                    ║</span>');
+        writeHTML('<span class="term-accent-text">║  Fun fact: This entire portfolio   ║</span>');
+        writeHTML('<span class="term-accent-text">║  is a single HTML file. No React.  ║</span>');
+        writeHTML('<span class="term-accent-text">║  No frameworks. Pure craft.        ║</span>');
+        writeHTML('<span class="term-accent-text">╚════════════════════════════════════╝</span>');
+        writeLine('');
+      },
+      clear: () => {
+        if (terminalOutput) terminalOutput.innerHTML = '';
+      },
+      exit: () => {
+        toggleTerminal();
+      }
+    };
+
+    // Rule-based NLP Intent Classifier
+    function classifyIntent(input) {
+      const clean = input.trim().toLowerCase();
+      
+      // Split into command parts (original syntax parser)
+      const parts = clean.split(/\s+/);
+      const mainCmd = parts[0];
+      const directArgs = parts.slice(1);
+      
+      // If matches exact command key directly, prioritize it
+      if (terminalCommands[mainCmd]) {
+        return { command: mainCmd, args: directArgs };
+      }
+      
+      // Conversational match patterns (NLP classification)
+      // 1. Theme intents
+      if (clean.includes('theme') || clean.includes('mode') || clean.includes('color') || clean.includes('style')) {
+        let themeArg = '';
+        if (clean.includes('dark')) themeArg = 'dark';
+        else if (clean.includes('cyberpunk') || clean.includes('cyber')) themeArg = 'cyberpunk';
+        else if (clean.includes('matrix') || clean.includes('hacker')) themeArg = 'matrix';
+        else if (clean.includes('default') || clean.includes('light') || clean.includes('original') || clean.includes('cream')) themeArg = 'default';
+        
+        return { command: 'theme', args: themeArg ? [themeArg] : [] };
+      }
+      
+      // 2. Project intents (navigation)
+      if (clean.includes('project') || clean.includes('portfolio') || clean.includes('case') || clean.includes('work') || clean.includes('build') || clean.includes('open')) {
+        // Look for numbers 1 to 6
+        const numMatch = clean.match(/\b([1-6])\b/);
+        if (numMatch) {
+          return { command: 'projects', args: ['open', numMatch[1]] };
+        }
+        // Look for project name keywords
+        const keywords = ['satellite', 'xai', 'ipo', 'platform', 'plant', 'disease', 'object', 'detection', 'stress', 'medical', 'iot', 'smart'];
+        for (const kw of keywords) {
+          if (clean.includes(kw)) {
+            let id = '';
+            if (kw === 'satellite' || kw === 'xai') id = 'xai-satellite';
+            else if (kw === 'ipo' || kw === 'platform') id = 'ipo-platform';
+            else if (kw === 'plant' || kw === 'disease') id = 'plant-disease';
+            else if (kw === 'object' || kw === 'detection') id = 'object-detection';
+            else if (kw === 'stress' || kw === 'medical') id = 'stress-detection';
+            else if (kw === 'iot' || kw === 'smart') id = 'iot-systems';
+            
+            if (id) return { command: 'projects', args: ['open', id] };
+          }
+        }
+        return { command: 'projects', args: [] };
+      }
+      
+      // 3. About intents
+      const aboutWords = ['about', 'who', 'bio', 'profile', 'experience', 'education', 'background', 'resume', 'cv', 'arshdeep', 'yadav'];
+      if (aboutWords.some(w => clean.includes(w))) {
+        return { command: 'about', args: [] };
+      }
+      
+      // 4. Skills intents
+      const skillWords = ['skill', 'stack', 'tech', 'languages', 'programming', 'python', 'pytorch', 'framework', 'database', 'cloud'];
+      if (skillWords.some(w => clean.includes(w))) {
+        return { command: 'skills', args: [] };
+      }
+      
+      // 5. Contact intents
+      const contactWords = ['contact', 'email', 'phone', 'call', 'reach', 'linkedin', 'github', 'social', 'address', 'location'];
+      if (contactWords.some(w => clean.includes(w))) {
+        return { command: 'contact', args: [] };
+      }
+
+      // 6. Sudo intents
+      if (clean.startsWith('sudo ') || clean.includes('root') || clean.includes('admin')) {
+        return { command: 'sudo', args: directArgs };
+      }
+
+      // 7. Clear intents
+      if (clean === 'cls' || clean.includes('clear') || clean.includes('clean')) {
+        return { command: 'clear', args: [] };
+      }
+
+      // 8. Exit intents
+      if (clean === 'exit' || clean === 'quit' || clean === 'close' || clean === 'hide') {
+        return { command: 'exit', args: [] };
+      }
+
+      // 9. Rocket intents
+      if (clean.includes('launch') || clean.includes('rocket') || clean.includes('fly') || clean.includes('blast')) {
+        return { command: 'launch', args: [] };
+      }
+
+      // 10. Robot intents
+      if (clean.includes('robot') || clean.includes('summon') || clean.includes('bot')) {
+        return { command: 'robot', args: [] };
+      }
+
+      // 11. Cowsay intents
+      if (clean.startsWith('cowsay') || clean.includes('cow say')) {
+        let msg = '';
+        if (clean.startsWith('cowsay ')) {
+          msg = input.substring(7).trim();
+        } else {
+          msg = input.replace(/cow\s+say/i, '').trim();
+        }
+        return { command: 'cowsay', args: msg ? [msg] : [] };
+      }
+      
+      // Default: parse as standard command split
+      return { command: mainCmd, args: directArgs };
+    }
+
+    function toggleTerminal() {
+      terminalOpen = !terminalOpen;
+      if (miniTerminal) {
+        miniTerminal.classList.toggle('open', terminalOpen);
+        if (terminalOpen) {
+          setTimeout(() => terminalInput.focus(), 300);
+          if (!terminalOutput.innerHTML) {
+            terminalOutput.innerHTML = '<span class="term-bold term-success">ARSHDEEP PORTFOLIO TERMINAL v2.0</span>\nType "<span class="term-info">help</span>" for available commands. Try speaking naturally (e.g. "<span class="term-info">tell me about yourself</span>")!\n\n';
+          }
+        }
+      }
+    }
+
+    const terminalBtn = document.getElementById('terminal-btn');
+    if (terminalBtn) {
+      terminalBtn.addEventListener('click', toggleTerminal);
     }
 
     document.addEventListener('keydown', (e) => {
-      // Konami code detection
-      if (e.key === konamiSequence[konamiIndex]) {
-        konamiIndex++;
-        if (konamiIndex === konamiSequence.length) {
-          konamiIndex = 0;
-          launchRocket();
+      if (e.key === '`' && !e.ctrlKey && !e.metaKey) {
+        if (e.target.tagName !== 'INPUT' || e.target.id === 'terminal-input') {
+          e.preventDefault();
+          toggleTerminal();
         }
-      } else {
-        konamiIndex = 0;
       }
     });
 
-    // ─────────────────────────────────────────────
-    // EASTER EGG: TRIPLE-CLICK LOGO → ROBOT
-    // ─────────────────────────────────────────────
-    let logoClicks = 0;
-    let logoClickTimer = null;
-    const robotOverlay = document.getElementById('robot-overlay');
+    if (terminalInput) {
+      terminalInput.addEventListener('keydown', (e) => {
+        // 1. Enter key: execute command
+        if (e.key === 'Enter') {
+          const rawInput = terminalInput.value;
+          const cleanInput = rawInput.trim();
+          terminalInput.value = '';
 
-    if (navLogo && robotOverlay) {
-      navLogo.addEventListener('click', (e) => {
-        logoClicks++;
-        clearTimeout(logoClickTimer);
+          if (cleanInput) {
+            // Echo command line
+            writeHTML(`<span class="term-prompt">arshdeep@portfolio:~$</span> <span class="term-cmd-line">${cleanInput}</span>`);
+            
+            // Push to command history
+            if (commandHistory.length === 0 || commandHistory[commandHistory.length - 1] !== cleanInput) {
+              commandHistory.push(cleanInput);
+              // Cap history length at 50 entries
+              if (commandHistory.length > 50) commandHistory.shift();
+              localStorage.setItem('term-history', JSON.stringify(commandHistory));
+            }
+            historyIndex = commandHistory.length;
 
-        logoClickTimer = setTimeout(() => {
-          if (logoClicks >= 3) {
-            // Toggle robot
-            robotOverlay.classList.toggle('visible');
+            // Classify intent using NLP engine
+            const parsed = classifyIntent(cleanInput);
+            const handler = terminalCommands[parsed.command];
 
-            // Auto-hide after 4 seconds
-            if (robotOverlay.classList.contains('visible')) {
-              setTimeout(() => robotOverlay.classList.remove('visible'), 4000);
+            if (handler) {
+              // Print small hint if NLP matched a conversational phrase
+              const cleanLower = cleanInput.toLowerCase().trim();
+              if (!terminalCommands[cleanLower] && parsed.command !== cleanLower) {
+                writeHTML(`<span class="term-muted-text">[Intent Resolved: <span class="term-bold term-success">${parsed.command}</span>]</span>`);
+              }
+              handler(parsed.args);
+            } else {
+              writeHTML(`<span class="term-error">Command not found: "${parsed.command}". Type "help" for a list of commands.</span>\n`);
             }
           }
-          logoClicks = 0;
-        }, 400);
-      });
-    }
-
-    // ─────────────────────────────────────────────
-    // EASTER EGG: Type "launch" anywhere
-    // ─────────────────────────────────────────────
-    let typedBuffer = '';
-    document.addEventListener('keypress', (e) => {
-      if (terminalOpen) return; // Don't capture when terminal is focused
-      typedBuffer += e.key.toLowerCase();
-      if (typedBuffer.length > 10) typedBuffer = typedBuffer.slice(-10);
-
-      if (typedBuffer.includes('launch')) {
-        typedBuffer = '';
-        launchRocket();
-      }
-
-      if (typedBuffer.includes('robot')) {
-        typedBuffer = '';
-        if (robotOverlay) {
-          robotOverlay.classList.toggle('visible');
-          if (robotOverlay.classList.contains('visible')) {
-            setTimeout(() => robotOverlay.classList.remove('visible'), 4000);
+        }
+        
+        // 2. Arrow Up: Previous history command
+        else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (commandHistory.length > 0 && historyIndex > 0) {
+            historyIndex--;
+            terminalInput.value = commandHistory[historyIndex];
           }
         }
-      }
-    });
+        
+        // 3. Arrow Down: Next history command / clear input
+        else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (historyIndex < commandHistory.length - 1) {
+            historyIndex++;
+            terminalInput.value = commandHistory[historyIndex];
+          } else if (historyIndex === commandHistory.length - 1) {
+            historyIndex = commandHistory.length;
+            terminalInput.value = '';
+          }
+        }
+        
+        // 4. Tab key: autocomplete
+        else if (e.key === 'Tab') {
+          e.preventDefault();
+          const currentVal = terminalInput.value.trim().toLowerCase();
+          if (!currentVal) return;
+
+          // Find matches from command keys
+          const commandKeys = Object.keys(terminalCommands);
+          const matches = commandKeys.filter(cmd => cmd.startsWith(currentVal));
+
+          if (matches.length === 1) {
+            // Autocomplete the matching command
+            terminalInput.value = matches[0] + ' ';
+          } else if (matches.length > 1) {
+            // Echo matches
+            writeHTML(`<span class="term-prompt">arshdeep@portfolio:~$</span> <span class="term-cmd-line">${terminalInput.value}</span>`);
+            writeHTML(`<span class="term-muted-text">Possible commands:</span> <span class="term-info">${matches.join('  ')}</span>`);
+          }
+        }
+      });
+    }
 
     // ─────────────────────────────────────────────
     // BOOT SEQUENCE
@@ -1540,130 +2002,7 @@
       greetingEl.textContent = greeting;
     }
 
-    // ─────────────────────────────────────────────
-    // MINI TERMINAL EASTER EGG
-    // Press ` (backtick) to toggle
-    // ─────────────────────────────────────────────
-    const miniTerminal = document.getElementById('mini-terminal');
-    const terminalInput = document.getElementById('terminal-input');
-    const terminalOutput = document.getElementById('terminal-output');
-    let terminalOpen = false;
 
-    const terminalCommands = {
-      help: () => [
-        'AVAILABLE COMMANDS:',
-        '  help      — show this menu',
-        '  about     — who is arshdeep?',
-        '  skills    — technical stack',
-        '  contact   — reach out',
-        '  launch    — 🚀 launch a rocket',
-        '  robot     — 🤖 summon the robot',
-        '  secret    — ???',
-        '  clear     — clear terminal',
-        '  exit      — close terminal',
-      ].join('\n'),
-      about: () => [
-        'ARSHDEEP YADAV',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        'CSE Graduate (AI/ML Honors) — Chandigarh University \'26',
-        'Incoming MBA — IIT Patna \'28 (Gen AI & Product Mgmt)',
-        'Location: Lucknow, Uttar Pradesh, India',
-        '',
-        'Building intelligent systems that see, learn, and explain.',
-        'Domains: Computer Vision · XAI · Robotics · Fintech · IoT',
-      ].join('\n'),
-      skills: () => [
-        'TECHNICAL STACK',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        'Languages:  Python · JavaScript · C++ · SQL · R',
-        'ML/AI:      PyTorch · TensorFlow · Scikit-learn · OpenCV',
-        'Data:       Pandas · NumPy · Tableau · Power BI · SPSS',
-        'Cloud:      AWS · Azure · GCP · Docker',
-        'PM:         Jira · Notion · Figma · Agile/Scrum',
-      ].join('\n'),
-      contact: () => [
-        'GET IN TOUCH',
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-        'Email:    arshdeep.yadav.work@gmail.com',
-        'Phone:    +91 8115237909',
-        'LinkedIn: linkedin.com/in/arshdeep-yadav',
-        'GitHub:   github.com/Arshdeep-Yadav',
-      ].join('\n'),
-      launch: () => {
-        launchRocket();
-        return '🚀 ROCKET LAUNCHED! LOOK UP!';
-      },
-      robot: () => {
-        if (robotOverlay) {
-          robotOverlay.classList.add('visible');
-          setTimeout(() => robotOverlay.classList.remove('visible'), 4000);
-        }
-        return '🤖 ROBOT DEPLOYED! CHECK BOTTOM-LEFT.';
-      },
-      secret: () => [
-        '╔════════════════════════════════════╗',
-        '║  YOU FOUND THE SECRET!             ║',
-        '║                                    ║',
-        '║  "The best product is the one      ║',
-        '║   that ships." — Arshdeep          ║',
-        '║                                    ║',
-        '║  Fun fact: This entire portfolio   ║',
-        '║  is a single HTML file. No React.  ║',
-        '║  No frameworks. Pure craft.        ║',
-        '╚════════════════════════════════════╝',
-      ].join('\n'),
-      clear: () => { terminalOutput.textContent = ''; return ''; },
-      exit: () => { toggleTerminal(); return ''; },
-    };
-
-    function toggleTerminal() {
-      terminalOpen = !terminalOpen;
-      if (miniTerminal) {
-        miniTerminal.style.height = terminalOpen ? '280px' : '0';
-        miniTerminal.style.padding = terminalOpen ? '0' : '0';
-        if (terminalOpen) {
-          setTimeout(() => terminalInput.focus(), 300);
-          if (!terminalOutput.textContent) {
-            terminalOutput.textContent = 'ARSHDEEP PORTFOLIO TERMINAL v1.0\nType "help" for available commands.\n\n';
-          }
-        }
-      }
-    }
-
-    const terminalBtn = document.getElementById('terminal-btn');
-    if (terminalBtn) {
-      terminalBtn.addEventListener('click', toggleTerminal);
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === '`' && !e.ctrlKey && !e.metaKey) {
-        if (e.target.tagName !== 'INPUT' || e.target.id === 'terminal-input') {
-          e.preventDefault();
-          toggleTerminal();
-        }
-      }
-    });
-
-    if (terminalInput) {
-      terminalInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          const cmd = terminalInput.value.trim().toLowerCase();
-          terminalInput.value = '';
-
-          if (cmd) {
-            terminalOutput.textContent += '> ' + cmd + '\n';
-            const handler = terminalCommands[cmd];
-            if (handler) {
-              const result = handler();
-              if (result) terminalOutput.textContent += result + '\n\n';
-            } else {
-              terminalOutput.textContent += 'Command not found: "' + cmd + '". Type "help" for available commands.\n\n';
-            }
-            terminalOutput.scrollTop = terminalOutput.scrollHeight;
-          }
-        }
-      });
-    }
   </script>
 
 </body>
