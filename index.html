@@ -176,6 +176,7 @@
         </div>
       </div>
     </div>
+    <button class="terminal-cta" id="terminal-btn">[ ` ] DEVELOPER TERMINAL</button>
   </section>
 
   <!-- ═══════════════════════════════════════════ -->
@@ -1627,6 +1628,11 @@
           }
         }
       }
+    }
+
+    const terminalBtn = document.getElementById('terminal-btn');
+    if (terminalBtn) {
+      terminalBtn.addEventListener('click', toggleTerminal);
     }
 
     document.addEventListener('keydown', (e) => {

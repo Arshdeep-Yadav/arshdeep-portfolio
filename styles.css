@@ -788,9 +788,10 @@ p {
 }
 
 /* ----------------------------------------------------------
-   PRINT CTA
+   PRINT & TERMINAL CTAS
    ---------------------------------------------------------- */
-.print-cta {
+.print-cta,
+.terminal-cta {
   position: fixed;
   bottom: var(--spacing);
   right: var(--spacing);
@@ -807,7 +808,8 @@ p {
   z-index: 999;
 }
 
-.print-cta:hover {
+.print-cta:hover,
+.terminal-cta:hover {
   background: var(--color-accent);
   color: var(--color-background);
   border-color: var(--color-accent);
@@ -1113,8 +1115,9 @@ p {
     display: none;
   }
 
-  /* Print button smaller */
-  .print-cta {
+  /* Print & Terminal buttons smaller */
+  .print-cta,
+  .terminal-cta {
     padding: 0.5rem 0.75rem;
     font-size: 0.75rem;
   }
@@ -1235,7 +1238,8 @@ p {
    ---------------------------------------------------------- */
 @media print {
   .nav,
-  .print-cta {
+  .print-cta,
+  .terminal-cta {
     display: none;
   }
 
@@ -1531,6 +1535,7 @@ p {
 .matrix-row:focus-visible,
 .back-link:focus-visible,
 .print-cta:focus-visible,
+.terminal-cta:focus-visible,
 .footer-link:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
@@ -1560,7 +1565,7 @@ p {
 /* ----------------------------------------------------------
    CURSOR OVERRIDES
    ---------------------------------------------------------- */
-a, button, .nav-link, .matrix-row, .back-link, .print-cta,
+a, button, .nav-link, .matrix-row, .back-link, .print-cta, .terminal-cta,
 .footer-link, .nav-logo, [role="link"], [role="button"] {
   cursor: pointer;
 }
@@ -1694,9 +1699,9 @@ a, button, .nav-link, .matrix-row, .back-link, .print-cta,
   bottom: 8px;
   left: 8px;
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   color: var(--color-muted);
-  opacity: 0.25;
+  opacity: 0.65;
   z-index: 998;
   letter-spacing: 0.05em;
   pointer-events: none;
