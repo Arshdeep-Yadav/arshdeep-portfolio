@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.fontshare.com; font-src 'self' https://fonts.gstatic.com https://cdn.fontshare.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'">
   <title>Arshdeep Yadav — AI/ML Engineer & Builder</title>
   <meta name="description" content="Portfolio of Arshdeep Yadav. CSE graduate (AI/ML Honors) from Chandigarh University, incoming MBA at IIT Patna. Building across computer vision, explainable AI, robotics, and deep-tech.">
 
@@ -1462,6 +1463,19 @@
     let historyIndex = commandHistory.length;
 
     // Helper functions for terminal writing
+    function escapeHTML(str) {
+      return str.replace(/[&<>"']/g, function(m) {
+        switch (m) {
+          case '&': return '&amp;';
+          case '<': return '&lt;';
+          case '>': return '&gt;';
+          case '"': return '&quot;';
+          case "'": return '&#039;';
+          default: return m;
+        }
+      });
+    }
+
     function writeHTML(html) {
       if (!terminalOutput) return;
       const lineEl = document.createElement('div');
@@ -1666,6 +1680,9 @@
       robot: () => {
         if (robotOverlay) {
           robotOverlay.classList.toggle('visible');
+          if (robotOverlay.classList.contains('visible') && typeof typeRobotGreeting === 'function') {
+            typeRobotGreeting();
+          }
         }
         writeHTML('<span class="term-success">🤖 Summoning robot companion overlays...</span>');
         writeLine('');
@@ -1836,8 +1853,8 @@
           terminalInput.value = '';
 
           if (cleanInput) {
-            // Echo command line
-            writeHTML(`<span class="term-prompt">arshdeep@portfolio:~$</span> <span class="term-cmd-line">${cleanInput}</span>`);
+            // Echo command line safely
+            writeHTML(`<span class="term-prompt">arshdeep@portfolio:~$</span> <span class="term-cmd-line">${escapeHTML(cleanInput)}</span>`);
             
             // Push to command history
             if (commandHistory.length === 0 || commandHistory[commandHistory.length - 1] !== cleanInput) {
@@ -1856,11 +1873,11 @@
               // Print small hint if NLP matched a conversational phrase
               const cleanLower = cleanInput.toLowerCase().trim();
               if (!terminalCommands[cleanLower] && parsed.command !== cleanLower) {
-                writeHTML(`<span class="term-muted-text">[Intent Resolved: <span class="term-bold term-success">${parsed.command}</span>]</span>`);
+                writeHTML(`<span class="term-muted-text">[Intent Resolved: <span class="term-bold term-success">${escapeHTML(parsed.command)}</span>]</span>`);
               }
               handler(parsed.args);
             } else {
-              writeHTML(`<span class="term-error">Command not found: "${parsed.command}". Type "help" for a list of commands.</span>\n`);
+              writeHTML(`<span class="term-error">Command not found: "${escapeHTML(parsed.command)}". Type "help" for a list of commands.</span>\n`);
             }
           }
         }
@@ -1901,7 +1918,7 @@
             terminalInput.value = matches[0] + ' ';
           } else if (matches.length > 1) {
             // Echo matches
-            writeHTML(`<span class="term-prompt">arshdeep@portfolio:~$</span> <span class="term-cmd-line">${terminalInput.value}</span>`);
+            writeHTML(`<span class="term-prompt">arshdeep@portfolio:~$</span> <span class="term-cmd-line">${escapeHTML(terminalInput.value)}</span>`);
             writeHTML(`<span class="term-muted-text">Possible commands:</span> <span class="term-info">${matches.join('  ')}</span>`);
           }
         }
@@ -2093,6 +2110,9 @@
         if (clickCount >= 3) {
           if (typeof robotOverlay !== 'undefined' && robotOverlay) {
             robotOverlay.classList.toggle('visible');
+            if (robotOverlay.classList.contains('visible') && typeof typeRobotGreeting === 'function') {
+              typeRobotGreeting();
+            }
           }
           clickCount = 0;
         } else {
@@ -2101,6 +2121,35 @@
       });
     }
 
+    // Advanced Robot Logic
+    const robotCloseBtn = document.getElementById('robot-close');
+    if (robotCloseBtn && typeof robotOverlay !== 'undefined') {
+      robotCloseBtn.addEventListener('click', () => {
+        robotOverlay.classList.remove('visible');
+      });
+    }
+    
+    function typeRobotGreeting() {
+      const robotText = document.getElementById('robot-text');
+      if (!robotText) return;
+      const msgs = [
+        "HELLO! I BUILD ROBOTS.",
+        "SYSTEMS NOMINAL.",
+        "AWAITING INPUT...",
+        "I AM ALIVE."
+      ];
+      const msg = msgs[Math.floor(Math.random() * msgs.length)];
+      robotText.textContent = '';
+      let i = 0;
+      const typeInt = setInterval(() => {
+        if (i < msg.length) {
+          robotText.textContent += msg.charAt(i);
+          i++;
+        } else {
+          clearInterval(typeInt);
+        }
+      }, 50);
+    }
   </script>
 
 </body>
