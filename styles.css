@@ -20,10 +20,10 @@
 
   /* Terminal theme variables */
   --term-bg: #050505;
-  --term-accent: #0026FF;
-  --term-text: #0026FF;
+  --term-accent: #FFE600;
+  --term-text: #00FF41;
   --term-prompt: #0026FF;
-  --term-input: #FFE600;
+  --term-input: #8B7355;
   
   --term-success: #00FF41;
   --term-error: #FF3B30;
@@ -1735,8 +1735,7 @@ a, button, .nav-link, .matrix-row, .back-link, .print-cta, .terminal-trigger,
   left: 12px;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--color-text);
-  border: 1px solid var(--color-primary);
+  color: var(--color-muted);
   padding: 6px 12px;
   opacity: 0.75;
   z-index: 998;

@@ -1003,7 +1003,7 @@
 
   <!-- Easter Egg Hint -->
   <div class="easter-egg-hint" id="easter-hint">
-    <span style="opacity: 0.4;">SECRETS:</span> ↑↑↓↓←→←→BA · TRIPLE-CLICK LOGO · TYPE "LAUNCH" · PRESS <span style="color: var(--color-accent); opacity: 0.6;">`</span>
+    <span style="opacity: 0.4;">SECRETS:</span> ↑↑↓↓←→←→BA · TRIPLE-CLICK LOGO · TYPE "LAUNCH" · PRESS `
   </div>
 
   <!-- Mini Terminal Easter Egg -->
@@ -1092,7 +1092,7 @@
         '--term-accent': '#FFE600',
         '--term-text': '#00F0FF',
         '--term-prompt': '#FF0055',
-        '--term-input': '#00F0FF',
+        '--term-input': '#8B7355',
         '--term-success': '#00F0FF',
         '--term-error': '#FF0055',
         '--term-info': '#FFE600',
@@ -2091,7 +2091,9 @@
         clickCount++;
         clearTimeout(clickTimer);
         if (clickCount >= 3) {
-          triggerAdvancedLaunch();
+          if (typeof robotOverlay !== 'undefined' && robotOverlay) {
+            robotOverlay.classList.toggle('visible');
+          }
           clickCount = 0;
         } else {
           clickTimer = setTimeout(() => { clickCount = 0; }, 500);
