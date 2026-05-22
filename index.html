@@ -35,7 +35,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2.1">
 </head>
 <body>
 
@@ -1150,9 +1150,7 @@
     // Apply saved theme immediately
     (function() {
       const savedTheme = localStorage.getItem('portfolio-theme') || 'default';
-      if (savedTheme !== 'default') {
-        setTheme(savedTheme);
-      }
+      setTheme(savedTheme);
     })();
 
     // ─────────────────────────────────────────────
