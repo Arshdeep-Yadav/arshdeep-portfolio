@@ -2058,3 +2058,89 @@ a, button, .nav-link, .matrix-row, .back-link, .print-cta, .terminal-trigger,
   color: var(--color-accent);
   border-color: var(--color-background);
 }
+
+/* ----------------------------------------------------------
+   ADVANCED ROCKET LAUNCH EASTER EGG
+   ---------------------------------------------------------- */
+#launch-sequence {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-primary);
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  overflow: hidden;
+}
+
+#launch-sequence.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#launch-countdown {
+  font-family: var(--font-mono);
+  font-size: clamp(3rem, 8vw, 8rem);
+  color: var(--term-prompt);
+  text-shadow: 0 0 20px var(--term-prompt);
+  font-weight: bold;
+  z-index: 2;
+  text-align: center;
+}
+
+#rocket-vessel {
+  position: absolute;
+  bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 5rem;
+  z-index: 3;
+  transition: bottom 3s cubic-bezier(0.5, 0, 0.2, 1);
+  filter: drop-shadow(0 0 10px rgba(255,100,0,0.8));
+}
+
+#rocket-vessel.liftoff {
+  bottom: 120vh;
+}
+
+.rocket-particle {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #FF5500;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: particleFade 1s ease-out forwards;
+  z-index: 1;
+  box-shadow: 0 0 10px #FF0000, 0 0 20px #FFD700;
+}
+
+@keyframes particleFade {
+  0% { transform: translateX(-50%) scale(1); opacity: 1; }
+  100% { transform: translateX(calc(-50% + var(--dx))) translateY(var(--dy)) scale(3); opacity: 0; }
+}
+
+@keyframes screenShake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-2px, -3px) rotate(-1deg); }
+  20% { transform: translate(-4px, 0px) rotate(1deg); }
+  30% { transform: translate(4px, 3px) rotate(0deg); }
+  40% { transform: translate(2px, -2px) rotate(1deg); }
+  50% { transform: translate(-2px, 3px) rotate(-1deg); }
+  60% { transform: translate(-4px, 2px) rotate(0deg); }
+  70% { transform: translate(4px, 2px) rotate(-1deg); }
+  80% { transform: translate(-2px, -2px) rotate(1deg); }
+  90% { transform: translate(2px, 3px) rotate(0deg); }
+  100% { transform: translate(2px, -3px) rotate(-1deg); }
+}
+
+body.shake-active {
+  animation: screenShake 0.1s infinite;
+}
