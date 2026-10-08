@@ -1,0 +1,9 @@
+{
+  "name":"Arshdeep Yadav — AI Lab",
+  "short_name":"Arshdeep",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#f6f3ec",
+  "theme_color":"#f6f3ec",
+  "icons":[{"src":"site-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

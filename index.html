@@ -1,2156 +1,791 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.fontshare.com; font-src 'self' https://fonts.gstatic.com https://cdn.fontshare.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'">
-  <title>Arshdeep Yadav — AI/ML Engineer & Builder</title>
-  <meta name="description" content="Portfolio of Arshdeep Yadav. CSE graduate (AI/ML Honors) from Chandigarh University, incoming MBA at IIT Patna. Building across computer vision, explainable AI, robotics, and deep-tech.">
-
-  <!-- Security -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Arshdeep Yadav — AI/ML Engineer & Builder">
-  <meta property="og:description" content="CSE graduate building intelligent systems across computer vision, explainable AI, robotics, and fintech. Incoming MBA at IIT Patna.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="en_IN">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Arshdeep Yadav — AI/ML Engineer & Builder">
-  <meta name="twitter:description" content="CSE graduate building intelligent systems across computer vision, explainable AI, robotics, and fintech.">
-
-  <!-- Theme -->
-  <meta name="theme-color" content="#050505">
-  <meta name="color-scheme" content="light">
-
-  <!-- Performance: DNS prefetch + preconnect -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://api.fontshare.com">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Arshdeep Yadav — AI/ML Engineer, AI Product Builder, and IIT Patna MBA (Gen AI & Product Management) candidate." />
+  <meta name="theme-color" content="#f6f3ec" />
+  <script>try { if (localStorage.getItem('arshdeep-theme') === 'dark') document.documentElement.classList.add('dark-mode') } catch (e) { }</script>
+  <meta name="author" content="Arshdeep Yadav" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="application-name" content="Arshdeep / AI Lab" />
+  <link rel="canonical" href="https://arshdeep.works/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Arshdeep Yadav — AI/ML Engineer · Product Builder" />
+  <meta property="og:description"
+    content="AI/ML Engineer and product-minded builder working across computer vision, explainable AI, fintech, and Generative AI product management." />
+  <meta property="og:url" content="https://arshdeep.works/" />
+  <meta property="og:image" content="https://arshdeep.works/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Arshdeep Yadav — AI/ML Engineer · Product Builder" />
+  <meta name="twitter:description" content="AI/ML Engineer + product-minded builder." />
+  <meta name="twitter:image" content="https://arshdeep.works/og-card.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="site-icon.svg" />
+  <link rel="apple-touch-icon" href="site-icon.svg" />
+  <title>Arshdeep Yadav — AI/ML Engineer · Product Builder</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css?v=2.3">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">{
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Arshdeep Yadav",
+    "url":"https://arshdeep.works/",
+    "jobTitle":"AI/ML Engineer & Product Builder",
+    "sameAs":["https://github.com/Arshdeep-Yadav","https://www.linkedin.com/in/arshdeep-yadav"]
+  }</script>
 </head>
+
 <body>
+  <a class="skip-link" href="#top">Skip to content</a>
+  <div class="grain"></div>
+  <canvas id="inkCanvas" aria-hidden="true"></canvas>
+  <div class="celestial-light-source" aria-hidden="true"></div>
 
-  <!-- Boot Sequence Overlay -->
-  <div id="boot-overlay" style="
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 99999;
-    background: #050505; display: flex;
-    flex-direction: column; justify-content: center; align-items: center;
-    font-family: 'JetBrains Mono', monospace; color: #0026FF;
-    transition: opacity 0.3s;
-  ">
-    <div id="boot-text" style="font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; text-align: left; line-height: 2;"></div>
-  </div>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Arshdeep home">
+      <span class="brand-mark">AY</span>
+      <span class="brand-copy"><b>ARSHDEEP YADAV</b><small>AI / PRODUCT / SYSTEMS</small></span>
+    </a>
 
-  <!-- Advanced Rocket Launch Sequence -->
-  <div id="launch-sequence">
-    <div id="launch-countdown"></div>
-    <div id="rocket-vessel">🚀</div>
-  </div>
+    <nav class="topnav" aria-label="Primary navigation">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#journey">Journey</a>
+      <a href="#stack">Lab</a>
+      <a href="#now">Now</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
-  <!-- Scroll Progress Bar -->
-  <div id="scroll-progress" style="
-    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-    background: #0026FF; z-index: 10001; transition: width 0.1s;
-  "></div>
+    <div class="top-actions">
+      <a class="resume-btn" href="https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing"
+        target="_blank" rel="noreferrer">Resume ↗</a>
+      <button class="pill-button" id="commandBtn" aria-label="Open command palette">⌘ K</button>
+      <button class="icon-button celestial-toggle" id="themeBtn" aria-label="Toggle theme"
+        title="Toggle Light / Dark mode (Celestial light source)">
+        <span class="celestial-sun" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4.5" fill="currentColor" fill-opacity="0.25"></circle>
+            <path
+              d="M12 2v2.5M12 19.5V22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M2 12h2.5M19.5 12H22M6.7 17.3l-1.77 1.77M19.07 4.93l-1.77 1.77" />
+          </svg>
+        </span>
+        <span class="celestial-moon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" fill="currentColor" fill-opacity="0.3"></path>
+            <circle cx="17.5" cy="8" r="0.9" fill="currentColor" stroke="none"></circle>
+            <circle cx="15" cy="12" r="0.6" fill="currentColor" stroke="none"></circle>
+          </svg>
+        </span>
+      </button>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
 
-  <!-- Cursor Trail Dot -->
-  <div id="cursor-dot" style="
-    position: fixed; width: 6px; height: 6px; background: #0026FF;
-    border-radius: 50%; pointer-events: none; z-index: 99998;
-    opacity: 0; transition: opacity 0.3s; mix-blend-mode: difference;
-  "></div>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- NAVIGATION -->
-  <!-- ═══════════════════════════════════════════ -->
-  <nav class="nav" id="main-nav" role="navigation" aria-label="Main navigation">
-    <!-- Orbiting Rocket -->
-    <div class="nav-rocket" aria-hidden="true">🚀</div>
-    <!-- Floating Satellites -->
-    <div class="nav-satellite sat-1" aria-hidden="true">🛰️</div>
-    <div class="nav-satellite sat-2" aria-hidden="true">🛰️</div>
-    <div class="nav-satellite sat-3" aria-hidden="true">⭐</div>
-
-    <div class="nav-logo" data-screen="home" tabindex="0" role="button" aria-label="Go to home">ARSHDEEP YADAV</div>
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <div class="nav-links" id="nav-links-container">
-      <a href="#home" class="nav-link active" data-screen="home" id="nav-home" tabindex="0" role="link">Home</a>
-      <a href="#strategy" class="nav-link" data-screen="strategy" id="nav-strategy" tabindex="0" role="link">Vision</a>
-      <a href="#dossier" class="nav-link" data-screen="dossier" id="nav-dossier" tabindex="0" role="link">Dossier</a>
+  <!-- Mobile nav overlay -->
+  <div class="mobile-nav-scrim" id="mobileScrim"></div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="mobile-nav-header">
+      <span class="brand-mark">AY</span>
+      <span>ARSHDEEP YADAV</span>
+      <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">×</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="#about"><span>01</span> ABOUT</a>
+      <a href="#work"><span>02</span> WORK</a>
+      <a href="#journey"><span>03</span> JOURNEY</a>
+      <a href="#stack"><span>04</span> LAB</a>
+      <a href="#now"><span>05</span> NOW</a>
+      <a href="#contact"><span>06</span> CONTACT</a>
+    </div>
+    <div class="mobile-nav-external">
+      <a href="https://github.com/Arshdeep-Yadav" target="_blank" rel="noreferrer">GITHUB</a>
+      <a href="https://www.linkedin.com/in/arshdeep-yadav" target="_blank" rel="noreferrer">LINKEDIN</a>
+      <a href="https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing" target="_blank"
+        rel="noreferrer">RESUME</a>
     </div>
   </nav>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- SCREEN: HOME -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="screen active" id="screen-home">
-    <div class="home">
-      <!-- Left Panel: Hero -->
-      <div class="hero-panel">
-        <div class="hero-statement">
-          <h1 data-text="Building intelligent systems that see, learn, and explain.">Building intelligent systems that see, learn, and explain.</h1>
-        </div>
-        <div class="hero-meta">
-          <div>AI/ML Engineer & Builder</div>
-          <div class="mt-1" id="time-greeting" style="color: var(--color-accent); font-size: 0.75rem;"></div>
-          <div class="mt-1">Lucknow, Uttar Pradesh, India</div>
-          <div class="mt-1" style="color: var(--color-accent);">arshdeep.yadav.work@gmail.com</div>
-          <div class="mt-2" style="color: var(--color-muted); font-size: 0.75rem; line-height: 1.8; max-width: 380px;">
-            CSE graduate (AI/ML Honors) → incoming MBA candidate at IIT Patna (Gen AI & Product Management). Shipping across computer vision, explainable AI, robotics, and fintech.
-          </div>
-          <div class="mt-3">
-            <button class="terminal-trigger" id="terminal-btn" aria-label="Open developer terminal">
-              <span style="color: var(--color-accent); font-weight: bold; margin-right: 4px;">&gt;_</span> PRESS <kbd class="key-hint">`</kbd> TO EXECUTE
-            </button>
-          </div>
-        </div>
-      </div>
+  <main id="top">
+    <section class="hero section-shell">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="live-dot"></span> ARSHDEEP / AI LAB</div>
+          <h1>I build AI systems that<br><span class="scribble-word">see, explain & ship.</span></h1>
+          <p class="hero-sub">AI/ML Engineer × AI Product Builder</p>
+          <p class="hero-lede">Computer Vision · Explainable AI · Generative AI · Product</p>
 
-      <!-- Right Panel: Project Matrix -->
-      <div class="project-matrix">
-        <div class="matrix-header">
-          <span>Project Index</span>
-          <span class="text-muted">[<span class="scramble" data-final="06">06</span>] Entries</span>
-        </div>
-
-        <div class="matrix-row" data-case="xai-satellite">
-          <div class="matrix-left">
-            <div class="matrix-title">Explainable Vision Transformer for Satellite Analysis</div>
-            <div class="matrix-pitch">XAI framework for satellite image classification using Vision Transformers with Grad-CAM interpretability. Published at IEEE RMKMATE'26.</div>
+          <div class="hero-cta-row">
+            <a class="button button-dark" href="#work">Explore my work <span>→</span></a>
+            <a class="button button-ghost"
+              href="https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing" target="_blank"
+              rel="noreferrer">View Resume <span>↗</span></a>
           </div>
-          <div class="matrix-right">
-            <div class="matrix-year">2026</div>
+
+          <div class="hero-meta">
+            <span>Based in India</span>
+            <span>·</span>
+            <span>CU '26 → IIT Patna '28</span>
+            <span>·</span>
+            <span class="status-inline"><i></i> Open to opportunities</span>
           </div>
         </div>
 
-        <div class="matrix-row" data-case="ipo-platform">
-          <div class="matrix-left">
-            <div class="matrix-title">Real-Time IPO Tracking Platform</div>
-            <div class="matrix-pitch">Full-stack fintech platform for live IPO data workflows with real-time tracking, built during Bluestock Fintech internship.</div>
-          </div>
-          <div class="matrix-right">
-            <div class="matrix-year">2025</div>
-          </div>
-        </div>
+        <div class="hero-board" id="heroBoard" aria-label="Interactive career board">
+          <div class="board-label">LIVE BOARD <span>drag the notes</span></div>
+          <div class="rank-tape">BUILD. SHIP. EXPLAIN.</div>
+          <div class="board-chip chip-check chip-one"><i>✓</i> PyTorch & TorchScript</div>
+          <div class="board-chip chip-check chip-two"><i>✓</i> TensorRT Edge Inference</div>
+          <div class="board-chip chip-check chip-three"><i>✓</i> IEEE RMKMATE Published</div>
+          <div class="board-chip chip-no chip-four"><i>×</i> black-box unexplainable AI</div>
+          <article class="sticky sticky-a draggable" data-x="0" data-y="0">
+            <div class="sticky-pin"></div>
+            <small>01 / PRODUCT</small>
+            <h3>SDE Intern<br>→ Team Lead</h3>
+            <p>Bluestock Fintech</p>
+            <b>IPO Dashboard</b>
+          </article>
+          <article class="sticky sticky-b draggable" data-x="0" data-y="0">
+            <div class="sticky-pin"></div>
+            <small>02 / EDUCATION</small>
+            <h3>MBA @ IIT Patna</h3>
+            <p>Generative AI × Product Management</p>
+            <b>Hybrid · 2026–2028</b>
+          </article>
+          <article class="sticky sticky-c draggable" data-x="0" data-y="0">
+            <div class="sticky-pin"></div>
+            <small>03 / RESEARCH</small>
+            <h3>IEEE RMKMATE'26</h3>
+            <p>Explainable Vision Transformer</p>
+            <b>Satellite image analysis</b>
+          </article>
 
-        <div class="matrix-row" data-case="plant-disease">
-          <div class="matrix-left">
-            <div class="matrix-title">Plant Disease Detection System</div>
-            <div class="matrix-pitch">CNN-based crop disease detection with Streamlit interface for real-time prediction and visualization from image datasets.</div>
-          </div>
-          <div class="matrix-right">
-            <div class="matrix-year">2025</div>
-          </div>
-        </div>
-
-        <div class="matrix-row" data-case="object-detection">
-          <div class="matrix-left">
-            <div class="matrix-title">Deep Learning Object Detection</div>
-            <div class="matrix-pitch">Real-time object detection and classification system using YOLO architecture with OpenCV tracking and transfer learning.</div>
-          </div>
-          <div class="matrix-right">
-            <div class="matrix-year">2024</div>
-          </div>
-        </div>
-
-        <div class="matrix-row" data-case="stress-detection">
-          <div class="matrix-left">
-            <div class="matrix-title">Stress Detection via Medical Data</div>
-            <div class="matrix-pitch">ML models for stress prediction using physiological datasets with feature engineering and classification optimization.</div>
-          </div>
-          <div class="matrix-right">
-            <div class="matrix-year">2023</div>
-          </div>
-        </div>
-
-        <div class="matrix-row" data-case="iot-systems">
-          <div class="matrix-left">
-            <div class="matrix-title">IoT-Based Smart Systems</div>
-            <div class="matrix-pitch">Suite of embedded systems — Smart Blind Stick, GPS Tracker, Room Monitor — built with ESP32, Arduino, and wireless protocols.</div>
-          </div>
-          <div class="matrix-right">
-            <div class="matrix-year">2023</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- SCREEN: CASE STUDY -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="screen" id="screen-case-study">
-    <div class="container">
-      <a href="#home" class="back-link" data-screen="home" tabindex="0" role="link" aria-label="Back to project index">← BACK TO INDEX</a>
-
-      <div class="case-study-header">
-        <h1 id="case-title">Explainable Vision Transformer for Satellite Analysis</h1>
-      </div>
-
-      <div class="meta-bar">
-        <div class="meta-item">
-          <div class="meta-label">Role</div>
-          <div class="meta-value" id="case-role">Lead Researcher</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">Timeline</div>
-          <div class="meta-value" id="case-timeline">2025 — 2026</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">Domain</div>
-          <div class="meta-value" id="case-team">Explainable AI · Remote Sensing</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">Tech Stack</div>
-          <div class="meta-value" id="case-stack">Vision Transformers, Grad-CAM, Python, PyTorch</div>
+          <svg class="board-ink" viewBox="0 0 520 480" aria-hidden="true">
+            <path d="M150 145 C90 210, 95 275, 192 305" />
+            <path d="M335 170 C398 190, 425 246, 377 310" />
+            <path d="M188 330 C233 368, 293 379, 348 331" />
+            <text x="226" y="236">→ build</text>
+          </svg>
         </div>
       </div>
 
-      <div class="case-content">
-        <!-- Column 1: Problem Space -->
-        <div class="case-column">
-          <h3>Problem Space</h3>
-          <p>Satellite image classification is increasingly powered by deep learning, but most models operate as black boxes. Decision-makers in urban planning, agriculture, and defense need to understand <strong>why</strong> a model classifies a region a certain way — not just the label.</p>
-          <p class="mt-2">Traditional CNNs lack the global context needed for large satellite images, and their feature maps don't provide human-readable explanations. Vision Transformers capture long-range spatial dependencies but their attention mechanisms are opaque.</p>
-          <p class="mt-2">The core challenge: build a classification pipeline that achieves state-of-the-art accuracy on satellite imagery <strong>and</strong> generates interpretable visual explanations that domain experts can trust and audit.</p>
-        </div>
-
-        <!-- Column 2: Architecture -->
-        <div class="case-column">
-          <h3>Model Architecture</h3>
-          <div class="architecture-diagram">
-┌──────────────────────────────────┐
-│      SATELLITE IMAGE INPUT       │
-│      (Multi-spectral Patches)    │
-└───────────────┬──────────────────┘
-                │
-┌───────────────▼──────────────────┐
-│     VISION TRANSFORMER (ViT)     │
-│  ┌────────────────────────────┐  │
-│  │  Patch Embedding (16×16)   │  │
-│  │  + Positional Encoding     │  │
-│  ├────────────────────────────┤  │
-│  │  Multi-Head Self-Attention │  │
-│  │  × 12 Transformer Blocks  │  │
-│  ├────────────────────────────┤  │
-│  │  [CLS] Token → Classifier │  │
-│  └────────────────────────────┘  │
-└───────────────┬──────────────────┘
-                │
-┌───────────────▼──────────────────┐
-│       EXPLAINABILITY LAYER       │
-│  ┌──────────┐  ┌──────────────┐  │
-│  │ GRAD-CAM │  │  ATTENTION   │  │
-│  │ Heatmaps │  │  ROLLOUT     │  │
-│  └──────────┘  └──────────────┘  │
-│        INTERPRETABLE OUTPUT      │
-└──────────────────────────────────┘</div>
-        </div>
-
-        <!-- Column 3: Impact -->
-        <div class="case-column">
-          <h3>Impact</h3>
-          <div class="metrics-board">
-            <a href="https://ieeexplore.ieee.org/document/11518743" target="_blank" rel="noopener" class="metric-block" style="text-decoration: none; display: flex;">
-              <div class="metric-value"><span class="scramble" data-final="IEEE">IEEE</span></div>
-              <div class="metric-label">Published May 2026 ↗</div>
-            </a>
-            <div class="metric-block">
-              <div class="metric-value"><span class="scramble" data-final="ViT">ViT</span></div>
-              <div class="metric-label">Architecture</div>
-            </div>
-            <div class="metric-block">
-              <div class="metric-value"><span class="scramble" data-final="XAI">XAI</span></div>
-              <div class="metric-label">Grad-CAM Integrated</div>
-            </div>
-            <div class="metric-block">
-              <div class="metric-value"><span class="scramble" data-final="2026">2026</span></div>
-              <div class="metric-label">RMKMATE'26 Conf</div>
-            </div>
-          </div>
-          <div class="mt-3">
-            <a href="https://ieeexplore.ieee.org/document/11518743" target="_blank" rel="noopener" class="cert-link" style="font-family: var(--font-mono); font-size: 0.85rem;">[IEEE XPLORE DOCUMENT ↗]</a>
-          </div>
-        </div>
+      <div class="hero-foot-strip" aria-hidden="true">
+        <div class="floating-caption note-a"><span>✦</span> research ≠ ivory tower</div>
+        <div class="floating-caption note-b"><span>→</span> make it real & useful</div>
       </div>
+    </section>
 
-      <!-- ═══ CASE STUDY TEMPLATES ═══ -->
-
-      <template id="case-ipo-platform">
-        <div data-title="Real-Time IPO Tracking Platform" data-role="Software Development Intern" data-timeline="May 2025 — Jun 2025" data-team="Fintech · Full-Stack" data-stack="Python, JavaScript, REST APIs, Frontend/Backend">
-          <div class="case-column" data-col="problem">
-            <h3>Problem Space</h3>
-            <p>Retail investors tracking IPO markets lacked a unified, real-time platform. Existing tools were fragmented — some tracked listings but not performance, others had data delays of hours.</p>
-            <p class="mt-2">Bluestock Fintech needed a platform that could ingest live financial data, display IPO status in real-time, and provide actionable insights for investors during the critical listing window.</p>
-            <p class="mt-2">The engineering challenge: build reliable data pipelines from multiple financial APIs, present real-time updates with minimal latency, and maintain platform stability during high-traffic IPO listing days.</p>
-          </div>
-          <div class="case-column" data-col="architecture">
-            <h3>System Architecture</h3>
-            <div class="architecture-diagram">
-┌──────────────────────────────┐
-│     FINANCIAL DATA SOURCES   │
-│   BSE API │ NSE API │ Feeds  │
-└──────┬───────────────────────┘
-       │
-┌──────▼───────────────────────┐
-│      PYTHON BACKEND          │
-│  ┌─────────────────────┐     │
-│  │  Data Ingestion     │     │
-│  │  + Normalization    │     │
-│  ├─────────────────────┤     │
-│  │  IPO Status Engine  │     │
-│  │  (Live Tracking)    │     │
-│  ├─────────────────────┤     │
-│  │  REST API Layer     │     │
-│  └──────────┬──────────┘     │
-└─────────────┼────────────────┘
-              │
-┌─────────────▼────────────────┐
-│      JAVASCRIPT FRONTEND     │
-│  Real-time Dashboard         │
-│  IPO Cards + Status Updates  │
-│  Performance Metrics         │
-└──────────────────────────────┘</div>
-          </div>
-          <div class="case-column" data-col="impact">
-            <h3>Impact</h3>
-            <div class="metrics-board">
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="LIVE">LIVE</span></div><div class="metric-label">Real-Time Data</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="F+B">F+B</span></div><div class="metric-label">Full-Stack</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="API">API</span></div><div class="metric-label">Integrations Built</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="AGILE">AGILE</span></div><div class="metric-label">Sprint-Based Dev</div></div>
-            </div>
-          </div>
-        </div>
-      </template>
-
-      <template id="case-plant-disease">
-        <div data-title="Plant Disease Detection System" data-role="ML Engineer" data-timeline="2025" data-team="Computer Vision · AgriTech" data-stack="Python, CNN, TensorFlow, Streamlit">
-          <div class="case-column" data-col="problem">
-            <h3>Problem Space</h3>
-            <p>Crop diseases cause billions in agricultural losses annually. Farmers in developing regions lack access to plant pathologists, and by the time diseases are visually obvious, the damage is often irreversible.</p>
-            <p class="mt-2">Existing detection methods required expert knowledge or expensive lab analysis. A mobile-friendly, image-based diagnostic tool could democratize early disease detection for smallholder farmers.</p>
-            <p class="mt-2">The ML challenge: build a convolutional neural network that generalizes across crop types, lighting conditions, and disease stages from relatively small image datasets — while keeping inference fast enough for a web-based real-time interface.</p>
-          </div>
-          <div class="case-column" data-col="architecture">
-            <h3>Model Architecture</h3>
-            <div class="architecture-diagram">
-┌──────────────────────────────┐
-│      IMAGE INPUT (RGB)       │
-│   Crop Leaf Photographs      │
-└──────────┬───────────────────┘
-           │
-┌──────────▼───────────────────┐
-│    PREPROCESSING PIPELINE    │
-│  Resize → Normalize →       │
-│  Augmentation (Flip, Rotate, │
-│  Color Jitter, Crop)         │
-└──────────┬───────────────────┘
-           │
-┌──────────▼───────────────────┐
-│    CNN CLASSIFIER            │
-│  ┌─────────────────────────┐ │
-│  │ Conv2D × 4 Blocks       │ │
-│  │ BatchNorm + ReLU        │ │
-│  │ MaxPool (2×2)           │ │
-│  ├─────────────────────────┤ │
-│  │ Global Avg Pool         │ │
-│  │ Dense → Softmax         │ │
-│  └─────────────────────────┘ │
-└──────────┬───────────────────┘
-           │
-┌──────────▼───────────────────┐
-│    STREAMLIT INTERFACE       │
-│  Upload → Predict → Display  │
-└──────────────────────────────┘</div>
-          </div>
-          <div class="case-column" data-col="impact">
-            <h3>Impact</h3>
-            <div class="metrics-board">
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="CNN">CNN</span></div><div class="metric-label">Deep Learning</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="LIVE">LIVE</span></div><div class="metric-label">Real-Time UI</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="AUG">AUG</span></div><div class="metric-label">Data Augmentation</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="WEB">WEB</span></div><div class="metric-label">Streamlit Deploy</div></div>
-            </div>
-          </div>
-        </div>
-      </template>
-
-      <template id="case-object-detection">
-        <div data-title="Deep Learning Object Detection" data-role="ML Engineer" data-timeline="2024" data-team="Computer Vision" data-stack="Python, OpenCV, YOLO, Transfer Learning">
-          <div class="case-column" data-col="problem">
-            <h3>Problem Space</h3>
-            <p>Real-time object detection is a cornerstone of autonomous systems, surveillance, and industrial automation. Existing solutions either sacrificed speed for accuracy or vice versa.</p>
-            <p class="mt-2">The goal was to build a detection system that could identify and track multiple object classes in real-time video streams with high accuracy, while remaining lightweight enough for edge deployment scenarios.</p>
-            <p class="mt-2">Key challenges included handling occlusion, varying scales, and real-world lighting conditions while maintaining &gt;30 FPS inference speed through efficient architecture choices and transfer learning from pre-trained YOLO weights.</p>
-          </div>
-          <div class="case-column" data-col="architecture">
-            <h3>Model Architecture</h3>
-            <div class="architecture-diagram">
-┌──────────────────────────────┐
-│     VIDEO STREAM INPUT       │
-│   Webcam / File / RTSP       │
-└──────────┬───────────────────┘
-           │
-┌──────────▼───────────────────┐
-│     YOLO DETECTOR            │
-│  ┌─────────────────────────┐ │
-│  │  Backbone (Darknet/CSP) │ │
-│  │  Feature Pyramid (FPN)  │ │
-│  │  Detection Head (3 sc.) │ │
-│  └──────────┬──────────────┘ │
-│             │                │
-│  ┌──────────▼──────────────┐ │
-│  │  Non-Max Suppression    │ │
-│  │  Confidence Threshold   │ │
-│  └──────────┬──────────────┘ │
-└─────────────┼────────────────┘
-              │
-┌─────────────▼────────────────┐
-│     OPENCV TRACKER           │
-│  Bounding Box Rendering      │
-│  Class Label Overlay         │
-│  FPS Counter                 │
-└──────────────────────────────┘</div>
-          </div>
-          <div class="case-column" data-col="impact">
-            <h3>Impact</h3>
-            <div class="metrics-board">
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="YOLO">YOLO</span></div><div class="metric-label">Architecture</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="RT">RT</span></div><div class="metric-label">Real-Time FPS</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="TL">TL</span></div><div class="metric-label">Transfer Learning</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="CV">CV</span></div><div class="metric-label">OpenCV Integrated</div></div>
-            </div>
-          </div>
-        </div>
-      </template>
-
-      <template id="case-stress-detection">
-        <div data-title="Stress Detection via Medical Data" data-role="ML Engineer" data-timeline="2023" data-team="Health AI · Predictive Analytics" data-stack="Python, Scikit-learn, Pandas, NumPy">
-          <div class="case-column" data-col="problem">
-            <h3>Problem Space</h3>
-            <p>Chronic stress is a silent contributor to cardiovascular disease, anxiety disorders, and burnout — yet clinical detection relies on subjective self-reporting. Physiological signals like heart rate variability, skin conductance, and cortisol proxies contain objective stress markers.</p>
-            <p class="mt-2">The challenge: build ML models that can reliably predict stress levels from noisy physiological sensor data, handling missing values, temporal dependencies, and individual baseline variation.</p>
-            <p class="mt-2">Feature engineering was critical — raw sensor readings needed to be transformed into meaningful statistical descriptors (rolling means, spectral features, inter-beat intervals) that capture stress signatures across different individuals.</p>
-          </div>
-          <div class="case-column" data-col="architecture">
-            <h3>Model Architecture</h3>
-            <div class="architecture-diagram">
-┌──────────────────────────────┐
-│   PHYSIOLOGICAL DATASETS     │
-│   HR │ EDA │ Temp │ Accel    │
-└──────────┬───────────────────┘
-           │
-┌──────────▼───────────────────┐
-│   FEATURE ENGINEERING        │
-│  ┌─────────────────────────┐ │
-│  │ Statistical Features    │ │
-│  │ (Mean, Std, Kurtosis)   │ │
-│  ├─────────────────────────┤ │
-│  │ Temporal Features       │ │
-│  │ (Rolling, Lag, Diff)    │ │
-│  ├─────────────────────────┤ │
-│  │ Normalization + Impute  │ │
-│  └──────────┬──────────────┘ │
-└─────────────┼────────────────┘
-              │
-┌─────────────▼────────────────┐
-│   CLASSIFICATION ENSEMBLE    │
-│  RF │ SVM │ XGBoost │ KNN    │
-│  ────────────────────────    │
-│  Cross-Validation + Tuning   │
-│  → Best Model Selection      │
-└──────────────────────────────┘</div>
-          </div>
-          <div class="case-column" data-col="impact">
-            <h3>Impact</h3>
-            <div class="metrics-board">
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="ML">ML</span></div><div class="metric-label">Multi-Model</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="FE">FE</span></div><div class="metric-label">Feature Engineering</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="CV">CV</span></div><div class="metric-label">Cross-Validated</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="OPT">OPT</span></div><div class="metric-label">Hyperparameter Tuned</div></div>
-            </div>
-          </div>
-        </div>
-      </template>
-
-      <template id="case-iot-systems">
-        <div data-title="IoT-Based Smart Systems" data-role="Embedded Systems Engineer" data-timeline="2023" data-team="IoT · Accessibility · Automation" data-stack="Arduino, ESP32, IoT Sensors, Wireless Protocols">
-          <div class="case-column" data-col="problem">
-            <h3>Problem Space</h3>
-            <p>Assistive technology and smart monitoring systems remain expensive and inaccessible for many users. Off-the-shelf IoT solutions lack customization for specific use cases like navigation aid for visually impaired users or low-cost environmental monitoring.</p>
-            <p class="mt-2">Three distinct problems were addressed: (1) obstacle detection and navigation for blind users, (2) real-time GPS tracking for safety-critical applications, and (3) automated room condition monitoring for energy efficiency and comfort.</p>
-            <p class="mt-2">Each system was designed for reliability, low power consumption, and practical deployment — prioritizing sensor accuracy and wireless communication stability in real-world conditions over lab-perfect metrics.</p>
-          </div>
-          <div class="case-column" data-col="architecture">
-            <h3>System Architecture</h3>
-            <div class="architecture-diagram">
-┌──────────────────────────────────┐
-│   SMART BLIND STICK              │
-│   Ultrasonic + Vibration Motor   │
-│   Arduino Nano │ Battery Pack    │
-├──────────────────────────────────┤
-│   GPS TRACKER                    │
-│   NEO-6M GPS + GSM Module        │
-│   ESP32 │ MQTT │ Cloud Relay     │
-├──────────────────────────────────┤
-│   ROOM MONITORING SYSTEM         │
-│   DHT22 │ MQ-135 │ LDR │ PIR    │
-│   ESP32 → WiFi → Dashboard      │
-└──────────────────────────────────┘
-     │           │           │
-  [SENSORS]  [WIRELESS]  [ACTUATORS]
-  Ultra/IR   WiFi/BLE    Motor/LED
-  Temp/Gas   MQTT/HTTP   Buzzer/LCD</div>
-          </div>
-          <div class="case-column" data-col="impact">
-            <h3>Impact</h3>
-            <div class="metrics-board">
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="3">3</span></div><div class="metric-label">Systems Built</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="IoT">IoT</span></div><div class="metric-label">End-to-End</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="ESP">ESP</span></div><div class="metric-label">ESP32 + Arduino</div></div>
-              <div class="metric-block"><div class="metric-value"><span class="scramble" data-final="A11Y">A11Y</span></div><div class="metric-label">Accessibility Focus</div></div>
-            </div>
-          </div>
-        </div>
-      </template>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- SCREEN: STRATEGY & ROADMAP -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="screen" id="screen-strategy">
-    <div class="container">
-      <div class="strategy-header">
-        <h1>Vision & Roadmap</h1>
+    <section class="marquee-band" aria-label="Proof points">
+      <div class="marquee-track">
+        <span>IEEE PUBLISHED</span><i>✳</i><span>SDE INTERN · BLUESTOCK</span><i>✳</i><span>IIT
+          PATNA</span><i>✳</i><span>COMPUTER VISION</span><i>✳</i><span>EXPLAINABLE AI</span><i>✳</i><span>PRODUCT
+          BUILDER</span><i>✳</i>
+        <span>IEEE PUBLISHED</span><i>✳</i><span>SDE INTERN · BLUESTOCK</span><i>✳</i><span>IIT
+          PATNA</span><i>✳</i><span>COMPUTER VISION</span><i>✳</i><span>EXPLAINABLE AI</span><i>✳</i><span>PRODUCT
+          BUILDER</span><i>✳</i>
       </div>
+    </section>
 
-      <div class="vision-block">
-        <div class="vision-column">
-          <h3>Strategic Thesis</h3>
-          <p>The next decade of AI impact won't come from bigger models — it'll come from <strong>intelligent integration</strong>. The gap between research breakthroughs and real-world deployment is where builders create the most value.</p>
-          <p class="mt-2">I focus on applied AI that crosses domain boundaries: computer vision for agriculture, explainable AI for defense and policy, embedded intelligence for accessibility, and data-driven analytics for business decisions.</p>
-          <p class="mt-2">My conviction: the most impactful AI systems are the ones users can <strong>trust, understand, and correct</strong>. That's why explainability, robustness, and practical deployment are central to every project I build.</p>
-        </div>
-        <div class="vision-column">
-          <h3>Operating Principles</h3>
-          <p><strong>1. Build to deploy, not to demo.</strong> Every model should work outside a Jupyter notebook. If it can't run on a Streamlit app or an ESP32, it's not done.</p>
-          <p class="mt-2"><strong>2. Explain what you build.</strong> Black-box AI erodes trust. Integrate interpretability (Grad-CAM, attention visualization, SHAP) as a first-class feature, not an afterthought.</p>
-          <p class="mt-2"><strong>3. Cross-pollinate domains.</strong> The best solutions come from applying techniques across boundaries — computer vision for agriculture, NLP for healthcare, embedded systems for accessibility.</p>
-          <p class="mt-2"><strong>4. Ship fast, measure everything.</strong> Agile sprints, version control, CI/CD pipelines. Treat ML projects with the same engineering rigor as production software.</p>
-        </div>
-      </div>
-
-      <div class="section-header">Growth Roadmap — 2025-2027 Horizons</div>
-
-      <div class="roadmap-table-wrapper">
-        <table class="roadmap-table">
-          <thead>
-            <tr>
-              <th>Horizon</th>
-              <th>Initiative</th>
-              <th>AI Capability</th>
-              <th>Focus Area</th>
-              <th>Confidence</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="mono">H1 — NOW</td>
-              <td>Explainable AI Research</td>
-              <td>Vision Transformers + Grad-CAM for interpretable classification</td>
-              <td>IEEE publication; remote sensing; satellite imagery</td>
-              <td><span class="confidence-bar">[████░]</span></td>
-            </tr>
-            <tr>
-              <td class="mono">H1 — NOW</td>
-              <td>Full-Stack AI Product Development</td>
-              <td>End-to-end ML pipelines with web deployment (Streamlit, Flask)</td>
-              <td>AgriTech, FinTech, HealthTech applications</td>
-              <td><span class="confidence-bar">[████░]</span></td>
-            </tr>
-            <tr>
-              <td class="mono">H2 — NEXT</td>
-              <td>Generative AI Systems</td>
-              <td>LLM fine-tuning, RAG pipelines, prompt engineering at scale</td>
-              <td>AWS GenAI certified; applied use cases</td>
-              <td><span class="confidence-bar">[███░░]</span></td>
-            </tr>
-            <tr>
-              <td class="mono">H2 — NEXT</td>
-              <td>Hybrid MBA — Gen AI & Product Management</td>
-              <td>AI product strategy, go-to-market, stakeholder coordination, data-driven roadmapping</td>
-              <td>IIT Patna (Jul 2026 — 2028); McKinsey Forward; Google PM certified</td>
-              <td><span class="confidence-bar">[█████]</span></td>
-            </tr>
-            <tr>
-              <td class="mono">H3 — LATER</td>
-              <td>Autonomous Systems & Robotics</td>
-              <td>Perception + planning stacks for autonomous navigation</td>
-              <td>Computer vision + embedded systems convergence</td>
-              <td><span class="confidence-bar">[██░░░]</span></td>
-            </tr>
-            <tr>
-              <td class="mono">H3 — LATER</td>
-              <td>Space Technology AI</td>
-              <td>ML for satellite data analysis, orbital mechanics optimization</td>
-              <td>ISRO IIRS certified; remote sensing research</td>
-              <td><span class="confidence-bar">[█░░░░]</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="section-header">Certifications & Credentials</div>
-
-      <div class="cert-grid">
-        <!-- 1. Stanford ML Specialization -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">Stanford Online</div>
-            <div class="cert-name">Machine Learning Specialization</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Nov 2025</span>
-            <span class="cert-id text-muted">ID: EBRZSV4O2SKF</span>
-            <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/EBRZSV4O2SKF" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-        <!-- 2. AWS Generative AI -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">Amazon Web Services (AWS)</div>
-            <div class="cert-name">AWS Academy Graduate — Generative AI Foundations</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Mar 2026</span>
-            <a href="https://www.credly.com/badges/aded235f-78ff-4cae-827f-0beff6d91334/linked_in_profile" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-        <!-- 3. UMich Applied Machine Learning -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">University of Michigan</div>
-            <div class="cert-name">Applied Machine Learning in Python</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Sep 2024</span>
-            <span class="cert-id text-muted">ID: CZV0U14CXMWD</span>
-            <a href="https://www.coursera.org/account/accomplishments/verify/CZV0U14CXMWD" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-        <!-- 4. IBM Computer Vision -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">IBM</div>
-            <div class="cert-name">Introduction to Computer Vision and Image Processing</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Nov 2025</span>
-            <a href="https://www.coursera.org/account/accomplishments/verify/7MSO64GNSPRC" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-        <!-- 5. UC Boulder Robotics -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">University of Colorado Boulder</div>
-            <div class="cert-name">Basic Robotic Behaviors and Odometry</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Apr 2026</span>
-            <span class="cert-id text-muted">ID: L4KJ9KID6ZUF</span>
-            <a href="https://www.coursera.org/account/accomplishments/verify/L4KJ9KID6ZUF" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-
-
-        <!-- 6. CU & IBM AI Analyst -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">IBM CEP & Chandigarh University</div>
-            <div class="cert-name">Artificial Intelligence Analyst</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Apr 2025</span>
-            <span class="cert-id text-muted">ID: 34422dfc709048878efd37e691069982</span>
-            <a href="https://courses.cu.skillsnetwork.site/certificates/34422dfc709048878efd37e691069982" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-        <!-- 7. Microsoft Generative AI for Data Analysis -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">Microsoft</div>
-            <div class="cert-name">Introduction to Generative AI for Data Analysis</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Mar 2025</span>
-            <span class="cert-id text-muted">ID: 9BKKW1HOUZLZ</span>
-            <a href="https://www.coursera.org/account/accomplishments/verify/9BKKW1HOUZLZ" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-        <!-- 8. Microsoft Azure AI Fundamentals -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">Microsoft</div>
-            <div class="cert-name">Microsoft Certified: Azure AI Fundamentals (AI-900)</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Jul 2024</span>
-            <span class="cert-id text-muted">ID: 26A92EC90AA7CFF</span>
-            <a href="https://learn.microsoft.com/en-us/users/arshdeepyadav-8123/credentials/26a92ec90aa7cff" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-        <!-- 9. ISRO IIRS Space Science -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">ISRO IIRS</div>
-            <div class="cert-name">Archival & Access of Space Science Data</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Jul 2025</span>
-            <span class="cert-id text-muted">ID: VDQxj8tIDa (Copy to verify)</span>
-            <a href="https://isrolms.iirs.gov.in/mod/customcert/verify_certificate.php" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-        <!-- 10. McKinsey Forward Program -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">McKinsey & Company</div>
-            <div class="cert-name">McKinsey Forward Program</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Jul 2025</span>
-            <a href="https://www.credly.com/badges/2837b18c-f39b-4b2b-97ce-22c192a26042/linked_in_profile" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-        <!-- 11. Google PM -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">Google</div>
-            <div class="cert-name">Foundations of Project Management</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Mar 2025</span>
-            <span class="cert-id text-muted">ID: RQIO9INEGCIV</span>
-            <a href="https://www.coursera.org/account/accomplishments/verify/RQIO9INEGCIV" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-        <!-- 12. Security Governance and Law -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">IBM CEP & Chandigarh University</div>
-            <div class="cert-name">Security Governance and Law</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Nov 2025</span>
-            <span class="cert-id text-muted">ID: course-v1:IBMCEP CESGOLIN v1</span>
-            <a href="https://courses.cu.skillsnetwork.site/certificates/5dd6193d8dff4d8ebaa43c3e8e3a150c" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-        <!-- 13. UMich Python for Everybody -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">University of Michigan</div>
-            <div class="cert-name">Python for Everybody Specialization</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Nov 2023</span>
-            <span class="cert-id text-muted">ID: QQB66J2AM6E4</span>
-            <a href="https://www.coursera.org/account/accomplishments/specialization/QQB66J2AM6E4" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-
-        <!-- 14. CU & IBM SPSS Modeler -->
-        <div class="cert-item">
-          <div>
-            <div class="cert-issuer">IBM CEP & Chandigarh University</div>
-            <div class="cert-name">Predictive Analytics using IBM SPSS Modeler — Advanced</div>
-          </div>
-          <div class="cert-meta">
-            <span class="cert-year">Nov 2024</span>
-            <span class="cert-id text-muted">ID: 3be7e904d07e40f8b86503a5cde6aede</span>
-            <a href="https://courses.cu.skillsnetwork.site/certificates/3be7e904d07e40f8b86503a5cde6aede" target="_blank" rel="noopener" class="cert-link">Verify ↗</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- SCREEN: PROFESSIONAL DOSSIER (CV) -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section class="screen" id="screen-dossier">
-    <div class="container">
-      <div class="dossier-header">
-        <h1>Dossier</h1>
-      </div>
-
-      <div class="section-header">Experience Ledger</div>
-
-      <div class="ledger-row">
-        <div class="ledger-year">May — Jun 2025</div>
-        <div class="ledger-content">
-          <div class="ledger-title">Software Development Intern</div>
-          <div class="ledger-company">Bluestock Fintech · Remote</div>
-          <div class="ledger-bullet">Contributed to development of a real-time IPO tracking platform using Python and JavaScript</div>
-          <div class="ledger-bullet">Worked on feature integration across frontend and backend systems for live financial data workflows</div>
-          <div class="ledger-bullet">Collaborated with engineering and product teams during sprint-based development cycles</div>
-          <div class="ledger-bullet">Supported debugging, testing, and optimization of user-facing platform components</div>
-        </div>
-      </div>
-
-      <div class="ledger-row">
-        <div class="ledger-year">Feb — Mar 2025</div>
-        <div class="ledger-content">
-          <div class="ledger-title">AI Data Analyst Intern</div>
-          <div class="ledger-company">Excelerate × Rochester Institute of Technology · Remote</div>
-          <div class="ledger-bullet">Cleaned and engineered datasets to improve predictive analysis workflows</div>
-          <div class="ledger-bullet">Applied machine learning techniques for student engagement and churn prediction</div>
-          <div class="ledger-bullet">Developed visualizations and analytical insights using Python-based libraries</div>
-          <div class="ledger-bullet">Presented findings and recommendations based on trend analysis and model outputs</div>
-        </div>
-      </div>
-
-      <div class="ledger-row">
-        <div class="ledger-year">Jan — Feb 2025</div>
-        <div class="ledger-content">
-          <div class="ledger-title">Data Analyst Intern</div>
-          <div class="ledger-company">Excelerate × Saint Louis University · Remote</div>
-          <div class="ledger-bullet">Analyzed social media campaign datasets to identify optimization and cost-saving opportunities</div>
-          <div class="ledger-bullet">Built dashboards and reports for stakeholder presentations and strategic insights</div>
-          <div class="ledger-bullet">Generated actionable recommendations using data-driven analysis techniques</div>
-        </div>
-      </div>
-
-      <div class="ledger-row">
-        <div class="ledger-year">Dec 2024</div>
-        <div class="ledger-content">
-          <div class="ledger-title">Associate Project Management Intern</div>
-          <div class="ledger-company">Excelerate × Saint Louis University · Remote</div>
-          <div class="ledger-bullet">Developed roadmap, budgeting, and execution strategy for a global hackathon initiative</div>
-          <div class="ledger-bullet">Coordinated workflows using Jira and Kanban methodologies</div>
-          <div class="ledger-bullet">Evaluated project feasibility, risks, and resource allocation strategies</div>
-          <div class="ledger-bullet">Presented structured project proposals to stakeholders and leadership teams</div>
-        </div>
-      </div>
-
-      <div class="section-header">Research</div>
-
-      <div class="ledger-row">
-        <div class="ledger-year">2025 — 2026</div>
-        <div class="ledger-content">
-          <div class="ledger-title">Explainable Vision Transformer for Satellite Image Analysis</div>
-          <div class="ledger-company">IEEE RMKMATE'26 International Conference</div>
-          <div class="ledger-bullet">Developed an explainable AI framework for satellite image classification using Vision Transformers</div>
-          <div class="ledger-bullet">Integrated Grad-CAM based interpretability methods to improve transparency in model predictions</div>
-          <div class="ledger-bullet">Published on May 20, 2026 in IEEE Xplore: <a href="https://ieeexplore.ieee.org/document/11518743" target="_blank" rel="noopener" style="color: var(--color-accent); text-decoration: underline;">Read Paper ↗</a></div>
-          <div class="ledger-bullet">Presented research work at IEEE RMKMATE'26 International Conference</div>
-          <div class="ledger-bullet">Focused on improving trust and interpretability in AI-driven remote sensing systems</div>
-        </div>
-      </div>
-
-      <div class="section-header">Education</div>
-
-      <div class="ledger-row">
-        <div class="ledger-year">Jul 2026 — 2028</div>
-        <div class="ledger-content">
-          <div class="ledger-title">Hybrid MBA — Gen AI & Product Management</div>
-          <div class="ledger-company">Indian Institute of Technology (IIT) Patna</div>
-          <div class="ledger-bullet">2-year hybrid program focused on Generative AI and AI Product Management</div>
-          <div class="ledger-bullet">Incoming — starting July 2026</div>
-        </div>
-      </div>
-
-      <div class="ledger-row">
-        <div class="ledger-year">2022 — Jun 2026</div>
-        <div class="ledger-content">
-          <div class="ledger-title">B.E. Computer Science Engineering (Honors in AI/ML)</div>
-          <div class="ledger-company">Chandigarh University · Mohali, Punjab</div>
-          <div class="ledger-bullet">Machine Learning, Deep Learning, Computer Vision, Artificial Neural Networks</div>
-          <div class="ledger-bullet">Robotics, Data Analytics, Data Structures & Algorithms</div>
-        </div>
-      </div>
-
-      <div class="section-header">Skill Matrix</div>
-
-      <div class="skill-matrix">
-        <div class="skill-group">
-          <div class="skill-group-title">AI / Machine Learning</div>
-          <div class="skill-list">TensorFlow, PyTorch, Scikit-learn, OpenCV, YOLO, CNNs, NLP Fundamentals, Vision Transformers, Grad-CAM, Explainable AI</div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Programming</div>
-          <div class="skill-list">Python, SQL, Java, C/C++, JavaScript, Git, GitHub, Docker</div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Data & Analytics</div>
-          <div class="skill-list">Pandas, NumPy, Matplotlib, Tableau, Data Visualization, Predictive Analytics, Feature Engineering</div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Cloud & Infrastructure</div>
-          <div class="skill-list">AWS, Microsoft Azure, Google Cloud Platform, Streamlit, Flask, Docker, CI/CD</div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Product & Project Management</div>
-          <div class="skill-list">Jira, Agile/Scrum, Kanban, Product Research, Roadmapping, Stakeholder Coordination</div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Robotics & Embedded</div>
-          <div class="skill-list">Arduino, ESP32, IoT Systems, Sensor Integration, Wireless Communication, MQTT</div>
-        </div>
-      </div>
-
+    <div class="proof-strip section-shell" aria-label="Key credentials">
+      <div class="proof-item"><strong>IEEE Published</strong><small>Research</small></div>
+      <div class="proof-item"><strong>SDE Intern</strong><small>Bluestock · 2025</small></div>
+      <div class="proof-item"><strong>IIT Patna</strong><small>GenAI + PM</small></div>
+      <div class="proof-item"><strong>6+ Projects</strong><small>Shipped</small></div>
+      <div class="proof-item"><strong>15+ Credentials</strong><small>Technical</small></div>
     </div>
 
-    <button class="print-cta" id="print-btn">[CTRL+P] EXPORT PDF</button>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- FOOTER -->
-  <!-- ═══════════════════════════════════════════ -->
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div class="footer-label">Contact</div>
-        <div class="footer-value">arshdeep.yadav.work@gmail.com</div>
-        <div class="footer-value">+91 8115237909</div>
-      </div>
-      <div class="footer-col">
-        <div class="footer-label">Social</div>
-        <a href="https://linkedin.com/in/arshdeep-yadav" target="_blank" rel="noopener" class="footer-link">LinkedIn ↗</a>
-        <a href="https://github.com/Arshdeep-Yadav" target="_blank" rel="noopener" class="footer-link">GitHub ↗</a>
-      </div>
-      <div class="footer-col">
-        <div class="footer-label">Location</div>
-        <div class="footer-value">Lucknow, Uttar Pradesh, India</div>
-        <div class="footer-value text-muted">CU '26 → IIT Patna '28</div>
-      </div>
-      <div class="footer-col">
-        <div class="footer-label">Status</div>
-        <div class="footer-status">
-          <span class="status-dot"></span>
-          Open to Opportunities
+    <section class="section-shell manifesto" id="about">
+      <div class="section-kicker">01 / ABOUT</div>
+      <div class="manifesto-grid">
+        <h2>The gap between a clever model and a useful product is where I want to work.</h2>
+        <div class="manifesto-copy">
+          <p>I care about AI that can be understood, shipped, measured, and improved. My engineering background gives me
+            the systems lens; product work gives me the reason to build the right thing.</p>
+          <div class="annotation">← this is the north star</div>
         </div>
-        <div class="footer-value text-muted">MBA @ IIT Patna · Jul 2026</div>
       </div>
+      <div class="principles-row">
+        <button class="principle" data-principle="build">
+          <span class="principle-num">01</span>
+          <strong>Build to deploy</strong>
+          <p>I care about taking models beyond notebooks.</p>
+        </button>
+        <button class="principle" data-principle="explain">
+          <span class="principle-num">02</span>
+          <strong>Explain what you build</strong>
+          <p>Useful AI should be understandable and inspectable.</p>
+        </button>
+        <button class="principle" data-principle="cross">
+          <span class="principle-num">03</span>
+          <strong>Cross-pollinate domains</strong>
+          <p>AgriTech × FinTech × Robotics × Computer Vision.</p>
+        </button>
+        <button class="principle" data-principle="ship">
+          <span class="principle-num">04</span>
+          <strong>Ship fast, measure everything</strong>
+          <p>I optimise for things people can actually use.</p>
+        </button>
+      </div>
+    </section>
+
+    <section class="section-shell" id="work">
+      <div class="section-heading">
+        <div><span class="section-kicker">02 / SELECTED WORK</span>
+          <h2>Build log</h2>
+        </div>
+        <div class="filter-row" role="group" aria-label="Filter projects">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="ai">AI / ML</button>
+          <button class="filter" data-filter="product">Product</button>
+          <button class="filter" data-filter="research">Research</button>
+          <button class="filter" data-filter="systems">Systems</button>
+        </div>
+      </div>
+
+      <div class="project-grid" id="projectGrid">
+        <article class="project-card featured" data-tags="ai research" data-project="xvit">
+          <div class="project-top"><span class="number">01</span><span class="tag">RESEARCH · JAN–MAY 2026</span></div>
+          <div class="project-visual">
+            <div class="thumb-media">
+              <img src="assets/project-xvit.jpg" alt="Explainable Vision Transformer for Satellite Analysis Dashboard"
+                loading="lazy" />
+              <div class="thumb-scrim"></div>
+            </div>
+            <div class="thumb-overlay">
+              <div class="thumb-header">
+                <span class="thumb-dot-cluster">● ● ●</span>
+                <span class="thumb-telemetry">SEN12MS // ViT-B/16</span>
+                <span class="thumb-status-badge">IEEE 2026</span>
+              </div>
+              <div class="thumb-footer">
+                <div class="thumb-metric">
+                  <span class="metric-label">IoU ACCURACY</span>
+                  <span class="metric-val">0.742</span>
+                </div>
+                <div class="thumb-metric">
+                  <span class="metric-label">ATTN HEADS</span>
+                  <span class="metric-val">12 HEADS</span>
+                </div>
+                <div class="thumb-badge">SATELLITE XAI</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>Explainable Vision Transformer for Satellite Image Analysis</h3>
+            <p>A novel framework generating transformer-aligned explanation maps for remote sensing. Published in IEEE
+              RMKMATE 2026.
+            </p>
+            <div class="project-footer"><span>Python · PyTorch · IEEE</span>
+              <div class="card-cta-group"><a href="https://ieeexplore.ieee.org/document/11518743" target="_blank"
+                  rel="noreferrer">Paper ↗</a><button class="text-link open-modal" data-project="xvit">Case study
+                  ↗</button><a href="https://github.com/Arshdeep-Yadav/satellite-vit-xai" target="_blank"
+                  rel="noreferrer">Repo ↗</a></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card" data-tags="product systems" data-project="ipo">
+          <div class="project-top"><span class="number">02</span><span class="tag">FINTECH · MAY–JUN 2025</span></div>
+          <div class="project-visual">
+            <div class="thumb-media">
+              <img src="assets/project-ipo.jpg" alt="IPO Tracking Platform and Analytics Interface" loading="lazy" />
+              <div class="thumb-scrim"></div>
+            </div>
+            <div class="thumb-overlay">
+              <div class="thumb-header">
+                <span class="thumb-dot-cluster">● ● ●</span>
+                <span class="thumb-telemetry">MARKET // LIVE-FEED</span>
+                <span class="thumb-status-badge">PROD</span>
+              </div>
+              <div class="thumb-footer">
+                <div class="thumb-metric">
+                  <span class="metric-label">24H VOLUME</span>
+                  <span class="metric-val">$18.2M</span>
+                </div>
+                <div class="thumb-metric">
+                  <span class="metric-label">TKR DELTA</span>
+                  <span class="metric-val positive">+3.45%</span>
+                </div>
+                <div class="thumb-badge">FINTECH CORE</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>IPO Tracking Platform</h3>
+            <p>End-to-end product work across a live IPO data workflow, from interface decisions to backend integration.
+            </p>
+            <div class="project-footer"><span>JavaScript · Python · APIs</span><button class="text-link open-modal"
+                data-project="ipo">Case study ↗</button></div>
+          </div>
+        </article>
+
+        <article class="project-card" data-tags="ai product" data-project="plant">
+          <div class="project-top"><span class="number">03</span><span class="tag">AGRITECH · 2025</span></div>
+          <div class="project-visual">
+            <div class="thumb-media">
+              <img src="assets/project-plant.jpg" alt="Plant Disease Detection AI Scanner" loading="lazy" />
+              <div class="thumb-scrim"></div>
+            </div>
+            <div class="thumb-overlay">
+              <div class="thumb-header">
+                <span class="thumb-dot-cluster">● ● ●</span>
+                <span class="thumb-telemetry">PATHOLOGY // SCAN-V4</span>
+                <span class="thumb-status-badge">ACTIVE</span>
+              </div>
+              <div class="thumb-footer">
+                <div class="thumb-metric">
+                  <span class="metric-label">ACCURACY</span>
+                  <span class="metric-val">98.2%</span>
+                </div>
+                <div class="thumb-metric">
+                  <span class="metric-label">CLASSES</span>
+                  <span class="metric-val">38 DISEASES</span>
+                </div>
+                <div class="thumb-badge">BOTANICAL CV</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>Plant Disease Detection</h3>
+            <p>CNN-based image classification with a Streamlit experience designed for immediate feedback and
+              explainability.</p>
+            <div class="project-footer"><span>TensorFlow · OpenCV · Streamlit</span><button class="text-link open-modal"
+                data-project="plant">Case study ↗</button></div>
+          </div>
+        </article>
+
+        <article class="project-card" data-tags="ai systems" data-project="object">
+          <div class="project-top"><span class="number">04</span><span class="tag">VISION · 2024</span></div>
+          <div class="project-visual">
+            <div class="thumb-media">
+              <img src="assets/project-yolo.jpg" alt="Deep Learning YOLO Real-time Object Detection Dashboard"
+                loading="lazy" />
+              <div class="thumb-scrim"></div>
+            </div>
+            <div class="thumb-overlay">
+              <div class="thumb-header">
+                <span class="thumb-dot-cluster">● ● ●</span>
+                <span class="thumb-telemetry">YOLOv8 // AUTONOMOUS</span>
+                <span class="thumb-status-badge">EDGE-AI</span>
+              </div>
+              <div class="thumb-footer">
+                <div class="thumb-metric">
+                  <span class="metric-label">STREAM SPEED</span>
+                  <span class="metric-val">45 FPS</span>
+                </div>
+                <div class="thumb-metric">
+                  <span class="metric-label">LATENCY</span>
+                  <span class="metric-val">12ms</span>
+                </div>
+                <div class="thumb-badge">REAL-TIME CV</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>Deep Learning Object Detection</h3>
+            <p>Real-time detection and classification using YOLO architecture, OpenCV tracking, and transfer learning.
+            </p>
+            <div class="project-footer"><span>YOLO · OpenCV · Python</span><button class="text-link open-modal"
+                data-project="object">Case study ↗</button></div>
+          </div>
+        </article>
+
+        <article class="project-card" data-tags="ai research" data-project="stress">
+          <div class="project-top"><span class="number">05</span><span class="tag">HEALTHTECH · 2023</span></div>
+          <div class="project-visual">
+            <div class="thumb-media">
+              <img src="assets/project-stress.jpg" alt="Stress Detection Physiological Telemetry Dashboard"
+                loading="lazy" />
+              <div class="thumb-scrim"></div>
+            </div>
+            <div class="thumb-overlay">
+              <div class="thumb-header">
+                <span class="thumb-dot-cluster">● ● ●</span>
+                <span class="thumb-telemetry">WESAD // BIO-METRICS</span>
+                <span class="thumb-status-badge">CLINICAL</span>
+              </div>
+              <div class="thumb-footer">
+                <div class="thumb-metric">
+                  <span class="metric-label">HRV (SDNN)</span>
+                  <span class="metric-val">58ms</span>
+                </div>
+                <div class="thumb-metric">
+                  <span class="metric-label">F1 SCORE</span>
+                  <span class="metric-val">0.91</span>
+                </div>
+                <div class="thumb-badge">HEALTHTECH ML</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>Stress Detection via Medical Data</h3>
+            <p>Feature-engineered ML models for physiological datasets with classification and evaluation pipelines.</p>
+            <div class="project-footer"><span>scikit-learn · Pandas · NumPy</span><button class="text-link open-modal"
+                data-project="stress">Case study ↗</button></div>
+          </div>
+        </article>
+
+        <article class="project-card" data-tags="systems product" data-project="iot">
+          <div class="project-top"><span class="number">06</span><span class="tag">IOT · 2023</span></div>
+          <div class="project-visual">
+            <div class="thumb-media">
+              <img src="assets/project-iot.jpg" alt="Smart Embedded Systems IoT Mesh Network Console" loading="lazy" />
+              <div class="thumb-scrim"></div>
+            </div>
+            <div class="thumb-overlay">
+              <div class="thumb-header">
+                <span class="thumb-dot-cluster">● ● ●</span>
+                <span class="thumb-telemetry">ESP32 // MESH-NET</span>
+                <span class="thumb-status-badge">ONLINE</span>
+              </div>
+              <div class="thumb-footer">
+                <div class="thumb-metric">
+                  <span class="metric-label">NODES</span>
+                  <span class="metric-val">12 ACTIVE</span>
+                </div>
+                <div class="thumb-metric">
+                  <span class="metric-label">PROTOCOL</span>
+                  <span class="metric-val">MQTT / QOS1</span>
+                </div>
+                <div class="thumb-badge">SMART EMBEDDED</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-body">
+            <h3>Smart Embedded Systems</h3>
+            <p>A suite of accessible IoT builds: smart blind stick, GPS tracker, and room monitoring system.</p>
+            <div class="project-footer"><span>ESP32 · Arduino · MQTT</span><button class="text-link open-modal"
+                data-project="iot">Case study ↗</button></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell journey" id="journey">
+      <div class="section-heading">
+        <div><span class="section-kicker">03 / TRAJECTORY</span>
+          <h2>Where the pieces connect</h2>
+        </div>
+        <div class="tiny-note">engineering → research → product</div>
+      </div>
+      <div class="timeline-wrap">
+        <div class="timeline-line"></div>
+        <div class="timeline-item">
+          <div class="timeline-dot">01</div>
+          <div><span>2022—26</span>
+            <h3>BE CSE · Honors in AI/ML</h3>
+            <p>Chandigarh University — machine learning, deep learning, computer vision, robotics.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">02</div>
+          <div><span>MAY 2025 — JUN 2025</span>
+            <h3>SDE Intern → Team Lead · Bluestock Fintech</h3>
+            <p>Led delivery around an IPO dashboard and bridged frontend, backend, and product execution.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">03</div>
+          <div><span>JAN 2026 — MAY 2026</span>
+            <h3>IEEE RMKMATE'26 · Research</h3>
+            <p>Explainable Vision Transformer for satellite image analysis; oral presentation and IEEE Xplore
+              publication.</p>
+          </div>
+        </div>
+        <div class="timeline-item active">
+          <div class="timeline-dot">04</div>
+          <div><span>2026—28</span>
+            <h3>MBA · GenAI & Product Management · IIT Patna</h3>
+            <p>Hybrid degree focused on AI models, product management, business analytics, governance, and strategy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell education-board" id="stack">
+      <div class="section-kicker">04 / TOOLBOX</div>
+      <div class="toolbox-grid">
+        <div class="toolbox-card big" data-filter-target="ai" title="Click to filter AI/ML projects"><span>01</span>
+          <h3>AI / ML</h3>
+          <p>PyTorch · TensorFlow · scikit-learn · OpenCV · YOLO · Vision Transformers · Grad-CAM</p><small
+            class="toolbox-hint">click to filter projects →</small>
+        </div>
+        <div class="toolbox-card" data-filter-target="systems" title="Click to filter Systems projects"><span>02</span>
+          <h3>Build</h3>
+          <p>Python · JavaScript · SQL · Git · Docker · APIs</p><small class="toolbox-hint">click to filter projects
+            →</small>
+        </div>
+        <div class="toolbox-card" data-filter-target="product" title="Click to filter Product projects"><span>03</span>
+          <h3>Product</h3>
+          <p>Research · Roadmapping · Agile/Scrum · Jira · Stakeholder coordination</p><small class="toolbox-hint">click
+            to filter projects →</small>
+        </div>
+        <div class="toolbox-card" data-filter-target="ai" title="Click to filter Data/AI projects"><span>04</span>
+          <h3>Data</h3>
+          <p>Pandas · NumPy · Matplotlib · Tableau · Predictive analytics</p><small class="toolbox-hint">click to filter
+            projects →</small>
+        </div>
+        <div class="toolbox-card" data-filter-target="systems" title="Click to filter Systems projects"><span>05</span>
+          <h3>Systems</h3>
+          <p>ESP32 · Arduino · MQTT · IoT · Sensor integration</p><small class="toolbox-hint">click to filter projects
+            →</small>
+        </div>
+        <div class="toolbox-card accent" data-filter-target="ai" title="Click to view AI projects"><span>06</span>
+          <h3>Currently learning</h3>
+          <p>LLM systems · RAG · AI product strategy · GPU fundamentals · product analytics</p><small
+            class="toolbox-hint">explore AI lab →</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell mba-panel">
+      <div class="mba-card">
+        <div class="mba-stamp">CURRENT / 2026</div>
+        <div class="mba-title"><small>Indian Institute of Technology, Patna</small>
+          <h2>MBA in<br><span class="mba-nowrap"><em>Generative AI</em> &amp;</span><br><span class="mba-nowrap">Product Management</span></h2>
+        </div>
+        <div class="mba-copy">
+          <p>Two-year, full-time master's degree in hybrid mode. The programme explicitly connects AI models, product
+            management, data-driven decision-making, ethics/governance, and capstone work.</p><a
+            href="https://admissions.iitp-cep.in/mba-gaipm" target="_blank" rel="noreferrer">Programme details ↗</a>
+        </div>
+        <div class="mba-course-row"><span>AI Models</span><span>Product</span><span>Business Analytics</span><span>AI
+            Governance</span><span>Vision / NLP</span></div>
+      </div>
+    </section>
+
+    <section class="section-shell now-section" id="now">
+      <div class="section-kicker">05 / NOW</div>
+      <div class="now-grid">
+        <div class="now-status">
+          <h2>What I'm doing now</h2>
+          <div class="annotation">updated oct 2026</div>
+        </div>
+        <div class="now-items">
+          <div class="now-item"><span class="now-arrow">→</span><span>Building AI + product systems</span></div>
+          <div class="now-item"><span class="now-arrow">→</span><span>Pursuing MBA in GenAI & Product Management @ IIT
+              Patna</span></div>
+          <div class="now-item"><span class="now-arrow">→</span><span>Developing XAI / Computer Vision depth</span>
+          </div>
+          <div class="now-item"><span class="now-arrow">→</span><span>Exploring AI product opportunities</span></div>
+          <div class="now-item now-item-highlight"><span class="now-arrow">→</span><span>Open to strong AI/ML/product
+              roles</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell launch-board" id="launch">
+      <div class="launch-header">
+        <div>
+          <span class="section-kicker">06 / SHIP CHECKLIST</span>
+          <h2>Vibe-coded ≠ half-finished.</h2>
+          <p>Every weird little production detail gets a checkbox before this portfolio ships.</p>
+        </div>
+        <div class="launch-score">
+          <b>LAUNCH BOARD</b>
+          <span>static · accessible · domain-agnostic</span>
+        </div>
+      </div>
+      <div class="launch-grid">
+        <article class="check-card warm tilt-a">
+          <header><span class="check-title">TRUST</span><strong>1</strong></header>
+          <label class="check-row done"><i>✓</i><span>Privacy policy</span></label>
+          <label class="check-row done"><i>✓</i><span>Terms & conditions</span></label>
+          <label class="check-row done"><i>✓</i><span>No frontend secrets</span></label>
+          <label class="check-row done"><i>✓</i><span>HTTPS auto-provisioned (Vercel)</span></label>
+        </article>
+        <article class="check-card mint tilt-b">
+          <header><span class="check-title">SEARCH</span><strong>2</strong></header>
+          <label class="check-row done"><i>✓</i><span>Title + meta description</span></label>
+          <label class="check-row done"><i>✓</i><span>Open Graph / social image</span></label>
+          <label class="check-row done"><i>✓</i><span>Favicon + manifest</span></label>
+          <label class="check-row done"><i>✓</i><span>Sitemap + robots.txt</span></label>
+          <label class="check-row host"><i>↗</i><span>Submit to Search Console</span></label>
+        </article>
+        <article class="check-card paper tilt-c">
+          <header><span class="check-title">UX</span><strong>3</strong></header>
+          <label class="check-row done"><i>✓</i><span>Mobile responsive</span></label>
+          <label class="check-row done"><i>✓</i><span>Color contrast pass</span></label>
+          <label class="check-row done"><i>✓</i><span>Custom 404</span></label>
+          <label class="check-row done"><i>✓</i><span>Accessible focus states</span></label>
+          <label class="check-row done"><i>✓</i><span>Reduced-motion support</span></label>
+        </article>
+        <article class="check-card dark tilt-d">
+          <header><span class="check-title">PERF</span><strong>4</strong></header>
+          <label class="check-row done"><i>✓</i><span>Zero external UI libraries</span></label>
+          <label class="check-row done"><i>✓</i><span>Native canvas / SVG ink</span></label>
+          <label class="check-row done"><i>✓</i><span>Static HTML-first content</span></label>
+          <label class="check-row done"><i>✓</i><span>Vercel Edge CDN + headers</span></label>
+        </article>
+        <article class="check-card coral tilt-e">
+          <header><span class="check-title">FORMS / DATA</span><strong>5</strong></header>
+          <label class="check-row na"><i>–</i><span>No contact form = no spam surface</span></label>
+          <label class="check-row na"><i>–</i><span>No cookies required by default</span></label>
+          <label class="check-row next"><i>→</i><span>Add analytics only when needed</span></label>
+        </article>
+        <article class="check-card blue tilt-f">
+          <header><span class="check-title">CONTENT</span><strong>6</strong></header>
+          <label class="check-row done"><i>✓</i><span>One clear H1</span></label>
+          <label class="check-row done"><i>✓</i><span>Descriptive links + image alt text</span></label>
+          <label class="check-row done"><i>✓</i><span>Canonical domain: arshdeep.works</span></label>
+          <label class="check-row done"><i>✓</i><span>Vercel config (vercel.json)</span></label>
+        </article>
+      </div>
+      <div class="launch-note">
+        <span>✎</span> The red X in the inspiration becomes <b>"not applicable"</b> here—not fake completeness. No
+        cookie banner without cookies. No form security theatre without a form.
+      </div>
+    </section>
+
+    <section class="section-shell contact" id="contact">
+      <div class="contact-left">
+        <span class="section-kicker">07 / CONTACT</span>
+        <h2>Have a hard problem?<br><span>Let's build it.</span></h2>
+        <p>For AI/ML engineering roles, AI product builds, research collaborations, or high-conviction technical
+          problems.</p>
+      </div>
+      <div class="contact-right">
+        <a class="contact-row contact-row-interactive" href="mailto:arshdeep.yadav.work@gmail.com" id="emailRow">
+          <div class="contact-label-group">
+            <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <small>EMAIL</small>
+          </div>
+          <div class="contact-value">
+            <span class="contact-email-link">arshdeep.yadav.work@gmail.com</span>
+            <div class="contact-action-btn copy-btn inline-copy" id="copyEmailBtn"
+              data-email="arshdeep.yadav.work@gmail.com" title="Copy email address" aria-label="Copy email to clipboard"
+              role="button" tabindex="0">
+              <svg class="copy-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg class="check-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#258f50"
+                stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span class="action-tooltip">Copy</span>
+            </div>
+          </div>
+          <div class="contact-actions-empty"></div>
+        </a>
+        <a class="contact-row" href="https://github.com/Arshdeep-Yadav" target="_blank" rel="noreferrer">
+          <div class="contact-label-group">
+            <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+            <small>GITHUB</small>
+          </div>
+          <strong>github.com/Arshdeep-Yadav</strong>
+          <div class="contact-actions-empty"></div>
+        </a>
+        <a class="contact-row" href="https://www.linkedin.com/in/arshdeep-yadav" target="_blank" rel="noreferrer">
+          <div class="contact-label-group">
+            <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+            <small>LINKEDIN</small>
+          </div>
+          <strong>linkedin.com/in/arshdeep-yadav</strong>
+          <div class="contact-actions-empty"></div>
+        </a>
+        <div class="contact-legal"><a href="privacy.html">Privacy</a><span>·</span><a href="terms.html">Terms</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer section-shell">
+    <div class="footer-cta">Let's build something useful.</div>
+    <div class="footer-info">
+      <span>Arshdeep Yadav</span>
+      <span>·</span>
+      <span>AI/ML Engineer × AI Product Builder</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/Arshdeep-Yadav" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/arshdeep-yadav" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href="mailto:arshdeep.yadav.work@gmail.com">Email</a>
+      <a href="https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing" target="_blank"
+        rel="noreferrer">Resume</a>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 ARSHDEEP YADAV</div>
-      <div class="footer-tagline">BUILT WITH PRECISION. NO FLUFF.</div>
-    </div>
-
-    <!-- Robot Meet Animation -->
-    <div class="footer-robots" aria-hidden="true">
-      <div class="footer-robot robot-left">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-muted)" stroke-width="1.5" stroke-linecap="square">
-          <path d="M12 2v4M8 6h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/>
-          <path d="M2 12h4M18 12h4M9 11v2M15 11v2M10 15h4"/>
-        </svg>
-      </div>
-      <div class="robot-speech" id="robot-speech">Hi! 👋</div>
-      <div class="footer-robot robot-right">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-muted)" stroke-width="1.5" stroke-linecap="square">
-          <path d="M12 2v4M8 6h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/>
-          <path d="M2 12h4M18 12h4M9 11v2M15 11v2M10 15h4"/>
-        </svg>
-      </div>
+      <span>AI LAB / 2026</span>
+      <span>·</span>
+      <span>Built with curiosity.</span>
     </div>
   </footer>
 
-  <!-- Easter Egg: Robot ASCII Overlay -->
-  <div class="robot-overlay" id="robot-overlay">
-    ┌───────────────┐
-    │   ┌───────┐   │
-    │   │ ●   ● │   │
-    │   │  ───  │   │
-    │   └───────┘   │
-    │ ┌─┴───────┴─┐ │
-    │ │ HELLO!    │ │
-    │ │ I BUILD   │ │
-    │ │  ROBOTS.  │ │
-    │ └───────────┘ │
-    │   ││   ││    │
-    │   └┘   └┘    │
-    └───────────────┘
-  </div>
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+    <div class="project-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="close-modal" id="closeModal">×</button>
+      <div class="modal-meta" id="modalMeta"></div>
+      <h2 id="modalTitle"></h2>
 
-  <!-- Easter Egg Hint -->
-  <div class="easter-egg-hint" id="easter-hint">
-    <span style="opacity: 0.4;">SECRETS:</span> ↑↑↓↓←→←→BA · TRIPLE-CLICK LOGO · TYPE "LAUNCH" · PRESS `
-  </div>
-
-  <!-- Mini Terminal Easter Egg -->
-  <div id="mini-terminal">
-    <div class="term-container">
-      <div id="terminal-output"></div>
-      <div class="term-input-line">
-        <span class="term-prompt">arshdeep@portfolio:~$</span>
-        <input id="terminal-input" type="text" autocomplete="off" spellcheck="false" />
+      <div class="modal-sections">
+        <div class="modal-section"><small>CONTEXT</small>
+          <p id="modalContext"></p>
+        </div>
+        <div class="modal-section"><small>PROBLEM</small>
+          <p id="modalProblem"></p>
+        </div>
+        <div class="modal-section"><small>APPROACH</small>
+          <p id="modalApproach"></p>
+        </div>
       </div>
+
+      <div class="modal-grid">
+        <div><small>STACK</small><strong id="modalStack"></strong></div>
+        <div><small>ROLE</small><strong id="modalRole"></strong></div>
+        <div><small>STATUS</small><strong id="modalStatus"></strong></div>
+      </div>
+
+      <div class="modal-section" id="modalDecisionsWrap"><small>KEY DECISIONS</small>
+        <ul id="modalDecisions"></ul>
+      </div>
+
+      <div class="modal-sections">
+        <div class="modal-section"><small>RESULT</small>
+          <p id="modalResult"></p>
+        </div>
+        <div class="modal-section"><small>LEARNINGS</small>
+          <p id="modalLearnings"></p>
+        </div>
+      </div>
+
+      <div class="modal-actions"><a id="modalLink" class="button button-dark" target="_blank" rel="noreferrer">View
+          project ↗</a><button class="button button-ghost" id="modalDone">Close</button></div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- JAVASCRIPT -->
-  <!-- ═══════════════════════════════════════════ -->
-  <script>
-    'use strict';
-
-    // ─────────────────────────────────────────────
-    // UTILITIES
-    // ─────────────────────────────────────────────
-    const $ = (sel, ctx = document) => ctx.querySelector(sel);
-    const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
-    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-    // Sanitize text
-    function safeSetText(el, text) {
-      if (el) el.textContent = text;
-    }
-
-    // ─────────────────────────────────────────────
-    // THEME ENGINE
-    // ─────────────────────────────────────────────
-    const THEMES = {
-      default: {
-        '--color-primary': '#050505',
-        '--color-background': '#F5F2EB',
-        '--color-surface': '#F5F2EB',
-        '--color-text': '#050505',
-        '--color-muted': '#8B7355',
-        '--color-accent': '#0026FF',
-        '--color-nav-bg': 'rgba(245, 242, 235, 0.95)',
-        '--color-dot-grid': 'rgba(5, 5, 5, 0.06)',
-        '--term-bg': '#050505',
-        '--term-accent': '#0026FF',
-        '--term-text': '#0026FF',
-        '--term-prompt': '#0026FF',
-        '--term-input': '#FFE600',
-        '--term-success': '#00FF41',
-        '--term-error': '#FF3B30',
-        '--term-info': '#00DFFF',
-        '--term-accent-color': '#FFE600',
-        '--term-muted': '#888888'
-      },
-      dark: {
-        '--color-primary': '#F5F2EB',
-        '--color-background': '#0D0D0D',
-        '--color-surface': '#1A1A1A',
-        '--color-text': '#E5E5E5',
-        '--color-muted': '#9E9E9E',
-        '--color-accent': '#FF3B30',
-        '--color-nav-bg': 'rgba(13, 13, 13, 0.95)',
-        '--color-dot-grid': 'rgba(245, 242, 235, 0.08)',
-        '--term-bg': '#0A0A0A',
-        '--term-accent': '#FF3B30',
-        '--term-text': '#E5E5E5',
-        '--term-prompt': '#FF3B30',
-        '--term-input': '#F5F2EB',
-        '--term-success': '#34C759',
-        '--term-error': '#FF3B30',
-        '--term-info': '#5AC8FA',
-        '--term-accent-color': '#FF9500',
-        '--term-muted': '#8E8E93'
-      },
-      cyberpunk: {
-        '--color-primary': '#FFE600',
-        '--color-background': '#0B0014',
-        '--color-surface': '#1D0030',
-        '--color-text': '#00F0FF',
-        '--color-muted': '#FF0055',
-        '--color-accent': '#FFE600',
-        '--color-nav-bg': 'rgba(11, 0, 20, 0.95)',
-        '--color-dot-grid': 'rgba(0, 240, 255, 0.08)',
-        '--term-bg': '#0B0014',
-        '--term-accent': '#FFE600',
-        '--term-text': '#00F0FF',
-        '--term-prompt': '#FF0055',
-        '--term-input': '#8B7355',
-        '--term-success': '#00F0FF',
-        '--term-error': '#FF0055',
-        '--term-info': '#FFE600',
-        '--term-accent-color': '#FF0055',
-        '--term-muted': '#881188'
-      },
-      matrix: {
-        '--color-primary': '#00FF41',
-        '--color-background': '#000000',
-        '--color-surface': '#0A0A0A',
-        '--color-text': '#00FF41',
-        '--color-muted': '#008F11',
-        '--color-accent': '#00FF41',
-        '--color-nav-bg': 'rgba(0, 0, 0, 0.95)',
-        '--color-dot-grid': 'rgba(0, 255, 65, 0.08)',
-        '--term-bg': '#000000',
-        '--term-accent': '#00FF41',
-        '--term-text': '#00FF41',
-        '--term-prompt': '#00FF41',
-        '--term-input': '#00FF41',
-        '--term-success': '#00FF41',
-        '--term-error': '#00FF41',
-        '--term-info': '#00FF41',
-        '--term-accent-color': '#00FF41',
-        '--term-muted': '#008F11'
-      }
-    };
-
-    function setTheme(themeName) {
-      const theme = THEMES[themeName];
-      if (!theme) return false;
-      
-      const root = document.documentElement;
-      Object.keys(theme).forEach(key => {
-        root.style.setProperty(key, theme[key]);
-      });
-      
-      localStorage.setItem('portfolio-theme', themeName);
-      
-      // Update theme-color meta tag
-      const metaThemeColor = $('meta[name="theme-color"]');
-      if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', theme['--color-background']);
-      }
-      
-      // Update color-scheme meta
-      const metaColorScheme = $('meta[name="color-scheme"]');
-      if (metaColorScheme) {
-        metaColorScheme.setAttribute('content', themeName === 'default' ? 'light' : 'dark');
-      }
-      
-      // Force re-scramble of active screen headers if scramble function exists
-      try {
-        const activeScreen = $('.screen.active');
-        if (activeScreen) {
-          $$('.scramble', activeScreen).forEach(el => scrambleText(el));
-        }
-      } catch(e) {}
-      
-      return true;
-    }
-
-    // Apply saved theme immediately
-    (function() {
-      const savedTheme = localStorage.getItem('portfolio-theme') || 'default';
-      setTheme(savedTheme);
-    })();
-
-    // ─────────────────────────────────────────────
-    // HAMBURGER MENU (MOBILE)
-    // ─────────────────────────────────────────────
-    const hamburger = document.getElementById('nav-hamburger');
-    const navLinksContainer = document.getElementById('nav-links-container');
-
-    if (hamburger && navLinksContainer) {
-      hamburger.addEventListener('click', () => {
-        const isOpen = navLinksContainer.classList.toggle('open');
-        hamburger.classList.toggle('active');
-        hamburger.setAttribute('aria-expanded', isOpen);
-        document.body.style.overflow = isOpen ? 'hidden' : '';
-      });
-
-      // Close menu on link click
-      $$('.nav-link', navLinksContainer).forEach(link => {
-        link.addEventListener('click', () => {
-          navLinksContainer.classList.remove('open');
-          hamburger.classList.remove('active');
-          hamburger.setAttribute('aria-expanded', 'false');
-          document.body.style.overflow = '';
-        });
-      });
-    }
-
-    // Hide cursor dot on touch devices
-    if (isTouchDevice) {
-      const dot = document.getElementById('cursor-dot');
-      if (dot) dot.style.display = 'none';
-    }
-
-    // ─────────────────────────────────────────────
-    // SPA ROUTER
-    // ─────────────────────────────────────────────
-    const screens = $$('.screen');
-    const navLinks = $$('.nav-link');
-    const validScreens = new Set(['home', 'case-study', 'strategy', 'dossier']);
-
-    function showScreen(screenId) {
-      // Validate screen ID to prevent DOM clobbering
-      if (!validScreens.has(screenId)) screenId = 'home';
-
-      screens.forEach(s => s.classList.remove('active'));
-      navLinks.forEach(l => l.classList.remove('active'));
-
-      const target = document.getElementById('screen-' + screenId);
-      if (target) {
-        target.classList.add('active');
-        window.scrollTo(0, 0);
-
-        // Trigger reveal animations
-        requestAnimationFrame(() => {
-          $$('.reveal', target).forEach((el, i) => {
-            setTimeout(() => el.classList.add('visible'), i * 60);
-          });
-        });
-      }
-
-      // Update nav active state
-      const navLink = $(`.nav-link[data-screen="${screenId}"]`);
-      if (navLink) navLink.classList.add('active');
-
-      // If showing case study, mark home as active in nav
-      if (screenId === 'case-study') {
-        const homeNav = $('.nav-link[data-screen="home"]');
-        if (homeNav) homeNav.classList.add('active');
-      }
-
-      // Trigger scramble animations for visible elements
-      if (target) {
-        $$('.scramble', target).forEach((el, i) => {
-          setTimeout(() => scrambleText(el), i * 80);
-        });
-      }
-    }
-
-    // Nav link clicks + keyboard support
-    function handleNavClick(e) {
-      e.preventDefault();
-      const screen = this.dataset.screen;
-      if (screen) window.location.hash = screen;
-    }
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', handleNavClick);
-      link.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleNavClick.call(link, e);
-        }
-      });
-    });
-
-    // Nav logo click → home
-    const navLogo = $('.nav-logo');
-    if (navLogo) {
-      navLogo.addEventListener('click', () => { window.location.hash = 'home'; });
-      navLogo.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          window.location.hash = 'home';
-        }
-      });
-    }
-
-    // Back links
-    $$('.back-link').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.location.hash = link.dataset.screen;
-      });
-      link.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          window.location.hash = link.dataset.screen;
-        }
-      });
-    });
-
-    // Hash routing with validation
-    function handleRoute() {
-      const rawHash = window.location.hash.slice(1) || 'home';
-      const hash = validScreens.has(rawHash) ? rawHash : 'home';
-      showScreen(hash);
-    }
-    window.addEventListener('hashchange', handleRoute);
-    window.addEventListener('DOMContentLoaded', handleRoute);
-
-    // ─────────────────────────────────────────────
-    // PROJECT MATRIX — Click to Case Study
-    // ─────────────────────────────────────────────
-    const originalCaseContent = $('.case-content').innerHTML;
-    const originalMeta = {
-      title: $('#case-title').textContent,
-      role: $('#case-role').textContent,
-      timeline: $('#case-timeline').textContent,
-      team: $('#case-team').textContent,
-      stack: $('#case-stack').textContent
-    };
-
-    $$('.matrix-row').forEach(row => {
-      // Make rows keyboard accessible
-      row.setAttribute('tabindex', '0');
-      row.setAttribute('role', 'link');
-
-      function activateRow() {
-        const caseId = row.dataset.case;
-        // Validate case ID format (alphanumeric + hyphens only)
-        if (!/^[a-z0-9-]+$/.test(caseId)) return;
-
-        const template = document.getElementById('case-' + caseId);
-
-        if (template && template.tagName === 'TEMPLATE') {
-          const content = template.content.cloneNode(true);
-          const wrapper = content.querySelector('div');
-
-          safeSetText($('#case-title'), wrapper.dataset.title);
-          safeSetText($('#case-role'), wrapper.dataset.role);
-          safeSetText($('#case-timeline'), wrapper.dataset.timeline);
-          safeSetText($('#case-team'), wrapper.dataset.team);
-          safeSetText($('#case-stack'), wrapper.dataset.stack);
-
-          const caseContent = $('.case-content');
-          caseContent.innerHTML = '';
-          $$('.case-column', wrapper).forEach(col => {
-            caseContent.appendChild(col.cloneNode(true));
-          });
-        } else if (caseId === 'xai-satellite') {
-          safeSetText($('#case-title'), originalMeta.title);
-          safeSetText($('#case-role'), originalMeta.role);
-          safeSetText($('#case-timeline'), originalMeta.timeline);
-          safeSetText($('#case-team'), originalMeta.team);
-          safeSetText($('#case-stack'), originalMeta.stack);
-          $('.case-content').innerHTML = originalCaseContent;
-        }
-
-        window.location.hash = 'case-study';
-      }
-
-      row.addEventListener('click', activateRow);
-      row.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          activateRow();
-        }
-      });
-    });
-
-    // ─────────────────────────────────────────────
-    // ASCII SCRAMBLE ANIMATION (enhanced)
-    // ─────────────────────────────────────────────
-    const scrambleChars = '█▓▒░─│┌┐└┘├┤┬┴┼0123456789ABCDEF%+-.';
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function scrambleText(el) {
-      const finalText = el.dataset.final;
-      if (!finalText) return;
-
-      // Respect reduced motion preferences
-      if (prefersReducedMotion) {
-        el.textContent = finalText;
-        return;
-      }
-
-      const duration = 500;
-      const startTime = performance.now();
-
-      function animate(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-
-        let display = '';
-        for (let i = 0; i < finalText.length; i++) {
-          // Characters resolve left-to-right with eased timing
-          const charThreshold = (i / finalText.length) * 0.7;
-          if (progress > charThreshold + 0.2) {
-            display += finalText[i];
-          } else {
-            display += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
-          }
-        }
-
-        el.textContent = display;
-
-        if (progress < 1) {
-          requestAnimationFrame(animate);
-        } else {
-          el.textContent = finalText;
-        }
-      }
-
-      el.textContent = '░'.repeat(finalText.length);
-      requestAnimationFrame(animate);
-    }
-
-    // ─────────────────────────────────────────────
-    // INTERSECTION OBSERVER — Reveal on scroll
-    // ─────────────────────────────────────────────
-    const revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-    );
-
-    // Observe reveal elements
-    $$('.reveal').forEach(el => revealObserver.observe(el));
-
-    // ─────────────────────────────────────────────
-    // PRINT CTA
-    // ─────────────────────────────────────────────
-    const printBtn = document.getElementById('print-btn');
-    if (printBtn) {
-      printBtn.addEventListener('click', () => window.print());
-    }
-
-    // ─────────────────────────────────────────────
-    // KEYBOARD SHORTCUTS
-    // ─────────────────────────────────────────────
-    document.addEventListener('keydown', (e) => {
-      // Ctrl+P / Cmd+P → handled by browser
-      // 1, 2, 3 → quick nav (when not typing)
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-
-      switch (e.key) {
-        case '1': window.location.hash = 'home'; break;
-        case '2': window.location.hash = 'strategy'; break;
-        case '3': window.location.hash = 'dossier'; break;
-        case 'Escape':
-          if (window.location.hash === '#case-study') {
-            window.location.hash = 'home';
-          }
-          break;
-      }
-    });
-
-    // ─────────────────────────────────────────────
-    // ADVANCED TERMINAL OS v2.0
-    // ─────────────────────────────────────────────
-    const miniTerminal = document.getElementById('mini-terminal');
-    const terminalInput = document.getElementById('terminal-input');
-    const terminalOutput = document.getElementById('terminal-output');
-    const robotOverlay = document.getElementById('robot-overlay');
-    let terminalOpen = false;
-
-    // Command History Persistence
-    let commandHistory = [];
-    try {
-      const savedHistory = localStorage.getItem('term-history');
-      if (savedHistory) commandHistory = JSON.parse(savedHistory);
-    } catch (e) {
-      console.error('Failed to load history', e);
-    }
-    let historyIndex = commandHistory.length;
-
-    // Helper functions for terminal writing
-    function escapeHTML(str) {
-      return str.replace(/[&<>"']/g, function(m) {
-        switch (m) {
-          case '&': return '&amp;';
-          case '<': return '&lt;';
-          case '>': return '&gt;';
-          case '"': return '&quot;';
-          case "'": return '&#039;';
-          default: return m;
-        }
-      });
-    }
-
-    function writeHTML(html) {
-      if (!terminalOutput) return;
-      const lineEl = document.createElement('div');
-      lineEl.innerHTML = html;
-      terminalOutput.appendChild(lineEl);
-      terminalOutput.scrollTop = terminalOutput.scrollHeight;
-    }
-
-    function writeLine(text, styleClass = '') {
-      const escaped = text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-      const span = styleClass ? `<span class="${styleClass}">${escaped}</span>` : escaped;
-      writeHTML(span);
-    }
-
-    // Projects mapping
-    const projectsList = [
-      { id: 'xai-satellite', num: 1, title: 'Explainable Vision Transformer for Satellite Analysis', year: '2026' },
-      { id: 'ipo-platform', num: 2, title: 'Real-Time IPO Tracking Platform', year: '2025' },
-      { id: 'plant-disease', num: 3, title: 'Plant Disease Detection System', year: '2025' },
-      { id: 'object-detection', num: 4, title: 'Deep Learning Object Detection', year: '2024' },
-      { id: 'stress-detection', num: 5, title: 'Stress Detection via Medical Data', year: '2023' },
-      { id: 'iot-systems', num: 6, title: 'IoT-Based Smart Systems', year: '2023' }
-    ];
-
-    // Terminal Commands definitions
-    const terminalCommands = {
-      help: () => {
-        writeHTML('<span class="term-bold term-accent-text">ARSHDEEP PORTFOLIO SHELL v2.0 - HELP MENU</span>');
-        writeLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        writeHTML('<span class="term-success">help</span>              - Show this menu');
-        writeHTML('<span class="term-success">about</span>             - Who is Arshdeep? Bio & education');
-        writeHTML('<span class="term-success">skills</span>            - View details of technical skillset');
-        writeHTML('<span class="term-success">contact</span>           - View contact info & clickable links');
-        writeHTML('<span class="term-success">projects [open]</span>   - List projects or open one (e.g. <span class="term-info">projects open 1</span>)');
-        writeHTML('<span class="term-success">theme [name]</span>      - Switch visual theme (<span class="term-info">default</span>, <span class="term-info">dark</span>, <span class="term-info">cyberpunk</span>, <span class="term-info">matrix</span>)');
-        writeHTML('<span class="term-success">neofetch / system</span> - Print hardware/system specifications & info');
-        writeHTML('<span class="term-success">cowsay [msg]</span>      - Make the terminal cow speak a message');
-        writeHTML('<span class="term-success">sudo [cmd]</span>        - Run a command as superuser (joke)');
-        writeHTML('<span class="term-success">launch</span>            - Trigger the 🚀 rocket animation');
-        writeHTML('<span class="term-success">robot</span>             - Toggle the 🤖 robot overlay');
-        writeHTML('<span class="term-success">secret</span>            - Access easter egg information');
-        writeHTML('<span class="term-success">clear</span>             - Clear terminal logs');
-        writeHTML('<span class="term-success">exit</span>              - Close terminal console');
-        writeLine('');
-      },
-      about: () => {
-        writeHTML('<span class="term-bold term-accent-text">ARSHDEEP YADAV - BIOGRAPHY</span>');
-        writeLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        writeHTML('<span class="term-bold">Role:</span>       AI/ML Systems Engineer & Builder');
-        writeHTML('<span class="term-bold">Education:</span>  B.E. Computer Science (Honors in AI/ML) - Chandigarh University \'26');
-        writeHTML('            Incoming MBA - IIT Patna \'28 (Gen AI & Product Management)');
-        writeHTML('<span class="term-bold">Location:</span>   Lucknow, Uttar Pradesh, India');
-        writeLine('');
-        writeLine('Building intelligent systems that see, learn, and explain. Expertise across');
-        writeLine('Computer Vision, Explainable AI, Robotics, Fintech, and IoT systems.');
-        writeLine('');
-      },
-      skills: () => {
-        writeHTML('<span class="term-bold term-accent-text">TECHNICAL SKILLSET MATRIX</span>');
-        writeLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        writeHTML('<span class="term-success">AI / Machine Learning:</span>     PyTorch, TensorFlow, OpenCV, CNNs, Vision Transformers,');
-        writeHTML('                            Grad-CAM, YOLO Object Detection, XAI Methods');
-        writeHTML('<span class="term-success">Languages:</span>               Python, JavaScript (ES6+), C++, SQL, R');
-        writeHTML('<span class="term-success">Data & Cloud Infrastructure:</span> AWS, Azure, GCP, Docker, Pandas, NumPy, Tableau,');
-        writeHTML('                            Power BI, Streamlit, Flask');
-        writeHTML('<span class="term-success">Product Management:</span>       Jira, Agile/Scrum, Kanban, Roadmapping, Figma,');
-        writeHTML('                            Stakeholder Coordination');
-        writeHTML('<span class="term-success">Robotics & Embedded:</span>     Arduino, ESP32, IoT Sensors, Wireless Protocols (MQTT)');
-        writeLine('');
-      },
-      contact: () => {
-        writeHTML('<span class="term-bold term-accent-text">CONNECT WITH ME</span>');
-        writeLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        writeHTML('<span class="term-bold">Email:</span>    <a href="mailto:arshdeep.yadav.work@gmail.com" class="term-link">arshdeep.yadav.work@gmail.com</a>');
-        writeHTML('<span class="term-bold">Phone:</span>    +91 8115237909');
-        writeHTML('<span class="term-bold">LinkedIn:</span> <a href="https://linkedin.com/in/arshdeep-yadav" target="_blank" rel="noopener" class="term-link">linkedin.com/in/arshdeep-yadav</a>');
-        writeHTML('<span class="term-bold">GitHub:</span>   <a href="https://github.com/Arshdeep-Yadav" target="_blank" rel="noopener" class="term-link">github.com/Arshdeep-Yadav</a>');
-        writeLine('');
-      },
-      projects: (args) => {
-        if (args && args.length >= 2 && args[0] === 'open') {
-          const target = args.slice(1).join(' ').trim().toLowerCase();
-          // Find project by number or name
-          let found = null;
-          if (/^\d+$/.test(target)) {
-            const num = parseInt(target, 10);
-            found = projectsList.find(p => p.num === num);
-          } else {
-            found = projectsList.find(p => p.id.includes(target) || p.title.toLowerCase().includes(target));
-          }
-
-          if (found) {
-            writeHTML(`<span class="term-success">Opening project ${found.num}: "${found.title}"...</span>`);
-            // Trigger navigation after a short delay
-            setTimeout(() => {
-              const row = $(`.matrix-row[data-case="${found.id}"]`);
-              if (row) {
-                // Trigger the click event
-                row.click();
-              } else {
-                // Fallback direct hash set
-                window.location.hash = 'case-study';
-              }
-              toggleTerminal();
-            }, 600);
-          } else {
-            writeHTML(`<span class="term-error">Project not found matching: "${target}". Type "projects" to list all.</span>`);
-          }
-          return;
-        }
-
-        // List projects
-        writeHTML('<span class="term-bold term-accent-text">PROJECT INDEX</span>');
-        writeLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        writeLine('Use "projects open <number|name>" to navigate directly to case studies.');
-        writeLine('');
-        projectsList.forEach(p => {
-          writeHTML(`  [<span class="term-info">${p.num}</span>] <span class="term-bold">${p.title}</span> (${p.year})`);
-        });
-        writeLine('');
-      },
-      theme: (args) => {
-        if (args && args.length > 0) {
-          const themeName = args[0].trim().toLowerCase();
-          if (THEMES[themeName]) {
-            setTheme(themeName);
-            writeHTML(`<span class="term-success">Theme changed successfully to <span class="term-bold">${themeName}</span>.</span>`);
-          } else {
-            writeHTML(`<span class="term-error">Invalid theme: "${themeName}". Available themes: default, dark, cyberpunk, matrix.</span>`);
-          }
-          return;
-        }
-        
-        // Show current theme
-        const currentTheme = localStorage.getItem('portfolio-theme') || 'default';
-        writeHTML('<span class="term-bold term-accent-text">THEME ENGINE</span>');
-        writeLine('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        writeLine(`Current Theme: ${currentTheme}`);
-        writeHTML('Available Themes: <span class="term-info">default</span>, <span class="term-info">dark</span>, <span class="term-info">cyberpunk</span>, <span class="term-info">matrix</span>');
-        writeLine('Usage: theme <name>  (e.g. theme cyberpunk)');
-        writeLine('');
-      },
-      neofetch: () => {
-        const uptimeSeconds = Math.floor(performance.now() / 1000);
-        const hrs = Math.floor(uptimeSeconds / 3600);
-        const mins = Math.floor((uptimeSeconds % 3600) / 60);
-        const secs = uptimeSeconds % 60;
-        const uptimeStr = `${hrs > 0 ? hrs + 'h ' : ''}${mins > 0 ? mins + 'm ' : ''}${secs}s (session)`;
-
-        const screenRes = `${window.screen.width}x${window.screen.height}`;
-        const currentTheme = localStorage.getItem('portfolio-theme') || 'default';
-
-        const lines = [
-          `     <span class="term-success">/\\</span>              <span class="term-bold term-accent-text">arshdeep@portfolio</span>`,
-          `    <span class="term-success">/  \\</span>             -------------------`,
-          `   <span class="term-success">/ /\\ \\</span>            <span class="term-bold">OS:</span> Portfolio OS v2.0`,
-          `  <span class="term-success">| |  | |</span>           <span class="term-bold">Host:</span> arshdeepyadav.me`,
-          `  <span class="term-success">| |  | |</span>           <span class="term-bold">Kernel:</span> WebKit / Blink Engine`,
-          `  <span class="term-success">| |__| |</span>           <span class="term-bold">Uptime:</span> ${uptimeStr}`,
-          `  <span class="term-success">/      \\</span>           <span class="term-bold">Shell:</span> Antigravity Shell v2.0`,
-          ` <span class="term-success">/        \\</span>          <span class="term-bold">Resolution:</span> ${screenRes}`,
-          `<span class="term-success">/|   /\\   |\\</span>         <span class="term-bold">Theme:</span> ${currentTheme}`,
-          `<span class="term-success">\\|  /  \\  |/</span>         <span class="term-bold">Diagnostics:</span> Memory OK`,
-          ` <span class="term-success">\\_/    \\_/</span>          <span class="term-bold">Status:</span> Open to Opportunities`,
-          `                     <span class="term-bold">MBA Candidate:</span> IIT Patna '28`
-        ];
-        
-        lines.forEach(l => writeHTML(l));
-        writeLine('');
-      },
-      system: () => {
-        terminalCommands.neofetch();
-      },
-      cowsay: (args) => {
-        const msg = (args && args.length > 0) ? args.join(' ') : 'Moouu!';
-        const border = '-'.repeat(msg.length + 2);
-        writeHTML(`  ${border}`);
-        writeHTML(`&lt; ${msg} &gt;`);
-        writeHTML(`  ${border}`);
-        writeHTML('         \\   ^__^');
-        writeHTML('          \\  (oo)\\_______');
-        writeHTML('             (__)\\       )\\/\\');
-        writeHTML('                 ||----w |');
-        writeHTML('                 ||     ||');
-        writeLine('');
-      },
-      sudo: (args) => {
-        const cmd = (args && args.length > 0) ? args.join(' ') : 'action';
-        writeHTML(`<span class="term-error">arshdeep is not in the sudoers file. This incident will be reported to the sysadmin.</span>`);
-        writeLine('');
-      },
-      launch: () => {
-        writeHTML('<span class="term-info">Initiating launch sequence...</span>');
-        triggerAdvancedLaunch();
-        writeLine('');
-      },
-      robot: () => {
-        if (robotOverlay) {
-          robotOverlay.classList.toggle('visible');
-          if (robotOverlay.classList.contains('visible') && typeof typeRobotGreeting === 'function') {
-            typeRobotGreeting();
-          }
-        }
-        writeHTML('<span class="term-success">🤖 Summoning robot companion overlays...</span>');
-        writeLine('');
-      },
-      secret: () => {
-        writeHTML('<span class="term-accent-text">╔════════════════════════════════════╗</span>');
-        writeHTML('<span class="term-accent-text">║  YOU FOUND THE SECRET!             ║</span>');
-        writeHTML('<span class="term-accent-text">║                                    ║</span>');
-        writeHTML('<span class="term-accent-text">║  "The best product is the one      ║</span>');
-        writeHTML('<span class="term-accent-text">║   that ships." — Arshdeep          ║</span>');
-        writeHTML('<span class="term-accent-text">║                                    ║</span>');
-        writeHTML('<span class="term-accent-text">║  Fun fact: This entire portfolio   ║</span>');
-        writeHTML('<span class="term-accent-text">║  is a single HTML file. No React.  ║</span>');
-        writeHTML('<span class="term-accent-text">║  No frameworks. Pure craft.        ║</span>');
-        writeHTML('<span class="term-accent-text">╚════════════════════════════════════╝</span>');
-        writeLine('');
-      },
-      clear: () => {
-        if (terminalOutput) terminalOutput.innerHTML = '';
-      },
-      exit: () => {
-        toggleTerminal();
-      }
-    };
-
-    // Rule-based NLP Intent Classifier
-    function classifyIntent(input) {
-      const clean = input.trim().toLowerCase();
-      
-      // Split into command parts (original syntax parser)
-      const parts = clean.split(/\s+/);
-      const mainCmd = parts[0];
-      const directArgs = parts.slice(1);
-      
-      // If matches exact command key directly, prioritize it
-      if (terminalCommands[mainCmd]) {
-        return { command: mainCmd, args: directArgs };
-      }
-      
-      // Conversational match patterns (NLP classification)
-      // 1. Theme intents
-      if (clean.includes('theme') || clean.includes('mode') || clean.includes('color') || clean.includes('style')) {
-        let themeArg = '';
-        if (clean.includes('dark')) themeArg = 'dark';
-        else if (clean.includes('cyberpunk') || clean.includes('cyber')) themeArg = 'cyberpunk';
-        else if (clean.includes('matrix') || clean.includes('hacker')) themeArg = 'matrix';
-        else if (clean.includes('default') || clean.includes('light') || clean.includes('original') || clean.includes('cream')) themeArg = 'default';
-        
-        return { command: 'theme', args: themeArg ? [themeArg] : [] };
-      }
-      
-      // 2. Project intents (navigation)
-      if (clean.includes('project') || clean.includes('portfolio') || clean.includes('case') || clean.includes('work') || clean.includes('build') || clean.includes('open')) {
-        // Look for numbers 1 to 6
-        const numMatch = clean.match(/\b([1-6])\b/);
-        if (numMatch) {
-          return { command: 'projects', args: ['open', numMatch[1]] };
-        }
-        // Look for project name keywords
-        const keywords = ['satellite', 'xai', 'ipo', 'platform', 'plant', 'disease', 'object', 'detection', 'stress', 'medical', 'iot', 'smart'];
-        for (const kw of keywords) {
-          if (clean.includes(kw)) {
-            let id = '';
-            if (kw === 'satellite' || kw === 'xai') id = 'xai-satellite';
-            else if (kw === 'ipo' || kw === 'platform') id = 'ipo-platform';
-            else if (kw === 'plant' || kw === 'disease') id = 'plant-disease';
-            else if (kw === 'object' || kw === 'detection') id = 'object-detection';
-            else if (kw === 'stress' || kw === 'medical') id = 'stress-detection';
-            else if (kw === 'iot' || kw === 'smart') id = 'iot-systems';
-            
-            if (id) return { command: 'projects', args: ['open', id] };
-          }
-        }
-        return { command: 'projects', args: [] };
-      }
-      
-      // 3. About intents
-      const aboutWords = ['about', 'who', 'bio', 'profile', 'experience', 'education', 'background', 'resume', 'cv', 'arshdeep', 'yadav'];
-      if (aboutWords.some(w => clean.includes(w))) {
-        return { command: 'about', args: [] };
-      }
-      
-      // 4. Skills intents
-      const skillWords = ['skill', 'stack', 'tech', 'languages', 'programming', 'python', 'pytorch', 'framework', 'database', 'cloud'];
-      if (skillWords.some(w => clean.includes(w))) {
-        return { command: 'skills', args: [] };
-      }
-      
-      // 5. Contact intents
-      const contactWords = ['contact', 'email', 'phone', 'call', 'reach', 'linkedin', 'github', 'social', 'address', 'location'];
-      if (contactWords.some(w => clean.includes(w))) {
-        return { command: 'contact', args: [] };
-      }
-
-      // 6. Sudo intents
-      if (clean.startsWith('sudo ') || clean.includes('root') || clean.includes('admin')) {
-        return { command: 'sudo', args: directArgs };
-      }
-
-      // 7. Clear intents
-      if (clean === 'cls' || clean.includes('clear') || clean.includes('clean')) {
-        return { command: 'clear', args: [] };
-      }
-
-      // 8. Exit intents
-      if (clean === 'exit' || clean === 'quit' || clean === 'close' || clean === 'hide') {
-        return { command: 'exit', args: [] };
-      }
-
-      // 9. Rocket intents
-      if (clean.includes('launch') || clean.includes('rocket') || clean.includes('fly') || clean.includes('blast')) {
-        return { command: 'launch', args: [] };
-      }
-
-      // 10. Robot intents
-      if (clean.includes('robot') || clean.includes('summon') || clean.includes('bot')) {
-        return { command: 'robot', args: [] };
-      }
-
-      // 11. Cowsay intents
-      if (clean.startsWith('cowsay') || clean.includes('cow say')) {
-        let msg = '';
-        if (clean.startsWith('cowsay ')) {
-          msg = input.substring(7).trim();
-        } else {
-          msg = input.replace(/cow\s+say/i, '').trim();
-        }
-        return { command: 'cowsay', args: msg ? [msg] : [] };
-      }
-      
-      // Default: parse as standard command split
-      return { command: mainCmd, args: directArgs };
-    }
-
-    function toggleTerminal() {
-      terminalOpen = !terminalOpen;
-      if (miniTerminal) {
-        miniTerminal.classList.toggle('open', terminalOpen);
-        if (terminalOpen) {
-          setTimeout(() => terminalInput.focus(), 300);
-          if (!terminalOutput.innerHTML) {
-            terminalOutput.innerHTML = '<span class="term-bold term-success">ARSHDEEP PORTFOLIO TERMINAL v2.0</span>\nType "<span class="term-info">help</span>" for available commands. Try speaking naturally (e.g. "<span class="term-info">tell me about yourself</span>")!\n\n';
-          }
-        }
-      }
-    }
-
-    const terminalBtn = document.getElementById('terminal-btn');
-    if (terminalBtn) {
-      terminalBtn.addEventListener('click', toggleTerminal);
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === '`' && !e.ctrlKey && !e.metaKey) {
-        if (e.target.tagName !== 'INPUT' || e.target.id === 'terminal-input') {
-          e.preventDefault();
-          toggleTerminal();
-        }
-      }
-    });
-
-    if (terminalInput) {
-      terminalInput.addEventListener('keydown', (e) => {
-        // 1. Enter key: execute command
-        if (e.key === 'Enter') {
-          const rawInput = terminalInput.value;
-          const cleanInput = rawInput.trim();
-          terminalInput.value = '';
-
-          if (cleanInput) {
-            // Echo command line safely
-            writeHTML(`<span class="term-prompt">arshdeep@portfolio:~$</span> <span class="term-cmd-line">${escapeHTML(cleanInput)}</span>`);
-            
-            // Push to command history
-            if (commandHistory.length === 0 || commandHistory[commandHistory.length - 1] !== cleanInput) {
-              commandHistory.push(cleanInput);
-              // Cap history length at 50 entries
-              if (commandHistory.length > 50) commandHistory.shift();
-              localStorage.setItem('term-history', JSON.stringify(commandHistory));
-            }
-            historyIndex = commandHistory.length;
-
-            // Classify intent using NLP engine
-            const parsed = classifyIntent(cleanInput);
-            const handler = terminalCommands[parsed.command];
-
-            if (handler) {
-              // Print small hint if NLP matched a conversational phrase
-              const cleanLower = cleanInput.toLowerCase().trim();
-              if (!terminalCommands[cleanLower] && parsed.command !== cleanLower) {
-                writeHTML(`<span class="term-muted-text">[Intent Resolved: <span class="term-bold term-success">${escapeHTML(parsed.command)}</span>]</span>`);
-              }
-              handler(parsed.args);
-            } else {
-              writeHTML(`<span class="term-error">Command not found: "${escapeHTML(parsed.command)}". Type "help" for a list of commands.</span>\n`);
-            }
-          }
-        }
-        
-        // 2. Arrow Up: Previous history command
-        else if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          if (commandHistory.length > 0 && historyIndex > 0) {
-            historyIndex--;
-            terminalInput.value = commandHistory[historyIndex];
-          }
-        }
-        
-        // 3. Arrow Down: Next history command / clear input
-        else if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          if (historyIndex < commandHistory.length - 1) {
-            historyIndex++;
-            terminalInput.value = commandHistory[historyIndex];
-          } else if (historyIndex === commandHistory.length - 1) {
-            historyIndex = commandHistory.length;
-            terminalInput.value = '';
-          }
-        }
-        
-        // 4. Tab key: autocomplete
-        else if (e.key === 'Tab') {
-          e.preventDefault();
-          const currentVal = terminalInput.value.trim().toLowerCase();
-          if (!currentVal) return;
-
-          // Find matches from command keys
-          const commandKeys = Object.keys(terminalCommands);
-          const matches = commandKeys.filter(cmd => cmd.startsWith(currentVal));
-
-          if (matches.length === 1) {
-            // Autocomplete the matching command
-            terminalInput.value = matches[0] + ' ';
-          } else if (matches.length > 1) {
-            // Echo matches
-            writeHTML(`<span class="term-prompt">arshdeep@portfolio:~$</span> <span class="term-cmd-line">${escapeHTML(terminalInput.value)}</span>`);
-            writeHTML(`<span class="term-muted-text">Possible commands:</span> <span class="term-info">${matches.join('  ')}</span>`);
-          }
-        }
-      });
-    }
-
-    // ─────────────────────────────────────────────
-    // BOOT SEQUENCE
-    // ─────────────────────────────────────────────
-    const bootLines = [
-      '> INITIALIZING PORTFOLIO OS v2.0...',
-      '> LOADING DESIGN SYSTEM.......... OK',
-      '> MOUNTING BRUTALIST GRID........ OK',
-      '> SCANNING PROJECT MATRIX........ OK',
-      '> AUTHENTICATING HUMAN........... OK',
-      '> WELCOME, VISITOR.',
-      '',
-      '> ARSHDEEP YADAV // AI SYSTEMS ENGINEER',
-      '> STATUS: OPEN TO OPPORTUNITIES',
-      '',
-      '> LAUNCHING INTERFACE...'
-    ];
-
-    const bootOverlay = document.getElementById('boot-overlay');
-    const bootText = document.getElementById('boot-text');
-
-    if (bootOverlay && bootText && !prefersReducedMotion) {
-      let lineIndex = 0;
-
-      function typeLine() {
-        if (lineIndex >= bootLines.length) {
-          setTimeout(() => {
-            bootOverlay.style.opacity = '0';
-            setTimeout(() => {
-              bootOverlay.style.display = 'none';
-            }, 300);
-          }, 400);
-          return;
-        }
-
-        const line = bootLines[lineIndex];
-        bootText.innerHTML += line + '\n';
-        lineIndex++;
-        setTimeout(typeLine, line === '' ? 100 : 120 + Math.random() * 80);
-      }
-
-      typeLine();
-    } else if (bootOverlay) {
-      bootOverlay.style.display = 'none';
-    }
-
-    // ─────────────────────────────────────────────
-    // CURSOR DOT TRAIL
-    // ─────────────────────────────────────────────
-    const cursorDot = document.getElementById('cursor-dot');
-    if (cursorDot && !prefersReducedMotion && !isTouchDevice) {
-      let dotX = 0, dotY = 0, targetX = 0, targetY = 0;
-
-      document.addEventListener('mousemove', (e) => {
-        targetX = e.clientX;
-        targetY = e.clientY;
-        cursorDot.style.opacity = '0.6';
-      });
-
-      document.addEventListener('mouseleave', () => {
-        cursorDot.style.opacity = '0';
-      });
-
-      function animateDot() {
-        dotX += (targetX - dotX) * 0.15;
-        dotY += (targetY - dotY) * 0.15;
-        cursorDot.style.left = dotX - 3 + 'px';
-        cursorDot.style.top = dotY - 3 + 'px';
-        requestAnimationFrame(animateDot);
-      }
-      animateDot();
-    }
-
-    // ─────────────────────────────────────────────
-    // SCROLL PROGRESS BAR
-    // ─────────────────────────────────────────────
-    const scrollProgress = document.getElementById('scroll-progress');
-    if (scrollProgress) {
-      window.addEventListener('scroll', () => {
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        if (docHeight > 0) {
-          const percent = (window.scrollY / docHeight) * 100;
-          scrollProgress.style.width = percent + '%';
-        }
-      }, { passive: true });
-    }
-
-    // ─────────────────────────────────────────────
-    // TIME-BASED GREETING
-    // ─────────────────────────────────────────────
-    const greetingEl = document.getElementById('time-greeting');
-    if (greetingEl) {
-      const hour = new Date().getHours();
-      let greeting;
-      if (hour < 6)       greeting = '// LATE NIGHT MODE — BUILDING IN THE DARK';
-      else if (hour < 12) greeting = '// GOOD MORNING — SYSTEMS ONLINE';
-      else if (hour < 17) greeting = '// GOOD AFTERNOON — EXECUTING';
-      else if (hour < 21) greeting = '// GOOD EVENING — DEPLOYING IDEAS';
-      else                greeting = '// NIGHT OWL MODE — SHIPPING CODE';
-      greetingEl.textContent = greeting;
-    }
-
-
-    // ─────────────────────────────────────────────
-    // ADVANCED ROCKET LAUNCH EASTER EGG
-    // ─────────────────────────────────────────────
-    let isLaunching = false;
-    function triggerAdvancedLaunch() {
-      if (isLaunching) return;
-      isLaunching = true;
-      
-      const launchSeq = document.getElementById('launch-sequence');
-      const countdownEl = document.getElementById('launch-countdown');
-      const rocketEl = document.getElementById('rocket-vessel');
-      
-      if (!launchSeq || !countdownEl || !rocketEl) return;
-      
-      launchSeq.classList.add('active');
-      rocketEl.classList.remove('liftoff');
-      countdownEl.textContent = "T-MINUS 3";
-      
-      setTimeout(() => { countdownEl.textContent = "2..."; }, 1000);
-      setTimeout(() => { countdownEl.textContent = "1..."; }, 2000);
-      setTimeout(() => { 
-        countdownEl.textContent = "IGNITION"; 
-        document.body.classList.add('shake-active');
-      }, 3000);
-      
-      setTimeout(() => {
-        countdownEl.textContent = "LIFTOFF!";
-        rocketEl.classList.add('liftoff');
-        
-        // Spawn particles
-        let particleInterval = setInterval(() => {
-          const p = document.createElement('div');
-          p.className = 'rocket-particle';
-          p.style.setProperty('--dx', (Math.random() * 100 - 50) + 'px');
-          p.style.setProperty('--dy', (Math.random() * 100 + 50) + 'px');
-          rocketEl.appendChild(p);
-          setTimeout(() => p.remove(), 1000);
-        }, 50);
-        
-        setTimeout(() => {
-          clearInterval(particleInterval);
-          document.body.classList.remove('shake-active');
-          launchSeq.classList.remove('active');
-          isLaunching = false;
-          
-          // Log to terminal if open
-          const termOut = document.getElementById('terminal-output');
-          if (termOut) {
-            const div = document.createElement('div');
-            div.innerHTML = '<span class="term-success">🚀 Rocket reached orbit successfully. Systems nominal.</span>';
-            termOut.appendChild(div);
-            termOut.scrollTop = termOut.scrollHeight;
-          }
-        }, 3000);
-      }, 4000);
-    }
-
-    // Konami Code Trigger
-    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-    let konamiIndex = 0;
-    document.addEventListener('keydown', (e) => {
-      if (e.key === konamiCode[konamiIndex]) {
-        konamiIndex++;
-        if (konamiIndex === konamiCode.length) {
-          triggerAdvancedLaunch();
-          konamiIndex = 0;
-        }
-      } else {
-        konamiIndex = 0;
-      }
-    });
-
-    // Triple Click Logo Trigger
-    const logoEl = document.querySelector('.nav-logo');
-    if (logoEl) {
-      let clickCount = 0;
-      let clickTimer;
-      logoEl.addEventListener('click', () => {
-        clickCount++;
-        clearTimeout(clickTimer);
-        if (clickCount >= 3) {
-          if (typeof robotOverlay !== 'undefined' && robotOverlay) {
-            robotOverlay.classList.toggle('visible');
-            if (robotOverlay.classList.contains('visible') && typeof typeRobotGreeting === 'function') {
-              typeRobotGreeting();
-            }
-          }
-          clickCount = 0;
-        } else {
-          clickTimer = setTimeout(() => { clickCount = 0; }, 500);
-        }
-      });
-    }
-
-    // Advanced Robot Logic
-    const robotCloseBtn = document.getElementById('robot-close');
-    if (robotCloseBtn && typeof robotOverlay !== 'undefined') {
-      robotCloseBtn.addEventListener('click', () => {
-        robotOverlay.classList.remove('visible');
-      });
-    }
-    
-    function typeRobotGreeting() {
-      const robotText = document.getElementById('robot-text');
-      if (!robotText) return;
-      const msgs = [
-        "HELLO! I BUILD ROBOTS.",
-        "SYSTEMS NOMINAL.",
-        "AWAITING INPUT...",
-        "I AM ALIVE."
-      ];
-      const msg = msgs[Math.floor(Math.random() * msgs.length)];
-      robotText.textContent = '';
-      let i = 0;
-      const typeInt = setInterval(() => {
-        if (i < msg.length) {
-          robotText.textContent += msg.charAt(i);
-          i++;
-        } else {
-          clearInterval(typeInt);
-        }
-      }, 50);
-    }
-  </script>
-
+  <div class="command-backdrop" id="commandBackdrop" aria-hidden="true">
+    <div class="command-box" role="dialog" aria-modal="true" aria-label="Command palette">
+      <div class="command-search"><span>⌘</span><input id="commandInput" autocomplete="off"
+          placeholder="Jump to… (try: xvit, work, resume)" /></div>
+      <div class="command-results" id="commandResults"></div>
+      <div class="command-footer">ESC close · ↑↓ navigate · ENTER open</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copied to clipboard</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="app.js"></script>
 </body>
+
 </html>

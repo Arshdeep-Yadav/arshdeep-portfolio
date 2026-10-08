@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background: #fafafa; margin: 0; }
+    canvas { display: block; width: 100vw; height: 100vh; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <canvas id="inkCanvas"></canvas>
+  <script>
+    const canvas = document.getElementById('inkCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let trail = [];
+    const maxTrail = 40;
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    let lastPos = null;
+    let isIdle = false;
+    let idleTimeout;
+
+    window.addEventListener('mousemove', e => {
+      const current = { x: e.clientX, y: e.clientY };
+      if (lastPos && !isIdle) {
+        const dx = current.x - lastPos.x;
+        const dy = current.y - lastPos.y;
+        const dist = Math.hypot(dx, dy);
+        const steps = Math.max(1, Math.floor(dist / 4));
+        for (let i = 0; i < steps; i++) {
+          trail.push({
+            x: lastPos.x + (dx * i) / steps,
+            y: lastPos.y + (dy * i) / steps,
+            age: 0
+          });
+        }
+      }
+      trail.push({ x: current.x, y: current.y, age: 0 });
+      lastPos = current;
+      isIdle = false;
+      clearTimeout(idleTimeout);
+      idleTimeout = setTimeout(() => { isIdle = true; }, 50);
+    });
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      const rgb = '13, 148, 136'; // Teal
+
+      trail.forEach(p => p.age += 1);
+      trail = trail.filter(p => p.age < maxTrail);
+
+      for (let i = 0; i < trail.length; i++) {
+        const p = trail[i];
+        const progress = p.age / maxTrail;
+        const radius = 10 * (1 - progress);
+        const opacity = (1 - progress) * 0.4;
+        
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(" + rgb + ", " + opacity + ")";
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</body>
+</html>
