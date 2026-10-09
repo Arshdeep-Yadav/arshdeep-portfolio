@@ -1,0 +1,25 @@
+# Arshdeep Yadav — Portfolio & AI Lab
+
+> AI/ML Engineer, AI Product Builder, and IIT Patna MBA (Generative AI & Product Management) candidate. Author of published IEEE RMKMATE 2026 research on Explainable Vision Transformers for Satellite Image Analysis.
+
+## Core Documentation
+
+- [Full Profile & Technical Background](https://arshdeep.works/llm.md): Complete curriculum vitae, technical project case studies, and engineering philosophy formatted for LLMs and AI crawlers.
+- [Canonical Portfolio](https://arshdeep.works/): The interactive web portfolio showcasing selected engineering and product builds.
+
+## Selected Projects & Research
+
+- [Explainable Vision Transformer (XViT)](https://ieeexplore.ieee.org/document/11518743): Published IEEE paper on transformer-aligned explanation maps for remote sensing.
+- [Satellite ViT XAI Repository](https://github.com/Arshdeep-Yadav/satellite-vit-xai): Open source PyTorch implementation of Attention Rollout and Grad-CAM patch saliency for SEN12MS.
+- [Bluestock Fintech IPO Tracking Platform](https://github.com/Arshdeep-Yadav): Live market telemetry tracking $18.2M+ in 24h volume.
+- [Plant Disease Classification](https://github.com/Arshdeep-Yadav): 98.2% accuracy CNN model across 38 botanical pathology categories.
+- [Real-Time Object Detection](https://github.com/Arshdeep-Yadav): Edge-optimized YOLOv8 pipeline processing 45 FPS with 12ms latency.
+- [Physiological Stress Detection](https://github.com/Arshdeep-Yadav): 0.91 F1-score multi-class physiological stress classifier with SHAP interpretability.
+- [Smart Embedded Assistive Hardware](https://github.com/Arshdeep-Yadav): Haptic feedback assistive walking stick and IoT alert telemetry.
+
+## Verified Profiles
+
+- [GitHub Profile](https://github.com/Arshdeep-Yadav): Public repositories, code architectures, and experiments.
+- [LinkedIn Profile](https://www.linkedin.com/in/arshdeep-yadav): Professional timeline, leadership, and credentials.
+- [Resume](https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing): Official engineering and product resume.
+- [Email](mailto:arshdeep.yadav.work@gmail.com): Direct contact for engineering and AI roles.

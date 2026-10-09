@@ -195,7 +195,8 @@ function openModal(key) {
   const link = document.getElementById('modalLink');
   if (link) {
     link.href = p.link || '#';
-    link.textContent = p.link && p.link.includes('github') ? 'View on GitHub ↗' : 'View project ↗';
+    const label = p.link && p.link.includes('github') ? 'View on GitHub' : 'View project';
+    link.innerHTML = `${label} <svg class="astryx-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>`;
   }
 
   if (!commandBackdrop || !commandBackdrop.contains(document.activeElement)) {
@@ -320,7 +321,14 @@ if (copyEmailBtn) {
 
 // ── Theme Toggle (Default: Crisp Light Theme) ────────────────────────
 const themeBtn = document.getElementById('themeBtn');
-const savedTheme = localStorage.getItem('arshdeep-theme');
+let savedTheme = null;
+try { savedTheme = localStorage.getItem('arshdeep-theme'); } catch (_) {}
+
+// Keep the mobile browser chrome (address bar) in sync with the theme.
+function syncThemeColor(isDark) {
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', isDark ? '#0f0f0e' : '#f6f3ec');
+}
 
 function syncThemeToggleUI(isDark) {
   if (!themeBtn) return;
@@ -334,6 +342,7 @@ function syncThemeToggleUI(isDark) {
 if (savedTheme === 'dark') {
   document.documentElement.classList.add('dark-mode');
   syncThemeToggleUI(true);
+  syncThemeColor(true);
 } else {
   document.documentElement.classList.remove('dark-mode');
   syncThemeToggleUI(false);
@@ -347,8 +356,9 @@ if (themeBtn) {
 
     document.documentElement.classList.toggle('dark-mode');
     const isDark = document.documentElement.classList.contains('dark-mode');
-    localStorage.setItem('arshdeep-theme', isDark ? 'dark' : 'light');
+    try { localStorage.setItem('arshdeep-theme', isDark ? 'dark' : 'light'); } catch (_) {}
     syncThemeToggleUI(isDark);
+    syncThemeColor(isDark);
 
     void document.body.offsetHeight;
     requestAnimationFrame(() => {
@@ -365,23 +375,34 @@ const mobileNav = document.getElementById('mobileNav');
 const mobileScrim = document.getElementById('mobileScrim');
 const mobileNavClose = document.getElementById('mobileNavClose');
 
+// Closed drawer must not be tabbable / readable (aria-hidden alone leaves links focusable).
+if (mobileNav) mobileNav.setAttribute('inert', '');
+
 function openMobileNav() {
   if (!mobileNav) return;
   mobileNav.classList.add('open');
   mobileNav.setAttribute('aria-hidden', 'false');
+  mobileNav.removeAttribute('inert');
   if (mobileScrim) mobileScrim.classList.add('open');
   if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'true');
   body.style.overflow = 'hidden';
+  if (mobileNavClose) mobileNavClose.focus({ preventScroll: true });
 }
 
 function closeMobileNav() {
-  if (!mobileNav) return;
+  if (!mobileNav || !mobileNav.classList.contains('open')) return;
   mobileNav.classList.remove('open');
   mobileNav.setAttribute('aria-hidden', 'true');
+  mobileNav.setAttribute('inert', '');
   if (mobileScrim) mobileScrim.classList.remove('open');
   if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
   body.style.overflow = '';
 }
+
+// Auto-close the drawer if the viewport grows past the mobile breakpoint.
+window.matchMedia('(min-width: 901px)').addEventListener('change', e => {
+  if (e.matches) closeMobileNav();
+});
 
 if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMobileNav);
 if (mobileNavClose) mobileNavClose.addEventListener('click', closeMobileNav);
@@ -390,43 +411,12 @@ document.querySelectorAll('.mobile-nav-links a').forEach(a => {
   a.addEventListener('click', closeMobileNav);
 });
 
-// ── Active Navigation on Scroll ──────────────────────────────────────
-const navSections = [
-  { id: 'about', el: document.getElementById('about') },
-  { id: 'work', el: document.getElementById('work') },
-  { id: 'journey', el: document.getElementById('journey') },
-  { id: 'stack', el: document.getElementById('stack') },
-  { id: 'now', el: document.getElementById('now') },
-  { id: 'contact', el: document.getElementById('contact') }
-];
-const topnavLinks = document.querySelectorAll('.topnav a');
-
-function updateActiveNav() {
-  const scrollPos = window.scrollY + 160;
-  let activeId = '';
-  for (const s of navSections) {
-    if (s.el) {
-      const top = s.el.offsetTop;
-      const height = s.el.offsetHeight;
-      if (scrollPos >= top && scrollPos < top + height) {
-        activeId = s.id;
-        break;
-      }
-    }
-  }
-  topnavLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === `#${activeId}`) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
-    }
-  });
-}
-window.addEventListener('scroll', updateActiveNav, { passive: true });
-updateActiveNav();
+// Active nav highlighting is handled by the IntersectionObserver scrollspy at the bottom of this file.
 
 // ── Draggable Hero Sticky Notes ──────────────────────────────────────
+// Mouse/pen only: on touch screens dragging would hijack page scrolling.
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
 function makeDraggable(el) {
   let active = false, startX = 0, startY = 0, baseX = 0, baseY = 0;
   const initialRot = el.classList.contains('sticky-a') ? '-4deg' : el.classList.contains('sticky-b') ? '4deg' : '2deg';
@@ -447,8 +437,11 @@ function makeDraggable(el) {
 
   const onMove = e => {
     if (!active) return;
-    const nx = baseX + (e.clientX - startX);
-    const ny = baseY + (e.clientY - startY);
+    const board = el.parentElement;
+    const maxX = board.clientWidth - el.offsetWidth;
+    const maxY = board.clientHeight - el.offsetHeight;
+    const nx = Math.max(0, Math.min(maxX, baseX + (e.clientX - startX)));
+    const ny = Math.max(0, Math.min(maxY, baseY + (e.clientY - startY)));
     el.style.left = `${nx}px`;
     el.style.top = `${ny}px`;
     el.style.bottom = 'auto';
@@ -469,7 +462,7 @@ function makeDraggable(el) {
   el.addEventListener('pointerup', onUp);
   el.addEventListener('pointercancel', onUp);
 }
-document.querySelectorAll('.draggable').forEach(makeDraggable);
+if (finePointer) document.querySelectorAll('.draggable').forEach(makeDraggable);
 
 // ── Command Palette (⌘K / Ctrl+K) ────────────────────────────────────
 const commands = [
@@ -626,69 +619,6 @@ window.addEventListener('keydown', e => {
   }
 });
 
-// ── Ink Canvas: Subtle Dynamic Connective Trails ─────────────────────
-const canvas = document.getElementById('inkCanvas');
-if (canvas) {
-  const ctx = canvas.getContext('2d');
-  let mouse = { x: -100, y: -100 };
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function resizeCanvas() {
-    const dpr = window.devicePixelRatio || 1;
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    canvas.style.width = `${window.innerWidth}px`;
-    canvas.style.height = `${window.innerHeight}px`;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-
-  resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
-  const inkEnabled = !prefersReducedMotion && window.innerWidth > 768;
-  const INK_IDLE_MS = 1800;
-  let inkRaf = null;
-  let lastMove = 0;
-
-  function drawInk(now) {
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    // Sleep once the pointer has been still for a while (saves CPU/battery).
-    if (now - lastMove > INK_IDLE_MS) {
-      inkRaf = null;
-      return;
-    }
-    if (mouse.x > 0 && mouse.y > 0) {
-      const kickers = [...document.querySelectorAll('.section-kicker')].slice(0, 5);
-      ctx.save();
-      ctx.globalAlpha = 0.12;
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = getComputedStyle(body).getPropertyValue('--ink') || '#1e1e1c';
-
-      kickers.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          const tx = rect.left + Math.min(60, rect.width);
-          const ty = rect.top + 4;
-          ctx.beginPath();
-          ctx.moveTo(mouse.x, mouse.y);
-          const midX = (mouse.x + tx) / 2;
-          ctx.bezierCurveTo(midX, mouse.y, midX, ty, tx, ty);
-          ctx.stroke();
-        }
-      });
-      ctx.restore();
-    }
-    inkRaf = requestAnimationFrame(drawInk);
-  }
-
-  window.addEventListener('pointermove', e => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-    if (!inkEnabled) return;
-    lastMove = performance.now();
-    if (inkRaf === null) inkRaf = requestAnimationFrame(drawInk);
-  });
-}
-
 // ── Premium GSAP Scroll Animations ───────────────────────────────────
 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -743,7 +673,7 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   // Stagger Journey items
   gsap.from(".timeline-item", {
     scrollTrigger: {
-      trigger: ".timeline",
+      trigger: ".timeline-wrap",
       start: "top 85%"
     },
     opacity: 0,
@@ -774,16 +704,23 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
 (function() {
   const canvas = document.getElementById('inkCanvas');
   if (!canvas) return;
+  // Desktop-only effect: skip on touch devices and for reduced-motion users.
+  if (!finePointer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const ctx = canvas.getContext('2d');
   let width, height;
   let trail = [];
   const maxTrail = 40;
+  let raf = null;
 
   function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     width = window.innerWidth;
     height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
   window.addEventListener('resize', resize);
   resize();
@@ -812,6 +749,7 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     isIdle = false;
     clearTimeout(idleTimeout);
     idleTimeout = setTimeout(() => { isIdle = true; }, 50);
+    if (raf === null) raf = requestAnimationFrame(draw);
   });
 
   function draw() {
@@ -835,9 +773,9 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       ctx.fillStyle = "rgba(" + rgb + ", " + opacity + ")";
       ctx.fill();
     }
-    requestAnimationFrame(draw);
+    // Sleep when the trail has faded out instead of burning a frame loop forever.
+    raf = trail.length ? requestAnimationFrame(draw) : null;
   }
-  draw();
 })();
 
 // ── Top Navigation Scrollspy ─────────────────────────────────────────
