@@ -722,12 +722,20 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     canvas.style.height = `${height}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', resize, { passive: true });
   resize();
 
   let lastPos = null;
   let isIdle = false;
   let idleTimeout;
+
+  // Pause draw loop when tab is backgrounded
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && raf !== null) {
+      cancelAnimationFrame(raf);
+      raf = null;
+    }
+  });
 
   window.addEventListener('mousemove', e => {
     const current = { x: e.clientX, y: e.clientY };
@@ -749,8 +757,8 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     isIdle = false;
     clearTimeout(idleTimeout);
     idleTimeout = setTimeout(() => { isIdle = true; }, 50);
-    if (raf === null) raf = requestAnimationFrame(draw);
-  });
+    if (raf === null && !document.hidden) raf = requestAnimationFrame(draw);
+  }, { passive: true });
 
   function draw() {
     ctx.clearRect(0, 0, width, height);

@@ -43,11 +43,19 @@
   <link rel="icon" type="image/svg+xml" href="site-icon.svg" />
   <link rel="apple-touch-icon" href="site-icon.svg" />
   <title>Arshdeep Yadav — AI/ML Engineer · Product Builder</title>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Outfit:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Outfit:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+    media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Outfit:wght@300;400;500;600;700&display=swap">
+  </noscript>
   <link rel="stylesheet" href="styles.css" />
 
   <!-- Rich Schema.org Knowledge Graph (JSON-LD) for Google Rich Results -->
@@ -125,7 +133,8 @@
         "name": "Arshdeep Yadav Profile",
         "isPartOf": { "@id": "https://arshdeep.works/#website" },
         "mainEntity": { "@id": "https://arshdeep.works/#person" },
-        "dateModified": "2026-10-10"
+        "dateCreated": "2024-01-15T09:00:00+05:30",
+        "dateModified": "2026-10-10T18:30:00+05:30"
       }
     ]
   }
@@ -241,21 +250,21 @@
           <article class="sticky sticky-a draggable" data-x="0" data-y="0">
             <div class="sticky-pin"></div>
             <small>01 / PRODUCT</small>
-            <h3>SDE Intern<br>→ Team Lead</h3>
+            <h2>SDE Intern<br>→ Team Lead</h2>
             <p>Bluestock Fintech</p>
             <b>IPO Dashboard</b>
           </article>
           <article class="sticky sticky-b draggable" data-x="0" data-y="0">
             <div class="sticky-pin"></div>
             <small>02 / EDUCATION</small>
-            <h3>MBA @ IIT Patna</h3>
+            <h2>MBA @ IIT Patna</h2>
             <p>Generative AI × Product Management</p>
             <b>Hybrid · 2026–2028</b>
           </article>
           <article class="sticky sticky-c draggable" data-x="0" data-y="0">
             <div class="sticky-pin"></div>
             <small>03 / RESEARCH</small>
-            <h3>IEEE RMKMATE'26</h3>
+            <h2>IEEE RMKMATE'26</h2>
             <p>Explainable Vision Transformer</p>
             <b>Satellite image analysis</b>
           </article>
@@ -347,8 +356,10 @@
           <div class="project-top"><span class="number">01</span><span class="tag">RESEARCH · JAN–MAY 2026</span></div>
           <div class="project-visual">
             <div class="thumb-media">
-              <img src="assets/project-xvit.jpg" alt="Explainable Vision Transformer for Satellite Analysis Dashboard"
-                loading="lazy" />
+              <img src="assets/project-xvit.webp" srcset="assets/project-xvit-688.webp 688w, assets/project-xvit.webp 1376w"
+                sizes="(max-width: 768px) 100vw, 688px"
+                alt="Explainable Vision Transformer for Satellite Analysis Dashboard"
+                width="1376" height="768" loading="lazy" decoding="async" />
               <div class="thumb-scrim"></div>
             </div>
             <div class="thumb-overlay">
@@ -387,7 +398,10 @@
           <div class="project-top"><span class="number">02</span><span class="tag">FINTECH · MAY–JUN 2025</span></div>
           <div class="project-visual">
             <div class="thumb-media">
-              <img src="assets/project-ipo.jpg" alt="IPO Tracking Platform and Analytics Interface" loading="lazy" />
+              <img src="assets/project-ipo.webp" srcset="assets/project-ipo-688.webp 688w, assets/project-ipo.webp 1376w"
+                sizes="(max-width: 768px) 100vw, 688px"
+                alt="IPO Tracking Platform and Analytics Interface"
+                width="1376" height="768" loading="lazy" decoding="async" />
               <div class="thumb-scrim"></div>
             </div>
             <div class="thumb-overlay">
@@ -422,7 +436,10 @@
           <div class="project-top"><span class="number">03</span><span class="tag">AGRITECH · 2025</span></div>
           <div class="project-visual">
             <div class="thumb-media">
-              <img src="assets/project-plant.jpg" alt="Plant Disease Detection AI Scanner" loading="lazy" />
+              <img src="assets/project-plant.webp" srcset="assets/project-plant-688.webp 688w, assets/project-plant.webp 1376w"
+                sizes="(max-width: 768px) 100vw, 688px"
+                alt="Plant Disease Detection AI Scanner"
+                width="1376" height="768" loading="lazy" decoding="async" />
               <div class="thumb-scrim"></div>
             </div>
             <div class="thumb-overlay">
@@ -457,8 +474,10 @@
           <div class="project-top"><span class="number">04</span><span class="tag">VISION · 2024</span></div>
           <div class="project-visual">
             <div class="thumb-media">
-              <img src="assets/project-yolo.jpg" alt="Deep Learning YOLO Real-time Object Detection Dashboard"
-                loading="lazy" />
+              <img src="assets/project-yolo.webp" srcset="assets/project-yolo-688.webp 688w, assets/project-yolo.webp 1376w"
+                sizes="(max-width: 768px) 100vw, 688px"
+                alt="Deep Learning YOLO Real-time Object Detection Dashboard"
+                width="1376" height="768" loading="lazy" decoding="async" />
               <div class="thumb-scrim"></div>
             </div>
             <div class="thumb-overlay">
@@ -493,8 +512,10 @@
           <div class="project-top"><span class="number">05</span><span class="tag">HEALTHTECH · 2023</span></div>
           <div class="project-visual">
             <div class="thumb-media">
-              <img src="assets/project-stress.jpg" alt="Stress Detection Physiological Telemetry Dashboard"
-                loading="lazy" />
+              <img src="assets/project-stress.webp" srcset="assets/project-stress-688.webp 688w, assets/project-stress.webp 1376w"
+                sizes="(max-width: 768px) 100vw, 688px"
+                alt="Stress Detection Physiological Telemetry Dashboard"
+                width="1376" height="768" loading="lazy" decoding="async" />
               <div class="thumb-scrim"></div>
             </div>
             <div class="thumb-overlay">
@@ -528,7 +549,10 @@
           <div class="project-top"><span class="number">06</span><span class="tag">IOT · 2023</span></div>
           <div class="project-visual">
             <div class="thumb-media">
-              <img src="assets/project-iot.jpg" alt="Smart Embedded Systems IoT Mesh Network Console" loading="lazy" />
+              <img src="assets/project-iot.webp" srcset="assets/project-iot-688.webp 688w, assets/project-iot.webp 1376w"
+                sizes="(max-width: 768px) 100vw, 688px"
+                alt="Smart Embedded Systems IoT Mesh Network Console"
+                width="1376" height="768" loading="lazy" decoding="async" />
               <div class="thumb-scrim"></div>
             </div>
             <div class="thumb-overlay">
@@ -603,6 +627,7 @@
 
     <section class="section-shell education-board" id="stack">
       <div class="section-kicker">04 / TOOLBOX</div>
+      <h2 class="sr-only">Technical Skills and Toolbox</h2>
       <div class="toolbox-grid">
         <div class="toolbox-card big" data-filter-target="ai" title="Click to filter AI/ML projects"><span>01</span>
           <h3>AI / ML</h3>
@@ -759,12 +784,12 @@
               data-email="arshdeep.yadav.work@gmail.com" title="Copy email address" aria-label="Copy email to clipboard"
               role="button" tabindex="0">
               <svg class="copy-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
               <svg class="check-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#258f50"
-                stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+                stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="display:none" aria-hidden="true">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
               <span class="action-tooltip">Copy</span>
@@ -864,6 +889,7 @@
   <div class="command-backdrop" id="commandBackdrop" aria-hidden="true">
     <div class="command-box" role="dialog" aria-modal="true" aria-label="Command palette">
       <div class="command-search"><span>⌘</span><input id="commandInput" autocomplete="off"
+          aria-label="Search portfolio commands and projects"
           placeholder="Jump to… (try: xvit, work, resume)" /></div>
       <div class="command-results" id="commandResults"></div>
       <div class="command-footer">ESC close · ↑↓ navigate · ENTER open</div>
@@ -871,9 +897,9 @@
   </div>
 
   <div class="toast" id="toast">Copied to clipboard</div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="app.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script defer src="app.js"></script>
 </body>
 
 </html>

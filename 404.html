@@ -12,11 +12,19 @@
     <meta name="robots" content="noindex, follow" />
     <link rel="icon" type="image/svg+xml" href="site-icon.svg" />
     <link rel="apple-touch-icon" href="site-icon.svg" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&display=swap"
-        rel="stylesheet" />
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Outfit:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Outfit:wght@300;400;500;600;700&display=swap"
+        media="print" onload="this.media='all'" />
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Outfit:wght@300;400;500;600;700&display=swap" />
+    </noscript>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -80,31 +88,31 @@
                     <!-- Bounding Box of Known Manifold -->
                     <rect x="24" y="20" width="376" height="100" rx="14" stroke="#1e1e1c" stroke-width="1.8"
                         stroke-dasharray="6 6" fill="rgba(255,255,255,0.4)" />
-                    <text x="38" y="42" font-family="'Space Grotesk', sans-serif" font-size="10" font-weight="700"
+                    <text x="38" y="42" font-family="'Outfit', sans-serif" font-size="10" font-weight="700"
                         fill="#6a675f" letter-spacing="0.1em">CANVAS MANIFOLD (arshdeep.works)</text>
 
                     <!-- Known Nodes -->
                     <g transform="translate(54, 62)">
                         <rect width="64" height="28" rx="8" fill="#fbfaf7" stroke="#1e1e1c" stroke-width="1.5" />
-                        <text x="32" y="18" font-family="'Inter', sans-serif" font-size="10" font-weight="700"
+                        <text x="32" y="18" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700"
                             fill="#1e1e1c" text-anchor="middle">/work</text>
                     </g>
 
                     <g transform="translate(144, 62)">
                         <rect width="72" height="28" rx="8" fill="#fbfaf7" stroke="#1e1e1c" stroke-width="1.5" />
-                        <text x="36" y="18" font-family="'Inter', sans-serif" font-size="10" font-weight="700"
+                        <text x="36" y="18" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700"
                             fill="#1e1e1c" text-anchor="middle">/journey</text>
                     </g>
 
                     <g transform="translate(242, 62)">
                         <rect width="68" height="28" rx="8" fill="#fbfaf7" stroke="#1e1e1c" stroke-width="1.5" />
-                        <text x="34" y="18" font-family="'Inter', sans-serif" font-size="10" font-weight="700"
+                        <text x="34" y="18" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700"
                             fill="#1e1e1c" text-anchor="middle">/stack</text>
                     </g>
 
                     <g transform="translate(330, 62)">
                         <rect width="52" height="28" rx="8" fill="#f4d566" stroke="#1e1e1c" stroke-width="1.5" />
-                        <text x="26" y="18" font-family="'Inter', sans-serif" font-size="10" font-weight="800"
+                        <text x="26" y="18" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="800"
                             fill="#1e1e1c" text-anchor="middle">/now</text>
                     </g>
 
@@ -116,9 +124,9 @@
                     <!-- Out of Bounds Disconnected Target -->
                     <g transform="translate(518, 46)">
                         <rect width="104" height="38" rx="10" fill="#feebe8" stroke="#ee684f" stroke-width="2" />
-                        <text x="52" y="19" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="800"
+                        <text x="52" y="19" font-family="'Outfit', sans-serif" font-size="11" font-weight="800"
                             fill="#ee684f" text-anchor="middle">404 NULL</text>
-                        <text x="52" y="31" font-family="'Inter', sans-serif" font-size="8" font-weight="600"
+                        <text x="52" y="31" font-family="'JetBrains Mono', monospace" font-size="8" font-weight="600"
                             fill="#993220" text-anchor="middle">tensor out of range</text>
                     </g>
 
@@ -126,7 +134,7 @@
                     <path d="M 570 120 C 560 106 565 98 568 88" stroke="#1e1e1c" stroke-width="1.5" fill="none"
                         stroke-linecap="round" />
                     <polygon points="563,94 568,86 573,95" fill="#1e1e1c" />
-                    <text x="475" y="134" font-family="'Caveat', cursive" font-size="16" font-weight="700"
+                    <text x="475" y="134" font-family="'Newsreader', Georgia, serif" font-style="italic" font-size="16" font-weight="700"
                         fill="#ee684f">You are here! (outside bounds)</text>
                 </svg>
             </div>
