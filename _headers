@@ -1,0 +1,60 @@
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT
+
+/styles.css
+  Cache-Control: public, max-age=31536000, stale-while-revalidate=604800
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT
+
+/app.js
+  Cache-Control: public, max-age=31536000, stale-while-revalidate=604800
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT
+
+/og-card.png
+  Cache-Control: public, max-age=31536000, immutable
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT
+
+/site-icon.svg
+  Content-Type: image/svg+xml; charset=utf-8
+  Cache-Control: public, max-age=31536000, immutable
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT
+
+/site.webmanifest
+  Content-Type: application/manifest+json; charset=utf-8
+  Cache-Control: public, max-age=31536000, stale-while-revalidate=604800
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT
+
+/llm.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT
+
+/robot.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT
+
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT

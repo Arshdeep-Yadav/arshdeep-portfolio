@@ -131,7 +131,7 @@ function showToast(msg, duration = 2500) {
   }, duration);
 }
 
-// ── Dialog focus management (inert background + focus restore) ────────
+// ── Dialog focus management (inert background + focus restore + focus trap) ─
 let lastFocused = null;
 
 function dialogOpen() {
@@ -141,7 +141,7 @@ function dialogOpen() {
 
 function syncBackground() {
   const lock = dialogOpen();
-  document.querySelectorAll('main, header.topbar, footer').forEach(el => {
+  document.querySelectorAll('main, header.topbar, footer, .skip-link').forEach(el => {
     if (lock) el.setAttribute('inert', '');
     else el.removeAttribute('inert');
   });
@@ -153,6 +153,22 @@ function restoreFocus() {
     lastFocused.focus({ preventScroll: true });
   }
   lastFocused = null;
+}
+
+function trapFocus(container, e) {
+  if (e.key !== 'Tab') return;
+  const focusables = Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'))
+    .filter(el => el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0);
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
 }
 
 // ── Case Study Modal System ──────────────────────────────────────────
@@ -234,10 +250,17 @@ const closeModalBtn = document.getElementById('closeModal');
 const modalDoneBtn = document.getElementById('modalDone');
 if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
 if (modalDoneBtn) modalDoneBtn.addEventListener('click', closeModal);
+
+let modalBackdropDown = false;
 if (modalBackdrop) {
-  modalBackdrop.addEventListener('click', e => {
-    if (e.target === modalBackdrop) closeModal();
+  modalBackdrop.addEventListener('mousedown', e => {
+    modalBackdropDown = (e.target === modalBackdrop);
   });
+  modalBackdrop.addEventListener('click', e => {
+    if (e.target === modalBackdrop && modalBackdropDown) closeModal();
+    modalBackdropDown = false;
+  });
+  modalBackdrop.addEventListener('keydown', e => trapFocus(modalBackdrop, e));
 }
 
 // ── Project Category Filters ─────────────────────────────────────────
@@ -319,6 +342,15 @@ if (copyEmailBtn) {
   });
 }
 
+const emailRow = document.getElementById('emailRow');
+if (emailRow) {
+  emailRow.addEventListener('click', e => {
+    if (e.target.closest('#copyEmailBtn')) return;
+    if (e.target.closest('.contact-email-link')) return;
+    window.location.href = 'mailto:arshdeep.yadav.work@gmail.com';
+  });
+}
+
 // ── Theme Toggle (Default: Crisp Light Theme) ────────────────────────
 const themeBtn = document.getElementById('themeBtn');
 let savedTheme = null;
@@ -395,7 +427,10 @@ function closeMobileNav() {
   mobileNav.setAttribute('aria-hidden', 'true');
   mobileNav.setAttribute('inert', '');
   if (mobileScrim) mobileScrim.classList.remove('open');
-  if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
+  if (hamburgerBtn) {
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+    hamburgerBtn.focus({ preventScroll: true });
+  }
   body.style.overflow = '';
 }
 
@@ -521,6 +556,11 @@ function renderCommands(filterText = '') {
     });
     commandResults.appendChild(btn);
   });
+
+  const activeBtn = commandResults.children[cmdIndex];
+  if (activeBtn && typeof activeBtn.scrollIntoView === 'function') {
+    activeBtn.scrollIntoView({ block: 'nearest' });
+  }
 }
 
 function openCommand() {
@@ -556,10 +596,17 @@ function runSelectedCommand() {
 
 const commandBtn = document.getElementById('commandBtn');
 if (commandBtn) commandBtn.addEventListener('click', openCommand);
+
+let commandBackdropDown = false;
 if (commandBackdrop) {
-  commandBackdrop.addEventListener('click', e => {
-    if (e.target === commandBackdrop) closeCommand();
+  commandBackdrop.addEventListener('mousedown', e => {
+    commandBackdropDown = (e.target === commandBackdrop);
   });
+  commandBackdrop.addEventListener('click', e => {
+    if (e.target === commandBackdrop && commandBackdropDown) closeCommand();
+    commandBackdropDown = false;
+  });
+  commandBackdrop.addEventListener('keydown', e => trapFocus(commandBackdrop, e));
 }
 if (commandInput) {
   commandInput.addEventListener('input', () => {
@@ -585,12 +632,15 @@ window.addEventListener('keydown', e => {
       closeCommand();
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      cmdIndex++;
+      const f = commandInput ? commandInput.value.trim().toLowerCase() : '';
+      const count = commands.filter(c => c.label.toLowerCase().includes(f) || c.hint.toLowerCase().includes(f)).length;
+      if (count > 0) cmdIndex = (cmdIndex + 1) % count;
       renderCommands(commandInput ? commandInput.value : '');
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      cmdIndex--;
-      if (cmdIndex < 0) cmdIndex = 0;
+      const f = commandInput ? commandInput.value.trim().toLowerCase() : '';
+      const count = commands.filter(c => c.label.toLowerCase().includes(f) || c.hint.toLowerCase().includes(f)).length;
+      if (count > 0) cmdIndex = (cmdIndex - 1 + count) % count;
       renderCommands(commandInput ? commandInput.value : '');
     } else if (e.key === 'Enter') {
       e.preventDefault();
@@ -620,7 +670,8 @@ window.addEventListener('keydown', e => {
 });
 
 // ── Premium GSAP Scroll Animations ───────────────────────────────────
-if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !prefersReducedMotion) {
   gsap.registerPlugin(ScrollTrigger);
 
   // Animate Hero Elements
@@ -683,19 +734,11 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     ease: "power2.out"
   });
 
-  // Section Headers
-  gsap.utils.toArray(".section-kicker, h2").forEach(header => {
-    gsap.from(header, {
-      scrollTrigger: {
-        trigger: header,
-        start: "top 90%"
-      },
-      opacity: 0,
-      y: 15,
-      duration: 0.8,
-      ease: "power3.out"
-    });
-  });
+  // Refresh ScrollTrigger once fonts and images are ready to ensure trigger coordinates are accurate
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => ScrollTrigger.refresh());
+  }
 }
 
 /* ========================================================================
@@ -794,8 +837,19 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   const sectionIds = Array.from(navLinks).map(a => a.getAttribute('href').replace('#', ''));
   const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
+  // Clear active highlight when user scrolls to the top of the canvas
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < 120) {
+      navLinks.forEach(link => link.classList.remove('active'));
+    }
+  }, { passive: true });
+
   if ('IntersectionObserver' in window && sections.length) {
     const observer = new IntersectionObserver((entries) => {
+      if (window.scrollY < 120) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        return;
+      }
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.id;

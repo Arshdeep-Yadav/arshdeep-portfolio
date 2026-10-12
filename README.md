@@ -69,10 +69,10 @@ A dependency-free, high-performance static web application built with vanilla we
 git clone https://github.com/Arshdeep-Yadav/arshdeep-portfolio.git
 cd arshdeep-portfolio
 
-# Start a local server (Python 3)
-python -m http.server 8000
+# Rust Preview Server (Blazing fast, Gzip + Far-Future Expires headers)
+cargo run --manifest-path preview-server/Cargo.toml -- 8000
 
-# Or with npx serve
+# Or standard static server
 npx serve .
 ```
 
