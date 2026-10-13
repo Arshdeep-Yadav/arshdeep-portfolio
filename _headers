@@ -12,8 +12,16 @@
   Cache-Control: public, max-age=31536000, stale-while-revalidate=604800
   Expires: Sun, 10 Oct 2027 00:00:00 GMT
 
+/styles.min.css
+  Cache-Control: public, max-age=31536000, immutable
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT
+
 /app.js
   Cache-Control: public, max-age=31536000, stale-while-revalidate=604800
+  Expires: Sun, 10 Oct 2027 00:00:00 GMT
+
+/app.min.js
+  Cache-Control: public, max-age=31536000, immutable
   Expires: Sun, 10 Oct 2027 00:00:00 GMT
 
 /og-card.png
@@ -43,12 +51,6 @@
   Expires: Sun, 10 Oct 2027 00:00:00 GMT
 
 /robots.txt
-  Content-Type: text/plain; charset=utf-8
-  Access-Control-Allow-Origin: *
-  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
-  Expires: Sun, 10 Oct 2027 00:00:00 GMT
-
-/robot.txt
   Content-Type: text/plain; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400

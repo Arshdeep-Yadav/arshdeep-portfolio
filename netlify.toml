@@ -26,9 +26,21 @@
     Expires = "Sun, 10 Oct 2027 00:00:00 GMT"
 
 [[headers]]
+  for = "/styles.min.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Expires = "Sun, 10 Oct 2027 00:00:00 GMT"
+
+[[headers]]
   for = "/app.js"
   [headers.values]
     Cache-Control = "public, max-age=31536000, stale-while-revalidate=604800"
+    Expires = "Sun, 10 Oct 2027 00:00:00 GMT"
+
+[[headers]]
+  for = "/app.min.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
     Expires = "Sun, 10 Oct 2027 00:00:00 GMT"
 
 [[headers]]
@@ -69,14 +81,6 @@
 
 [[headers]]
   for = "/robots.txt"
-  [headers.values]
-    Content-Type = "text/plain; charset=utf-8"
-    Access-Control-Allow-Origin = "*"
-    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
-    Expires = "Sun, 10 Oct 2027 00:00:00 GMT"
-
-[[headers]]
-  for = "/robot.txt"
   [headers.values]
     Content-Type = "text/plain; charset=utf-8"
     Access-Control-Allow-Origin = "*"

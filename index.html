@@ -45,8 +45,7 @@
   <title>Arshdeep Yadav — AI/ML Engineer · Product Builder</title>
   <!-- Preload primary self-hosted web fonts for instant rendering -->
   <link rel="preload" href="assets/fonts/outfit.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="assets/fonts/newsreader.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="styles.css?v=2.4" />
+  <link rel="stylesheet" href="styles.min.css?v=3.5">
 
   <!-- Rich Schema.org Knowledge Graph (JSON-LD) for Google Rich Results -->
   <script type="application/ld+json">
@@ -185,23 +184,91 @@
   <div class="mobile-nav-scrim" id="mobileScrim"></div>
   <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true">
     <div class="mobile-nav-header">
-      <span class="brand-mark">AY</span>
-      <span>ARSHDEEP YADAV</span>
-      <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">×</button>
+      <div class="mobile-brand">
+        <span class="mobile-brand-mark">AY</span>
+        <div class="mobile-brand-meta">
+          <strong class="mobile-brand-name">ARSHDEEP YADAV</strong>
+          <span class="mobile-brand-sub">IIT PATNA MBA · AI LAB</span>
+        </div>
+      </div>
+      <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
     </div>
+
     <div class="mobile-nav-links">
-      <a href="#about"><span>01</span> ABOUT</a>
-      <a href="#work"><span>02</span> WORK</a>
-      <a href="#journey"><span>03</span> JOURNEY</a>
-      <a href="#stack"><span>04</span> LAB</a>
-      <a href="#now"><span>05</span> NOW</a>
-      <a href="#contact"><span>06</span> CONTACT</a>
+      <a href="#about" class="mobile-nav-item">
+        <span class="mobile-nav-num">01</span>
+        <div class="mobile-nav-item-body">
+          <span class="mobile-nav-title">ABOUT</span>
+          <small class="mobile-nav-hint">Engineering & Product Vision</small>
+        </div>
+        <svg class="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
+      <a href="#work" class="mobile-nav-item">
+        <span class="mobile-nav-num">02</span>
+        <div class="mobile-nav-item-body">
+          <span class="mobile-nav-title">WORK</span>
+          <small class="mobile-nav-hint">6 Shipped AI/ML Systems</small>
+        </div>
+        <svg class="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
+      <a href="#journey" class="mobile-nav-item">
+        <span class="mobile-nav-num">03</span>
+        <div class="mobile-nav-item-body">
+          <span class="mobile-nav-title">JOURNEY</span>
+          <small class="mobile-nav-hint">IIT Patna MBA & IEEE Research</small>
+        </div>
+        <svg class="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
+      <a href="#stack" class="mobile-nav-item">
+        <span class="mobile-nav-num">04</span>
+        <div class="mobile-nav-item-body">
+          <span class="mobile-nav-title">LAB</span>
+          <small class="mobile-nav-hint">Toolbox, Models & Architecture</small>
+        </div>
+        <svg class="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
+      <a href="#now" class="mobile-nav-item">
+        <span class="mobile-nav-num">05</span>
+        <div class="mobile-nav-item-body">
+          <span class="mobile-nav-title">NOW</span>
+          <small class="mobile-nav-hint">Current Focus & Research (Q4 2026)</small>
+        </div>
+        <svg class="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
+      <a href="#contact" class="mobile-nav-item">
+        <span class="mobile-nav-num">06</span>
+        <div class="mobile-nav-item-body">
+          <span class="mobile-nav-title">CONTACT</span>
+          <small class="mobile-nav-hint">Direct Inbox & Collaboration</small>
+        </div>
+        <svg class="mobile-nav-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
     </div>
-    <div class="mobile-nav-external">
-      <a href="https://github.com/Arshdeep-Yadav" target="_blank" rel="noreferrer">GITHUB</a>
-      <a href="https://www.linkedin.com/in/arshdeep-yadav" target="_blank" rel="noreferrer">LINKEDIN</a>
-      <a href="https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing" target="_blank"
-        rel="noreferrer">RESUME</a>
+
+    <div class="mobile-nav-footer">
+      <div class="mobile-status-pill">
+        <span class="mobile-status-dot"></span>
+        <span>Open to AI Engineering & PM Roles</span>
+      </div>
+      <div class="mobile-nav-actions">
+        <a href="https://github.com/Arshdeep-Yadav" target="_blank" rel="noreferrer" class="mobile-action-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/arshdeep-yadav" target="_blank" rel="noreferrer" class="mobile-action-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing" target="_blank" rel="noreferrer" class="mobile-action-pill mobile-action-resume">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"></path></svg>
+          <span>Resume</span>
+        </a>
+      </div>
     </div>
   </nav>
 
@@ -886,9 +953,7 @@
   </div>
 
   <div class="toast" id="toast">Copied to clipboard</div>
-  <script defer src="assets/vendor/gsap.min.js"></script>
-  <script defer src="assets/vendor/ScrollTrigger.min.js"></script>
-  <script defer src="app.js?v=2.1"></script>
+  <script defer src="app.min.js?v=3.0"></script>
 </body>
 
 </html>

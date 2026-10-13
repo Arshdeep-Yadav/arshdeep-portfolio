@@ -669,77 +669,42 @@ window.addEventListener('keydown', e => {
   }
 });
 
-// ── Premium GSAP Scroll Animations ───────────────────────────────────
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !prefersReducedMotion) {
-  gsap.registerPlugin(ScrollTrigger);
+// ── Native Hardware-Accelerated Scroll Reveals (Zero External Dependencies) ──
+(function initScrollReveals() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
 
-  // Animate Hero Elements
-  gsap.from(".hero-board", { opacity: 0, y: 40, duration: 1.2, ease: "power4.out" });
-  gsap.from("h1, .hero-lede, .hero-cta-row", {
-    opacity: 0,
-    y: 20,
-    duration: 1,
-    stagger: 0.15,
-    ease: "power3.out",
-    delay: 0.2
-  });
-  
-  // Animate the Sticky Notes on Hero
-  gsap.from(".sticky", {
-    scale: 0.8,
-    opacity: 0,
-    rotation: (i) => [-4, 4, 0][i % 3] * 3,
-    duration: 1,
-    stagger: 0.2,
-    ease: "back.out(1.5)",
-    delay: 0.5
+  const targets = document.querySelectorAll(
+    '.marquee-band, .proof-strip, .manifesto, .project-card, .timeline-item, .toolbox-card, .mba-panel, .now-section, .launch-board, .contact'
+  );
+  if (!targets.length) return;
+
+  targets.forEach((el, idx) => {
+    el.classList.add('reveal-init');
+    // Subtle stagger on grid cards and timeline
+    if (el.classList.contains('project-card') || el.classList.contains('toolbox-card') || el.classList.contains('timeline-item')) {
+      el.style.transitionDelay = `${(idx % 4) * 0.07}s`;
+    }
   });
 
-  // Fade in Marquee & Proof strip
-  gsap.from(".marquee-band, .proof-strip", {
-    scrollTrigger: {
-      trigger: ".marquee-band",
-      start: "top 90%"
-    },
-    opacity: 0,
-    y: 20,
-    duration: 0.8,
-    stagger: 0.1
-  });
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.08
+    });
 
-  // Stagger Bento Grid Cards
-  gsap.from(".project-card", {
-    scrollTrigger: {
-      trigger: ".project-grid",
-      start: "top 85%"
-    },
-    opacity: 0,
-    y: 30,
-    duration: 0.8,
-    stagger: 0.1,
-    ease: "power3.out"
-  });
-
-  // Stagger Journey items
-  gsap.from(".timeline-item", {
-    scrollTrigger: {
-      trigger: ".timeline-wrap",
-      start: "top 85%"
-    },
-    opacity: 0,
-    x: -20,
-    duration: 0.6,
-    stagger: 0.1,
-    ease: "power2.out"
-  });
-
-  // Refresh ScrollTrigger once fonts and images are ready to ensure trigger coordinates are accurate
-  window.addEventListener('load', () => ScrollTrigger.refresh());
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => ScrollTrigger.refresh());
+    targets.forEach(el => observer.observe(el));
+  } else {
+    targets.forEach(el => el.classList.add('is-revealed'));
   }
-}
+})();
 
 /* ========================================================================
    FLUID INK CURSOR TRAIL (Editorial Aesthetic)

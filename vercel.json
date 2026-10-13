@@ -42,7 +42,7 @@
       ]
     },
     {
-      "source": "/(styles\\.css|app\\.js)",
+      "source": "/(styles\\.css|app\\.js|styles\\.min\\.css|app\\.min\\.js)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -132,7 +132,7 @@
       ]
     },
     {
-      "source": "/(llms\\.txt|robots\\.txt|robot\\.txt)",
+      "source": "/(llms\\.txt|robots\\.txt)",
       "headers": [
         {
           "key": "Content-Type",
