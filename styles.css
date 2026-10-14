@@ -36,18 +36,11 @@
   /* ── Mobile Safe Area Tokens (iOS Notch & Dynamic Island) ── */
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-left: env(safe-area-inset-left, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
 
-  /* ── 8pt Spacing Scale & Section Rhythm ── */
-  --space-2xs: 4px;
-  --space-xs: 8px;
+  /* ── Spacing Scale & Section Rhythm ── */
   --space-sm: 16px;
   --space-md: 24px;
-  --space-lg: 32px;
   --space-xl: 48px;
-  --space-2xl: 64px;
-  --space-3xl: 88px;
   --section-pad: 96px;
   --section-pad-sm: 64px;
 
@@ -74,24 +67,11 @@
   /* Warm Honey Amber */
   --mint: #059669;
   /* Botanical Pine Mint */
-  --blue: #2563EB;
-  /* Technical Cobalt */
-  --coral: #DC4C38;
-  /* Editorial Terracotta Hanko Red */
-
-  /* ── Unified Elevation Shadows ── */
-  --shadow-sm: 0 1px 3px rgba(20, 24, 28, 0.04), 0 1px 2px rgba(20, 24, 28, 0.02);
-  --shadow-md: 0 6px 18px -3px rgba(20, 24, 28, 0.06), 0 2px 6px -1px rgba(20, 24, 28, 0.03);
-  --shadow-card: 0 4px 20px -2px rgba(20, 24, 28, 0.05), 0 2px 6px rgba(20, 24, 28, 0.02);
-  --shadow-hover: 0 16px 36px -6px rgba(20, 24, 28, 0.09), 0 4px 12px -2px rgba(20, 24, 28, 0.04);
-  --shadow: 0 20px 60px rgba(20, 24, 28, 0.08);
-  --shadow-lg: 0 30px 80px rgba(20, 24, 28, 0.12);
 
   /* ── Concentric Geometry Tokens ── */
   --radius-outer: 26px;
   --radius-card: 20px;
   --radius-inner: 12px;
-  --radius-sm: 10px;
   --radius-pill: 999px;
   --max: 1220px;
 
@@ -104,23 +84,13 @@
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
 
   /* ── Astryx Design System Tokens (by Meta) ── */
-  --astryx-brand: #0B7A70;
-  --astryx-brand-hover: #086158;
   --astryx-brand-subtle: rgba(11, 122, 112, 0.10);
-  --astryx-surface: #FFFFFF;
-  --astryx-surface-subtle: #F7F5EE;
-  --astryx-surface-raised: #FFFFFF;
   --astryx-border: rgba(20, 24, 28, 0.08);
   --astryx-border-subtle: rgba(20, 24, 28, 0.05);
   --astryx-border-focus: #0B7A70;
   --astryx-badge-success-bg: rgba(5, 150, 105, 0.12);
   --astryx-badge-success-text: #059669;
-  --astryx-badge-info-bg: rgba(37, 99, 235, 0.12);
-  --astryx-badge-info-text: #2563EB;
-  --astryx-badge-brand-bg: rgba(11, 122, 112, 0.10);
-  --astryx-badge-brand-text: #086158;
   --astryx-badge-neutral-bg: rgba(20, 24, 28, 0.05);
-  --astryx-badge-neutral-text: #474E57;
 
   /* ── Editorial Translucent Glass Tokens (Zero Black Borders) ── */
   --glass-bg: rgba(255, 255, 255, 0.72);
@@ -153,24 +123,10 @@
   --accent-hover: #5EEAD4;
   --yellow: #FBBF24;
   --mint: #34D399;
-  --blue: #60A5FA;
-  --coral: #F87171;
-
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
-  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.4);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
-  --shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.6);
-  --shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.65);
   --dot-color: rgba(255, 255, 255, 0.05);
 
   /* ── Astryx Tokens Inverted ── */
-  --astryx-brand: #2DD4BF;
-  --astryx-brand-hover: #5EEAD4;
   --astryx-brand-subtle: rgba(45, 212, 191, 0.15);
-  --astryx-surface: #111418;
-  --astryx-surface-subtle: #161A20;
-  --astryx-surface-raised: #1C2128;
   --astryx-border: rgba(255, 255, 255, 0.08);
   --astryx-border-subtle: rgba(255, 255, 255, 0.05);
   --astryx-border-focus: #2DD4BF;
@@ -187,12 +143,7 @@
   --glass-blur-heavy: blur(28px) saturate(200%);
   --glass-shadow: 0 14px 40px -4px rgba(0, 0, 0, 0.5), 0 2px 8px 0 rgba(0, 0, 0, 0.25), inset 0 1px 1px 0 rgba(255, 255, 255, 0.14);
   --glass-shadow-hover: 0 22px 56px -6px rgba(0, 0, 0, 0.65), 0 4px 14px 0 rgba(0, 0, 0, 0.35), inset 0 1px 1px 0 rgba(255, 255, 255, 0.22);
-  --astryx-badge-info-bg: rgba(96, 165, 250, 0.18);
-  --astryx-badge-info-text: #60A5FA;
-  --astryx-badge-brand-bg: rgba(45, 212, 191, 0.18);
-  --astryx-badge-brand-text: #2DD4BF;
   --astryx-badge-neutral-bg: rgba(255, 255, 255, 0.08);
-  --astryx-badge-neutral-text: #E5E7EB;
 }
 
 /* ── Global Baseline & Reset ───────────────────────────────────────── */
@@ -203,6 +154,8 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -218,11 +171,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-::selection {
-  background: rgba(11, 122, 112, 0.20);
-  color: var(--ink);
 }
 
 a:focus-visible,
@@ -250,7 +198,6 @@ input:focus-visible {
 h1,
 h2,
 h3,
-h4,
 .project-body h3,
 .toolbox-card h3,
 .launch-header h2,
@@ -264,8 +211,6 @@ h4,
 }
 
 code,
-kbd,
-samp,
 .board-label,
 .number,
 .timeline-dot,
@@ -397,7 +342,7 @@ samp,
    ══════════════════════════════════════════════════════════ */
 .topbar {
   position: sticky;
-  top: 12px;
+  top: max(12px, var(--safe-top));
   z-index: 40;
   width: min(var(--max), calc(100% - 28px));
   margin: 12px auto 0;
@@ -1360,24 +1305,6 @@ h1 {
   border-color: rgba(16, 185, 129, 0.3);
 }
 
-.astryx-badge-info {
-  background: var(--astryx-badge-info-bg);
-  color: var(--astryx-badge-info-text);
-  border-color: rgba(59, 130, 246, 0.3);
-}
-
-.astryx-badge-brand {
-  background: var(--astryx-badge-brand-bg);
-  color: var(--astryx-badge-brand-text);
-  border-color: rgba(13, 148, 136, 0.3);
-}
-
-.astryx-badge-neutral {
-  background: var(--astryx-badge-neutral-bg);
-  color: var(--astryx-badge-neutral-text);
-  border-color: var(--astryx-border);
-}
-
 /* Astryx Live Status Badge */
 .status-inline {
   display: inline-flex;
@@ -1650,8 +1577,7 @@ h1 {
   display: block;
 }
 
-.sticky h2,
-.sticky h3 {
+.sticky h2 {
   font-family: var(--font-display);
   font-size: 19px;
   line-height: 1.22;
@@ -2194,12 +2120,6 @@ h1 {
   width: 100%;
   height: 100%;
   overflow: hidden;
-}
-
-.thumb-media picture {
-  display: block;
-  width: 100%;
-  height: 100%;
 }
 
 .thumb-media img {
@@ -2756,7 +2676,6 @@ h1 {
 
 .mba-course-row span {
   border: 1px solid var(--glass-border);
-  background: var(--glass-bg-subtle);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: var(--radius-pill);
@@ -3236,12 +3155,6 @@ h1 {
   transform: translateX(0);
 }
 
-.contact-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .contact-action-btn {
   display: inline-flex;
   align-items: center;
@@ -3427,6 +3340,8 @@ h1 {
   top: 18px;
   width: 38px;
   height: 38px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
   border: 1px solid var(--glass-border);
   background: var(--glass-bg-subtle);
@@ -3615,8 +3530,12 @@ h1 {
 .toast {
   position: fixed;
   left: 50%;
-  bottom: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   transform: translate(-50%, 20px);
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  text-align: center;
+  line-height: 1.45;
   opacity: 0;
   background: var(--ink);
   color: var(--paper);
@@ -3970,8 +3889,7 @@ h1 {
   border-color: rgba(255, 255, 255, 0.25);
 }
 
-.dark-mode .pill-button,
-.dark-mode .icon-button:not(.celestial-toggle) {
+.dark-mode .pill-button {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.14);
   color: var(--ink);
@@ -4056,7 +3974,6 @@ h1 {
 }
 
 .dark-mode .sticky-a h2,
-.dark-mode .sticky-a h3,
 .dark-mode .sticky-a b {
   color: #FFFBEB;
 }
@@ -4079,7 +3996,6 @@ h1 {
 }
 
 .dark-mode .sticky-b h2,
-.dark-mode .sticky-b h3,
 .dark-mode .sticky-b b {
   color: #F0FDF4;
 }
@@ -4102,7 +4018,6 @@ h1 {
 }
 
 .dark-mode .sticky-c h2,
-.dark-mode .sticky-c h3,
 .dark-mode .sticky-c b {
   color: #FFF1F2;
 }
@@ -4383,24 +4298,10 @@ h1 {
 /* ══════════════════════════════════════════════════════════
    MOBILE & TOUCH FOUNDATION LAYER
    ══════════════════════════════════════════════════════════ */
-html {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
 a,
-button,
-[role="button"] {
+button {
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-}
-
-.toast {
-  width: max-content;
-  max-width: calc(100vw - 32px);
-  text-align: center;
-  line-height: 1.45;
-  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
 }
 
 @media (hover: none), (pointer: coarse) {
@@ -4428,16 +4329,6 @@ button,
   .action-tooltip {
     display: none;
   }
-}
-
-.topbar {
-  top: max(12px, var(--safe-top));
-}
-
-
-.close-modal {
-  min-width: 44px;
-  min-height: 44px;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -4780,8 +4671,7 @@ button,
     padding: 16px 12px 12px;
   }
 
-  .sticky h2,
-  .sticky h3 {
+  .sticky h2 {
     font-size: 15px;
     line-height: 1.15;
   }

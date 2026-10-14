@@ -114,154 +114,158 @@ const projects = {
   }
 };
 
-const body = document.body;
-const modalBackdrop = document.getElementById('modalBackdrop');
-const commandBackdrop = document.getElementById('commandBackdrop');
-const toast = document.getElementById('toast');
-
-// ── Toast notification helper ────────────────────────────────────────
-let toastTimer = null;
-function showToast(msg, duration = 2500) {
-  if (!toast) return;
-  toast.textContent = msg;
-  toast.classList.add('show');
-  if (toastTimer) clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    toast.classList.remove('show');
-  }, duration);
-}
-
-// ── Dialog focus management (inert background + focus restore + focus trap) ─
-let lastFocused = null;
-
-function dialogOpen() {
-  return (modalBackdrop && modalBackdrop.classList.contains('show')) ||
-         (commandBackdrop && commandBackdrop.classList.contains('show'));
-}
-
-function syncBackground() {
-  const lock = dialogOpen();
-  document.querySelectorAll('main, header.topbar, footer, .skip-link').forEach(el => {
-    if (lock) el.setAttribute('inert', '');
-    else el.removeAttribute('inert');
-  });
-}
-
-function restoreFocus() {
-  if (dialogOpen()) return;
-  if (lastFocused && document.contains(lastFocused) && typeof lastFocused.focus === 'function') {
-    lastFocused.focus({ preventScroll: true });
-  }
-  lastFocused = null;
-}
-
-function trapFocus(container, e) {
-  if (e.key !== 'Tab') return;
-  const focusables = Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'))
-    .filter(el => el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0);
-  if (!focusables.length) return;
-  const first = focusables[0];
-  const last = focusables[focusables.length - 1];
-  if (e.shiftKey && document.activeElement === first) {
-    e.preventDefault();
-    last.focus();
-  } else if (!e.shiftKey && document.activeElement === last) {
-    e.preventDefault();
-    first.focus();
-  }
-}
-
-// ── Case Study Modal System ──────────────────────────────────────────
-function openModal(key) {
-  const p = projects[key];
-  if (!p || !modalBackdrop) return;
-
-  const setElText = (id, val) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = val || '';
+// ── Scoped Toast Notification Service ────────────────────────────────
+const showToast = (() => {
+  const el = document.getElementById('toast');
+  let timer = null;
+  return (msg, duration = 2500) => {
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add('show');
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => el.classList.remove('show'), duration);
   };
+})();
 
-  setElText('modalMeta', p.meta);
-  setElText('modalTitle', p.title);
-  setElText('modalContext', p.context || '');
-  setElText('modalProblem', p.problem || '');
-  setElText('modalApproach', p.approach || '');
-  setElText('modalStack', p.stack || '');
-  setElText('modalRole', p.role || '');
-  setElText('modalStatus', p.status || '');
-  setElText('modalResult', p.result || '');
-  setElText('modalLearnings', p.learnings || '');
+// ── Dialog Focus & Inert Coordinator ─────────────────────────────────
+const Dialog = (() => {
+  let lastFocused = null;
+  const backdrops = () => [document.getElementById('modalBackdrop'), document.getElementById('commandBackdrop')].filter(Boolean);
+  const isOpen = () => backdrops().some(b => b.classList.contains('show'));
 
-  const decisionsList = document.getElementById('modalDecisions');
-  const decisionsWrap = document.getElementById('modalDecisionsWrap');
-  if (decisionsList) {
-    decisionsList.innerHTML = '';
-    if (p.decisions && p.decisions.length) {
-      p.decisions.forEach(d => {
-        const li = document.createElement('li');
-        li.textContent = d;
-        decisionsList.appendChild(li);
-      });
-      if (decisionsWrap) decisionsWrap.style.display = '';
-    } else {
-      if (decisionsWrap) decisionsWrap.style.display = 'none';
+  function syncInert() {
+    const locked = isOpen();
+    document.querySelectorAll('main, header.topbar, footer, .skip-link').forEach(el => {
+      if (locked) el.setAttribute('inert', '');
+      else el.removeAttribute('inert');
+    });
+  }
+
+  function saveFocus() {
+    if (!isOpen()) lastFocused = document.activeElement;
+  }
+
+  function restoreFocus() {
+    if (isOpen()) return;
+    if (lastFocused && document.contains(lastFocused) && typeof lastFocused.focus === 'function') {
+      lastFocused.focus({ preventScroll: true });
+    }
+    lastFocused = null;
+  }
+
+  function trapFocus(container, e) {
+    if (e.key !== 'Tab') return;
+    const focusables = Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'))
+      .filter(el => el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0);
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
     }
   }
 
-  const link = document.getElementById('modalLink');
-  if (link) {
-    link.href = p.link || '#';
-    const label = p.link && p.link.includes('github') ? 'View on GitHub' : 'View project';
-    link.innerHTML = `${label} <svg class="astryx-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>`;
+  return { isOpen, syncInert, saveFocus, restoreFocus, trapFocus };
+})();
+
+// ── Case Study Modal System ──────────────────────────────────────────
+const Modal = (() => {
+  const backdrop = document.getElementById('modalBackdrop');
+  if (!backdrop) return { open() {}, close() {} };
+
+  function open(key) {
+    const p = projects[key];
+    if (!p) return;
+
+    const set = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val || '';
+    };
+
+    set('modalMeta', p.meta);
+    set('modalTitle', p.title);
+    set('modalContext', p.context || '');
+    set('modalProblem', p.problem || '');
+    set('modalApproach', p.approach || '');
+    set('modalStack', p.stack || '');
+    set('modalRole', p.role || '');
+    set('modalStatus', p.status || '');
+    set('modalResult', p.result || '');
+    set('modalLearnings', p.learnings || '');
+
+    const decisionsList = document.getElementById('modalDecisions');
+    const decisionsWrap = document.getElementById('modalDecisionsWrap');
+    if (decisionsList) {
+      decisionsList.innerHTML = '';
+      if (p.decisions && p.decisions.length) {
+        p.decisions.forEach(d => {
+          const li = document.createElement('li');
+          li.textContent = d;
+          decisionsList.appendChild(li);
+        });
+        if (decisionsWrap) decisionsWrap.style.display = '';
+      } else if (decisionsWrap) {
+        decisionsWrap.style.display = 'none';
+      }
+    }
+
+    const link = document.getElementById('modalLink');
+    if (link) {
+      link.href = p.link || '#';
+      const label = p.link && p.link.includes('github') ? 'View on GitHub' : 'View project';
+      link.innerHTML = `${label} <svg class="astryx-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>`;
+    }
+
+    Dialog.saveFocus();
+    backdrop.classList.add('show');
+    backdrop.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    Dialog.syncInert();
+    const closeBtn = document.getElementById('closeModal');
+    if (closeBtn) closeBtn.focus();
   }
 
-  if (!commandBackdrop || !commandBackdrop.contains(document.activeElement)) {
-    lastFocused = document.activeElement;
+  function close() {
+    if (!backdrop.classList.contains('show')) return;
+    backdrop.classList.remove('show');
+    backdrop.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    Dialog.syncInert();
+    Dialog.restoreFocus();
   }
-  modalBackdrop.classList.add('show');
-  modalBackdrop.setAttribute('aria-hidden', 'false');
-  body.style.overflow = 'hidden';
-  syncBackground();
+
+  document.querySelectorAll('.open-modal').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      open(btn.dataset.project);
+    });
+  });
+
+  document.querySelectorAll('.project-card[data-project]').forEach(card => {
+    card.addEventListener('dblclick', () => open(card.dataset.project));
+  });
+
   const closeBtn = document.getElementById('closeModal');
-  if (closeBtn) closeBtn.focus();
-}
+  const doneBtn = document.getElementById('modalDone');
+  if (closeBtn) closeBtn.addEventListener('click', close);
+  if (doneBtn) doneBtn.addEventListener('click', close);
 
-function closeModal() {
-  if (!modalBackdrop) return;
-  modalBackdrop.classList.remove('show');
-  modalBackdrop.setAttribute('aria-hidden', 'true');
-  body.style.overflow = '';
-  syncBackground();
-  restoreFocus();
-}
-
-document.querySelectorAll('.open-modal').forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.stopPropagation();
-    openModal(btn.dataset.project);
+  let isBackdropTarget = false;
+  backdrop.addEventListener('mousedown', e => { isBackdropTarget = e.target === backdrop; });
+  backdrop.addEventListener('click', e => {
+    if (e.target === backdrop && isBackdropTarget) close();
+    isBackdropTarget = false;
   });
-});
+  backdrop.addEventListener('keydown', e => Dialog.trapFocus(backdrop, e));
 
-document.querySelectorAll('.project-card[data-project]').forEach(card => {
-  card.addEventListener('dblclick', () => openModal(card.dataset.project));
-});
-
-const closeModalBtn = document.getElementById('closeModal');
-const modalDoneBtn = document.getElementById('modalDone');
-if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-if (modalDoneBtn) modalDoneBtn.addEventListener('click', closeModal);
-
-let modalBackdropDown = false;
-if (modalBackdrop) {
-  modalBackdrop.addEventListener('mousedown', e => {
-    modalBackdropDown = (e.target === modalBackdrop);
-  });
-  modalBackdrop.addEventListener('click', e => {
-    if (e.target === modalBackdrop && modalBackdropDown) closeModal();
-    modalBackdropDown = false;
-  });
-  modalBackdrop.addEventListener('keydown', e => trapFocus(modalBackdrop, e));
-}
+  return { open, close };
+})();
+const openModal = Modal.open;
+const closeModal = Modal.close;
 
 // ── Project Category Filters ─────────────────────────────────────────
 document.querySelectorAll('.filter').forEach(btn => {
@@ -351,323 +355,321 @@ if (emailRow) {
   });
 }
 
-// ── Theme Toggle (Default: Crisp Light Theme) ────────────────────────
-const themeBtn = document.getElementById('themeBtn');
-let savedTheme = null;
-try { savedTheme = localStorage.getItem('arshdeep-theme'); } catch (_) {}
-
-// Keep the mobile browser chrome (address bar) in sync with the theme.
-function syncThemeColor(isDark) {
+// ── Theme Engine (Default: Crisp Light Theme) ────────────────────────
+(() => {
+  const btn = document.getElementById('themeBtn');
   const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', isDark ? '#0f0f0e' : '#f6f3ec');
-}
 
-function syncThemeToggleUI(isDark) {
-  if (!themeBtn) return;
-  themeBtn.setAttribute('aria-label', isDark ? 'Switch to light mode (Sun)' : 'Switch to dark mode (Moon)');
-  themeBtn.setAttribute('title', isDark ? 'Switch to light mode (Sun)' : 'Switch to dark mode (Moon)');
-  if (!themeBtn.querySelector('.celestial-sun')) {
-    themeBtn.textContent = isDark ? '☾' : '☼';
+  function sync(isDark) {
+    if (meta) meta.setAttribute('content', isDark ? '#0f0f0e' : '#f6f3ec');
+    if (btn) {
+      btn.setAttribute('aria-label', isDark ? 'Switch to light mode (Sun)' : 'Switch to dark mode (Moon)');
+      btn.setAttribute('title', isDark ? 'Switch to light mode (Sun)' : 'Switch to dark mode (Moon)');
+      if (!btn.querySelector('.celestial-sun')) {
+        btn.textContent = isDark ? '☾' : '☼';
+      }
+    }
   }
-}
 
-if (savedTheme === 'dark') {
-  document.documentElement.classList.add('dark-mode');
-  syncThemeToggleUI(true);
-  syncThemeColor(true);
-} else {
-  document.documentElement.classList.remove('dark-mode');
-  syncThemeToggleUI(false);
-}
+  let saved = null;
+  try { saved = localStorage.getItem('arshdeep-theme'); } catch (_) {}
+  const isDark = saved === 'dark';
+  document.documentElement.classList.toggle('dark-mode', isDark);
+  sync(isDark);
 
-if (themeBtn) {
-  themeBtn.addEventListener('click', () => {
-    const css = document.createElement('style');
-    css.textContent = '*,*::before,*::after{transition:none!important}';
-    document.head.appendChild(css);
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const css = document.createElement('style');
+      css.textContent = '*,*::before,*::after{transition:none!important}';
+      document.head.appendChild(css);
 
-    document.documentElement.classList.toggle('dark-mode');
-    const isDark = document.documentElement.classList.contains('dark-mode');
-    try { localStorage.setItem('arshdeep-theme', isDark ? 'dark' : 'light'); } catch (_) {}
-    syncThemeToggleUI(isDark);
-    syncThemeColor(isDark);
+      const dark = document.documentElement.classList.toggle('dark-mode');
+      try { localStorage.setItem('arshdeep-theme', dark ? 'dark' : 'light'); } catch (_) {}
+      sync(dark);
 
-    void document.body.offsetHeight;
-    requestAnimationFrame(() => {
-      try { document.head.removeChild(css); } catch (_) {}
+      void document.body.offsetHeight;
+      requestAnimationFrame(() => {
+        try { document.head.removeChild(css); } catch (_) {}
+      });
+      showToast(dark ? 'Lunar dark mode enabled' : 'Solar light mode enabled', 1500);
     });
-
-    showToast(isDark ? 'Lunar dark mode enabled' : 'Solar light mode enabled', 1500);
-  });
-}
+  }
+})();
 
 // ── Mobile Navigation Drawer ─────────────────────────────────────────
-const hamburgerBtn = document.getElementById('hamburgerBtn');
-const mobileNav = document.getElementById('mobileNav');
-const mobileScrim = document.getElementById('mobileScrim');
-const mobileNavClose = document.getElementById('mobileNavClose');
+const MobileNav = (() => {
+  const btn = document.getElementById('hamburgerBtn');
+  const nav = document.getElementById('mobileNav');
+  const scrim = document.getElementById('mobileScrim');
+  const closeBtn = document.getElementById('mobileNavClose');
 
-// Closed drawer must not be tabbable / readable (aria-hidden alone leaves links focusable).
-if (mobileNav) mobileNav.setAttribute('inert', '');
+  if (!nav) return { open() {}, close() {}, isOpen: () => false };
+  nav.setAttribute('inert', '');
 
-function openMobileNav() {
-  if (!mobileNav) return;
-  mobileNav.classList.add('open');
-  mobileNav.setAttribute('aria-hidden', 'false');
-  mobileNav.removeAttribute('inert');
-  if (mobileScrim) mobileScrim.classList.add('open');
-  if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'true');
-  body.style.overflow = 'hidden';
-  if (mobileNavClose) mobileNavClose.focus({ preventScroll: true });
-}
-
-function closeMobileNav() {
-  if (!mobileNav || !mobileNav.classList.contains('open')) return;
-  mobileNav.classList.remove('open');
-  mobileNav.setAttribute('aria-hidden', 'true');
-  mobileNav.setAttribute('inert', '');
-  if (mobileScrim) mobileScrim.classList.remove('open');
-  if (hamburgerBtn) {
-    hamburgerBtn.setAttribute('aria-expanded', 'false');
-    hamburgerBtn.focus({ preventScroll: true });
+  function open() {
+    nav.classList.add('open');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.removeAttribute('inert');
+    if (scrim) scrim.classList.add('open');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus({ preventScroll: true });
   }
-  body.style.overflow = '';
-}
 
-// Auto-close the drawer if the viewport grows past the mobile breakpoint.
-window.matchMedia('(min-width: 901px)').addEventListener('change', e => {
-  if (e.matches) closeMobileNav();
-});
+  function close() {
+    if (!nav.classList.contains('open')) return;
+    nav.classList.remove('open');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.setAttribute('inert', '');
+    if (scrim) scrim.classList.remove('open');
+    if (btn) {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus({ preventScroll: true });
+    }
+    document.body.style.overflow = '';
+  }
 
-if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMobileNav);
-if (mobileNavClose) mobileNavClose.addEventListener('click', closeMobileNav);
-if (mobileScrim) mobileScrim.addEventListener('click', closeMobileNav);
-document.querySelectorAll('.mobile-nav-links a').forEach(a => {
-  a.addEventListener('click', closeMobileNav);
-});
+  window.matchMedia('(min-width: 901px)').addEventListener('change', e => {
+    if (e.matches) close();
+  });
 
-// Active nav highlighting is handled by the IntersectionObserver scrollspy at the bottom of this file.
+  if (btn) btn.addEventListener('click', open);
+  if (closeBtn) closeBtn.addEventListener('click', close);
+  if (scrim) scrim.addEventListener('click', close);
+  document.querySelectorAll('.mobile-nav-links a').forEach(a => a.addEventListener('click', close));
+
+  return { open, close, isOpen: () => nav.classList.contains('open') };
+})();
 
 // ── Draggable Hero Sticky Notes ──────────────────────────────────────
-// Mouse/pen only: on touch screens dragging would hijack page scrolling.
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-function makeDraggable(el) {
-  let active = false, startX = 0, startY = 0, baseX = 0, baseY = 0;
-  const initialRot = el.classList.contains('sticky-a') ? '-4deg' : el.classList.contains('sticky-b') ? '4deg' : '2deg';
+if (finePointer) {
+  function makeDraggable(el) {
+    let active = false, startX = 0, startY = 0, baseX = 0, baseY = 0;
+    const initialRot = el.classList.contains('sticky-a') ? '-4deg' : el.classList.contains('sticky-b') ? '4deg' : '2deg';
 
-  const onDown = e => {
-    active = true;
-    try { el.setPointerCapture(e.pointerId); } catch (_) {}
-    const rect = el.getBoundingClientRect();
-    const board = el.parentElement.getBoundingClientRect();
-    startX = e.clientX;
-    startY = e.clientY;
-    baseX = rect.left - board.left;
-    baseY = rect.top - board.top;
-    el.style.transform = 'rotate(0deg) scale(1.04)';
-    el.style.zIndex = '20';
-    el.style.cursor = 'grabbing';
-  };
+    el.addEventListener('pointerdown', e => {
+      active = true;
+      try { el.setPointerCapture(e.pointerId); } catch (_) {}
+      const rect = el.getBoundingClientRect();
+      const board = el.parentElement.getBoundingClientRect();
+      startX = e.clientX;
+      startY = e.clientY;
+      baseX = rect.left - board.left;
+      baseY = rect.top - board.top;
+      el.style.transform = 'rotate(0deg) scale(1.04)';
+      el.style.zIndex = '20';
+      el.style.cursor = 'grabbing';
+    });
 
-  const onMove = e => {
-    if (!active) return;
-    const board = el.parentElement;
-    const maxX = board.clientWidth - el.offsetWidth;
-    const maxY = board.clientHeight - el.offsetHeight;
-    const nx = Math.max(0, Math.min(maxX, baseX + (e.clientX - startX)));
-    const ny = Math.max(0, Math.min(maxY, baseY + (e.clientY - startY)));
-    el.style.left = `${nx}px`;
-    el.style.top = `${ny}px`;
-    el.style.bottom = 'auto';
-    el.style.right = 'auto';
-  };
+    el.addEventListener('pointermove', e => {
+      if (!active) return;
+      const board = el.parentElement;
+      const maxX = board.clientWidth - el.offsetWidth;
+      const maxY = board.clientHeight - el.offsetHeight;
+      const nx = Math.max(0, Math.min(maxX, baseX + (e.clientX - startX)));
+      const ny = Math.max(0, Math.min(maxY, baseY + (e.clientY - startY)));
+      el.style.left = `${nx}px`;
+      el.style.top = `${ny}px`;
+      el.style.bottom = 'auto';
+      el.style.right = 'auto';
+    });
 
-  const onUp = e => {
-    if (!active) return;
-    active = false;
-    try { el.releasePointerCapture(e.pointerId); } catch (_) {}
-    el.style.transform = `rotate(${initialRot}) scale(1)`;
-    el.style.zIndex = '4';
-    el.style.cursor = 'grab';
-  };
+    const onUp = e => {
+      if (!active) return;
+      active = false;
+      try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+      el.style.transform = `rotate(${initialRot}) scale(1)`;
+      el.style.zIndex = '4';
+      el.style.cursor = 'grab';
+    };
 
-  el.addEventListener('pointerdown', onDown);
-  el.addEventListener('pointermove', onMove);
-  el.addEventListener('pointerup', onUp);
-  el.addEventListener('pointercancel', onUp);
+    el.addEventListener('pointerup', onUp);
+    el.addEventListener('pointercancel', onUp);
+  }
+
+  document.querySelectorAll('.draggable').forEach(makeDraggable);
 }
-if (finePointer) document.querySelectorAll('.draggable').forEach(makeDraggable);
 
 // ── Command Palette (⌘K / Ctrl+K) ────────────────────────────────────
-const commands = [
-  { label: 'Explainable Vision Transformer (XViT)', hint: 'Research · Case Study', action: () => openModal('xvit') },
-  { label: 'IPO Tracking Platform (Bluestock)', hint: 'Fintech · Case Study', action: () => openModal('ipo') },
-  { label: 'Plant Disease Detection (AgriTech)', hint: 'CNN · Case Study', action: () => openModal('plant') },
-  { label: 'Deep Learning Object Detection (YOLO)', hint: 'Vision · Case Study', action: () => openModal('object') },
-  { label: 'Stress Detection via Bio-Signals', hint: 'HealthTech · Case Study', action: () => openModal('stress') },
-  { label: 'Smart Embedded Systems (IoT)', hint: 'Hardware · Case Study', action: () => openModal('iot') },
-  { label: 'Filter: AI / ML Projects', hint: 'Tag: AI', action: () => { const b = document.querySelector('.filter[data-filter="ai"]'); if (b) b.click(); location.hash = 'work'; } },
-  { label: 'Filter: Product Projects', hint: 'Tag: Product', action: () => { const b = document.querySelector('.filter[data-filter="product"]'); if (b) b.click(); location.hash = 'work'; } },
-  { label: 'Filter: Research Projects', hint: 'Tag: Research', action: () => { const b = document.querySelector('.filter[data-filter="research"]'); if (b) b.click(); location.hash = 'work'; } },
-  { label: 'Filter: Systems Projects', hint: 'Tag: Systems', action: () => { const b = document.querySelector('.filter[data-filter="systems"]'); if (b) b.click(); location.hash = 'work'; } },
-  { label: 'Jump to About / North Star', hint: '/#about', action: () => location.hash = 'about' },
-  { label: 'Jump to Selected Work', hint: '/#work', action: () => location.hash = 'work' },
-  { label: 'Jump to Career Trajectory', hint: '/#journey', action: () => location.hash = 'journey' },
-  { label: 'Jump to Toolbox & Lab', hint: '/#stack', action: () => location.hash = 'stack' },
-  { label: 'IIT Patna MBA Programme', hint: 'GenAI & PM', action: () => { const el = document.querySelector('.mba-panel'); if (el) el.scrollIntoView({ behavior: 'smooth' }); } },
-  { label: 'What I\'m Doing Now', hint: '/#now', action: () => location.hash = 'now' },
-  { label: 'Production Ship Checklist', hint: '/#launch', action: () => location.hash = 'launch' },
-  { label: 'Contact Arshdeep', hint: '/#contact', action: () => location.hash = 'contact' },
-  { label: 'Copy Email Address', hint: 'arshdeep.yadav.work@gmail.com', action: () => { if (copyEmailBtn) copyEmailBtn.click(); } },
-  { label: 'View Resume / CV', hint: 'External PDF', action: () => window.open('https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing', '_blank') },
-  { label: 'Toggle Light / Dark Mode', hint: 'Theme toggle', action: () => { if (themeBtn) themeBtn.click(); } },
-  { label: 'Print / Save as PDF', hint: 'System dialog', action: () => window.print() }
-];
+const CommandPalette = (() => {
+  const backdrop = document.getElementById('commandBackdrop');
+  const input = document.getElementById('commandInput');
+  const results = document.getElementById('commandResults');
+  const triggerBtn = document.getElementById('commandBtn');
+  if (!backdrop) return { open() {}, close() {}, isOpen: () => false, handleKey() {} };
 
-let cmdIndex = 0;
-const commandInput = document.getElementById('commandInput');
-const commandResults = document.getElementById('commandResults');
+  const commands = [
+    { label: 'Explainable Vision Transformer (XViT)', hint: 'Research · Case Study', action: () => openModal('xvit') },
+    { label: 'IPO Tracking Platform (Bluestock)', hint: 'Fintech · Case Study', action: () => openModal('ipo') },
+    { label: 'Plant Disease Detection (AgriTech)', hint: 'CNN · Case Study', action: () => openModal('plant') },
+    { label: 'Deep Learning Object Detection (YOLO)', hint: 'Vision · Case Study', action: () => openModal('object') },
+    { label: 'Stress Detection via Bio-Signals', hint: 'HealthTech · Case Study', action: () => openModal('stress') },
+    { label: 'Smart Embedded Systems (IoT)', hint: 'Hardware · Case Study', action: () => openModal('iot') },
+    { label: 'Filter: AI / ML Projects', hint: 'Tag: AI', action: () => { const b = document.querySelector('.filter[data-filter="ai"]'); if (b) b.click(); location.hash = 'work'; } },
+    { label: 'Filter: Product Projects', hint: 'Tag: Product', action: () => { const b = document.querySelector('.filter[data-filter="product"]'); if (b) b.click(); location.hash = 'work'; } },
+    { label: 'Filter: Research Projects', hint: 'Tag: Research', action: () => { const b = document.querySelector('.filter[data-filter="research"]'); if (b) b.click(); location.hash = 'work'; } },
+    { label: 'Filter: Systems Projects', hint: 'Tag: Systems', action: () => { const b = document.querySelector('.filter[data-filter="systems"]'); if (b) b.click(); location.hash = 'work'; } },
+    { label: 'Jump to About / North Star', hint: '/#about', action: () => { location.hash = 'about'; } },
+    { label: 'Jump to Selected Work', hint: '/#work', action: () => { location.hash = 'work'; } },
+    { label: 'Jump to Career Trajectory', hint: '/#journey', action: () => { location.hash = 'journey'; } },
+    { label: 'Jump to Toolbox & Lab', hint: '/#stack', action: () => { location.hash = 'stack'; } },
+    { label: 'IIT Patna MBA Programme', hint: 'GenAI & PM', action: () => { const el = document.querySelector('.mba-panel'); if (el) el.scrollIntoView({ behavior: 'smooth' }); } },
+    { label: 'What I\'m Doing Now', hint: '/#now', action: () => { location.hash = 'now'; } },
+    { label: 'Production Ship Checklist', hint: '/#launch', action: () => { location.hash = 'launch'; } },
+    { label: 'Contact Arshdeep', hint: '/#contact', action: () => { location.hash = 'contact'; } },
+    { label: 'Copy Email Address', hint: 'arshdeep.yadav.work@gmail.com', action: () => { const copyBtn = document.getElementById('copyEmailBtn'); if (copyBtn) copyBtn.click(); } },
+    { label: 'View Resume / CV', hint: 'External PDF', action: () => window.open('https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing', '_blank') },
+    { label: 'Toggle Light / Dark Mode', hint: 'Theme toggle', action: () => { const t = document.getElementById('themeBtn'); if (t) t.click(); } },
+    { label: 'Print / Save as PDF', hint: 'System dialog', action: () => window.print() }
+  ];
 
-function renderCommands(filterText = '') {
-  const f = filterText.trim().toLowerCase();
-  const list = commands.filter(c => c.label.toLowerCase().includes(f) || c.hint.toLowerCase().includes(f));
-  cmdIndex = Math.min(cmdIndex, Math.max(0, list.length - 1));
-  if (!commandResults) return;
-  commandResults.innerHTML = '';
+  let selectedIndex = 0;
 
-  if (list.length === 0) {
-    const empty = document.createElement('div');
-    empty.style.padding = '18px 12px';
-    empty.style.fontSize = '12px';
-    empty.style.color = 'var(--muted)';
-    empty.textContent = 'No matching commands found.';
-    commandResults.appendChild(empty);
-    return;
+  function filterList(text = '') {
+    const f = text.trim().toLowerCase();
+    return commands.filter(c => c.label.toLowerCase().includes(f) || c.hint.toLowerCase().includes(f));
   }
 
-  list.forEach((c, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'command-item' + (i === cmdIndex ? ' active' : '');
-    btn.innerHTML = `<span>${c.label}</span><small>${c.hint}</small>`;
-    btn.addEventListener('click', () => {
-      c.action();
-      closeCommand();
+  function render(text = '') {
+    const list = filterList(text);
+    selectedIndex = Math.min(selectedIndex, Math.max(0, list.length - 1));
+    if (!results) return;
+    results.innerHTML = '';
+
+    if (!list.length) {
+      const empty = document.createElement('div');
+      empty.style.padding = '18px 12px';
+      empty.style.fontSize = '12px';
+      empty.style.color = 'var(--muted)';
+      empty.textContent = 'No matching commands found.';
+      results.appendChild(empty);
+      return;
+    }
+
+    list.forEach((c, i) => {
+      const b = document.createElement('button');
+      b.className = 'command-item' + (i === selectedIndex ? ' active' : '');
+      b.innerHTML = `<span>${c.label}</span><small>${c.hint}</small>`;
+      b.addEventListener('click', () => {
+        c.action();
+        close();
+      });
+      results.appendChild(b);
     });
-    commandResults.appendChild(btn);
-  });
 
-  const activeBtn = commandResults.children[cmdIndex];
-  if (activeBtn && typeof activeBtn.scrollIntoView === 'function') {
-    activeBtn.scrollIntoView({ block: 'nearest' });
+    const activeItem = results.children[selectedIndex];
+    if (activeItem && typeof activeItem.scrollIntoView === 'function') {
+      activeItem.scrollIntoView({ block: 'nearest' });
+    }
   }
-}
 
-function openCommand() {
-  if (!commandBackdrop) return;
-  if (!dialogOpen()) lastFocused = document.activeElement;
-  commandBackdrop.classList.add('show');
-  commandBackdrop.setAttribute('aria-hidden', 'false');
-  syncBackground();
-  if (commandInput) {
-    commandInput.value = '';
-    cmdIndex = 0;
-    renderCommands();
-    setTimeout(() => commandInput.focus(), 50);
+  function open() {
+    Dialog.saveFocus();
+    backdrop.classList.add('show');
+    backdrop.setAttribute('aria-hidden', 'false');
+    Dialog.syncInert();
+    if (input) {
+      input.value = '';
+      selectedIndex = 0;
+      render();
+      setTimeout(() => input.focus(), 50);
+    }
   }
-}
 
-function closeCommand() {
-  if (!commandBackdrop) return;
-  commandBackdrop.classList.remove('show');
-  commandBackdrop.setAttribute('aria-hidden', 'true');
-  syncBackground();
-  restoreFocus();
-}
-
-function runSelectedCommand() {
-  const f = commandInput ? commandInput.value.trim().toLowerCase() : '';
-  const list = commands.filter(c => c.label.toLowerCase().includes(f) || c.hint.toLowerCase().includes(f));
-  if (list[cmdIndex]) {
-    list[cmdIndex].action();
-    closeCommand();
+  function close() {
+    if (!backdrop.classList.contains('show')) return;
+    backdrop.classList.remove('show');
+    backdrop.setAttribute('aria-hidden', 'true');
+    Dialog.syncInert();
+    Dialog.restoreFocus();
   }
-}
 
-const commandBtn = document.getElementById('commandBtn');
-if (commandBtn) commandBtn.addEventListener('click', openCommand);
+  function executeCurrent() {
+    const list = filterList(input ? input.value : '');
+    if (list[selectedIndex]) {
+      list[selectedIndex].action();
+      close();
+    }
+  }
 
-let commandBackdropDown = false;
-if (commandBackdrop) {
-  commandBackdrop.addEventListener('mousedown', e => {
-    commandBackdropDown = (e.target === commandBackdrop);
+  if (triggerBtn) triggerBtn.addEventListener('click', open);
+
+  let isBackdropTarget = false;
+  backdrop.addEventListener('mousedown', e => { isBackdropTarget = e.target === backdrop; });
+  backdrop.addEventListener('click', e => {
+    if (e.target === backdrop && isBackdropTarget) close();
+    isBackdropTarget = false;
   });
-  commandBackdrop.addEventListener('click', e => {
-    if (e.target === commandBackdrop && commandBackdropDown) closeCommand();
-    commandBackdropDown = false;
-  });
-  commandBackdrop.addEventListener('keydown', e => trapFocus(commandBackdrop, e));
-}
-if (commandInput) {
-  commandInput.addEventListener('input', () => {
-    cmdIndex = 0;
-    renderCommands(commandInput.value);
-  });
-}
+  backdrop.addEventListener('keydown', e => Dialog.trapFocus(backdrop, e));
+
+  if (input) {
+    input.addEventListener('input', () => {
+      selectedIndex = 0;
+      render(input.value);
+    });
+  }
+
+  return {
+    open,
+    close,
+    isOpen: () => backdrop.classList.contains('show'),
+    handleKey(e) {
+      if (e.key === 'Escape') {
+        close();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const list = filterList(input ? input.value : '');
+        if (list.length) selectedIndex = (selectedIndex + 1) % list.length;
+        render(input ? input.value : '');
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const list = filterList(input ? input.value : '');
+        if (list.length) selectedIndex = (selectedIndex - 1 + list.length) % list.length;
+        render(input ? input.value : '');
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        executeCurrent();
+      }
+    }
+  };
+})();
 
 // ── Global Keyboard Shortcuts ────────────────────────────────────────
 window.addEventListener('keydown', e => {
   if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
     e.preventDefault();
-    if (commandBackdrop && commandBackdrop.classList.contains('show')) {
-      closeCommand();
-    } else {
-      openCommand();
-    }
+    CommandPalette.isOpen() ? CommandPalette.close() : CommandPalette.open();
     return;
   }
 
-  if (commandBackdrop && commandBackdrop.classList.contains('show')) {
-    if (e.key === 'Escape') {
-      closeCommand();
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      const f = commandInput ? commandInput.value.trim().toLowerCase() : '';
-      const count = commands.filter(c => c.label.toLowerCase().includes(f) || c.hint.toLowerCase().includes(f)).length;
-      if (count > 0) cmdIndex = (cmdIndex + 1) % count;
-      renderCommands(commandInput ? commandInput.value : '');
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      const f = commandInput ? commandInput.value.trim().toLowerCase() : '';
-      const count = commands.filter(c => c.label.toLowerCase().includes(f) || c.hint.toLowerCase().includes(f)).length;
-      if (count > 0) cmdIndex = (cmdIndex - 1 + count) % count;
-      renderCommands(commandInput ? commandInput.value : '');
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      runSelectedCommand();
-    }
+  if (CommandPalette.isOpen()) {
+    CommandPalette.handleKey(e);
     return;
   }
 
   if (e.key === 'Escape') {
-    if (modalBackdrop && modalBackdrop.classList.contains('show')) closeModal();
-    if (mobileNav && mobileNav.classList.contains('open')) closeMobileNav();
+    closeModal();
+    if (MobileNav.isOpen()) MobileNav.close();
   }
 });
 
 // ── Easter Eggs ──────────────────────────────────────────────────────
-let secretKeyBuffer = '';
-window.addEventListener('keydown', e => {
-  if (e.target && e.target.closest && e.target.closest('input, textarea, [contenteditable]')) return;
-  if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-    secretKeyBuffer = (secretKeyBuffer + e.key.toLowerCase()).slice(-10);
-    if (secretKeyBuffer.endsWith('launch')) {
-      showToast('🚀 Launch checklist verified — all systems go!');
-    } else if (secretKeyBuffer.endsWith('iitp')) {
-      showToast('🎓 IIT Patna MBA: GenAI & Product Management (2026–2028)');
+(() => {
+  let secretKeyBuffer = '';
+  window.addEventListener('keydown', e => {
+    if (e.target && e.target.closest && e.target.closest('input, textarea, [contenteditable]')) return;
+    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      secretKeyBuffer = (secretKeyBuffer + e.key.toLowerCase()).slice(-10);
+      if (secretKeyBuffer.endsWith('launch')) {
+        showToast('🚀 Launch checklist verified — all systems go!');
+      } else if (secretKeyBuffer.endsWith('iitp')) {
+        showToast('🎓 IIT Patna MBA: GenAI & Product Management (2026–2028)');
+      }
     }
-  }
-});
+  });
+})();
 
 // ── Native Hardware-Accelerated Scroll Reveals (Zero External Dependencies) ──
 (function initScrollReveals() {
