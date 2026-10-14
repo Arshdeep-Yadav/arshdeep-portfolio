@@ -71,9 +71,12 @@ if (critRegex.test(html)) {
 
 // Ensure clean link rel="stylesheet"
 html = html.replace(
-  /<link rel="preload" href="styles\.min\.css[^"]*" as="style"[^>]*>\s*(<noscript><link rel="stylesheet"[^>]*><\/noscript>)?/,
-  '<link rel="stylesheet" href="styles.min.css?v=3.5">'
+  /(<link rel="preload" href="styles\.min\.css[^"]*" as="style"[^>]*>\s*(<noscript><link rel="stylesheet"[^>]*><\/noscript>)?|<link rel="stylesheet" href="styles\.min\.css[^"]*">)/,
+  '<link rel="stylesheet" href="styles.min.css?v=3.7">'
 );
+
+// Ensure clean app.min.js version query
+html = html.replace(/app\.min\.js\?v=[0-9\.]+/, 'app.min.js?v=3.7');
 
 fs.writeFileSync('index.html', html, 'utf8');
 

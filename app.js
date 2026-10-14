@@ -184,6 +184,8 @@ const Modal = (() => {
   function open(key) {
     const p = projects[key];
     if (!p) return;
+    if (typeof CommandPalette !== 'undefined' && CommandPalette.isOpen()) CommandPalette.close();
+    if (typeof MobileNav !== 'undefined' && MobileNav.isOpen()) MobileNav.close();
 
     const set = (id, val) => {
       const el = document.getElementById(id);
@@ -417,6 +419,8 @@ const MobileNav = (() => {
   nav.setAttribute('inert', '');
 
   function open() {
+    if (typeof closeModal === 'function') closeModal();
+    if (typeof CommandPalette !== 'undefined' && CommandPalette.isOpen()) CommandPalette.close();
     Dialog.saveFocus();
     nav.classList.add('open');
     nav.setAttribute('aria-hidden', 'false');
@@ -591,6 +595,8 @@ const CommandPalette = (() => {
   }
 
   function open() {
+    if (typeof closeModal === 'function') closeModal();
+    if (typeof MobileNav !== 'undefined' && MobileNav.isOpen()) MobileNav.close();
     Dialog.saveFocus();
     backdrop.classList.add('show');
     backdrop.setAttribute('aria-hidden', 'false');

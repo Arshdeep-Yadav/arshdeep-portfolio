@@ -3315,6 +3315,10 @@ h1 {
   z-index: 60;
 }
 
+.command-backdrop {
+  z-index: 70;
+}
+
 .modal-backdrop.show,
 .command-backdrop.show {
   display: flex;
