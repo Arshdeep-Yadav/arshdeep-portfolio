@@ -130,8 +130,12 @@ const showToast = (() => {
 // ── Dialog Focus & Inert Coordinator ─────────────────────────────────
 const Dialog = (() => {
   let lastFocused = null;
-  const backdrops = () => [document.getElementById('modalBackdrop'), document.getElementById('commandBackdrop')].filter(Boolean);
-  const isOpen = () => backdrops().some(b => b.classList.contains('show'));
+  const backdrops = () => [
+    document.getElementById('modalBackdrop'),
+    document.getElementById('commandBackdrop'),
+    document.getElementById('mobileNav')
+  ].filter(Boolean);
+  const isOpen = () => backdrops().some(b => b.classList.contains('show') || b.classList.contains('open'));
 
   function syncInert() {
     const locked = isOpen();
@@ -200,7 +204,7 @@ const Modal = (() => {
     const decisionsList = document.getElementById('modalDecisions');
     const decisionsWrap = document.getElementById('modalDecisionsWrap');
     if (decisionsList) {
-      decisionsList.innerHTML = '';
+      decisionsList.replaceChildren();
       if (p.decisions && p.decisions.length) {
         p.decisions.forEach(d => {
           const li = document.createElement('li');
@@ -215,8 +219,10 @@ const Modal = (() => {
 
     const link = document.getElementById('modalLink');
     if (link) {
-      link.href = p.link || '#';
-      const label = p.link && p.link.includes('github') ? 'View on GitHub' : 'View project';
+      const safeLink = p.link && /^https?:\/\//i.test(p.link) ? p.link : '#';
+      link.href = safeLink;
+      link.setAttribute('rel', 'noopener noreferrer');
+      const label = safeLink.includes('github') ? 'View on GitHub' : 'View project';
       link.innerHTML = `${label} <svg class="astryx-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>`;
     }
 
@@ -270,8 +276,12 @@ const closeModal = Modal.close;
 // ── Project Category Filters ─────────────────────────────────────────
 document.querySelectorAll('.filter').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
     btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
     const f = btn.dataset.filter;
     document.querySelectorAll('.project-card').forEach(card => {
       const tags = (card.dataset.tags || '').split(' ');
@@ -407,12 +417,14 @@ const MobileNav = (() => {
   nav.setAttribute('inert', '');
 
   function open() {
+    Dialog.saveFocus();
     nav.classList.add('open');
     nav.setAttribute('aria-hidden', 'false');
     nav.removeAttribute('inert');
     if (scrim) scrim.classList.add('open');
     if (btn) btn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
+    Dialog.syncInert();
     if (closeBtn) closeBtn.focus({ preventScroll: true });
   }
 
@@ -424,9 +436,10 @@ const MobileNav = (() => {
     if (scrim) scrim.classList.remove('open');
     if (btn) {
       btn.setAttribute('aria-expanded', 'false');
-      btn.focus({ preventScroll: true });
     }
     document.body.style.overflow = '';
+    Dialog.syncInert();
+    Dialog.restoreFocus();
   }
 
   window.matchMedia('(min-width: 901px)').addEventListener('change', e => {
@@ -436,6 +449,7 @@ const MobileNav = (() => {
   if (btn) btn.addEventListener('click', open);
   if (closeBtn) closeBtn.addEventListener('click', close);
   if (scrim) scrim.addEventListener('click', close);
+  nav.addEventListener('keydown', e => Dialog.trapFocus(nav, e));
   document.querySelectorAll('.mobile-nav-links a').forEach(a => a.addEventListener('click', close));
 
   return { open, close, isOpen: () => nav.classList.contains('open') };
@@ -450,10 +464,12 @@ if (finePointer) {
     const initialRot = el.classList.contains('sticky-a') ? '-4deg' : el.classList.contains('sticky-b') ? '4deg' : '2deg';
 
     el.addEventListener('pointerdown', e => {
+      const boardEl = el.parentElement;
+      if (!boardEl) return;
       active = true;
       try { el.setPointerCapture(e.pointerId); } catch (_) {}
       const rect = el.getBoundingClientRect();
-      const board = el.parentElement.getBoundingClientRect();
+      const board = boardEl.getBoundingClientRect();
       startX = e.clientX;
       startY = e.clientY;
       baseX = rect.left - board.left;
@@ -466,6 +482,7 @@ if (finePointer) {
     el.addEventListener('pointermove', e => {
       if (!active) return;
       const board = el.parentElement;
+      if (!board) return;
       const maxX = board.clientWidth - el.offsetWidth;
       const maxY = board.clientHeight - el.offsetHeight;
       const nx = Math.max(0, Math.min(maxX, baseX + (e.clientX - startX)));
@@ -479,7 +496,9 @@ if (finePointer) {
     const onUp = e => {
       if (!active) return;
       active = false;
-      try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+      if (e && e.pointerId) {
+        try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+      }
       el.style.transform = `rotate(${initialRot}) scale(1)`;
       el.style.zIndex = '4';
       el.style.cursor = 'grab';
@@ -487,6 +506,7 @@ if (finePointer) {
 
     el.addEventListener('pointerup', onUp);
     el.addEventListener('pointercancel', onUp);
+    el.addEventListener('lostpointercapture', onUp);
   }
 
   document.querySelectorAll('.draggable').forEach(makeDraggable);
@@ -520,7 +540,7 @@ const CommandPalette = (() => {
     { label: 'Production Ship Checklist', hint: '/#launch', action: () => { location.hash = 'launch'; } },
     { label: 'Contact Arshdeep', hint: '/#contact', action: () => { location.hash = 'contact'; } },
     { label: 'Copy Email Address', hint: 'arshdeep.yadav.work@gmail.com', action: () => { const copyBtn = document.getElementById('copyEmailBtn'); if (copyBtn) copyBtn.click(); } },
-    { label: 'View Resume / CV', hint: 'External PDF', action: () => window.open('https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing', '_blank') },
+    { label: 'View Resume / CV', hint: 'External PDF', action: () => window.open('https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing', '_blank', 'noopener,noreferrer') },
     { label: 'Toggle Light / Dark Mode', hint: 'Theme toggle', action: () => { const t = document.getElementById('themeBtn'); if (t) t.click(); } },
     { label: 'Print / Save as PDF', hint: 'System dialog', action: () => window.print() }
   ];
@@ -536,7 +556,7 @@ const CommandPalette = (() => {
     const list = filterList(text);
     selectedIndex = Math.min(selectedIndex, Math.max(0, list.length - 1));
     if (!results) return;
-    results.innerHTML = '';
+    results.replaceChildren();
 
     if (!list.length) {
       const empty = document.createElement('div');
@@ -551,9 +571,14 @@ const CommandPalette = (() => {
     list.forEach((c, i) => {
       const b = document.createElement('button');
       b.className = 'command-item' + (i === selectedIndex ? ' active' : '');
-      b.innerHTML = `<span>${c.label}</span><small>${c.hint}</small>`;
+      const span = document.createElement('span');
+      span.textContent = c.label;
+      const small = document.createElement('small');
+      small.textContent = c.hint;
+      b.appendChild(span);
+      b.appendChild(small);
       b.addEventListener('click', () => {
-        c.action();
+        if (typeof c.action === 'function') c.action();
         close();
       });
       results.appendChild(b);
@@ -588,7 +613,7 @@ const CommandPalette = (() => {
 
   function executeCurrent() {
     const list = filterList(input ? input.value : '');
-    if (list[selectedIndex]) {
+    if (list[selectedIndex] && typeof list[selectedIndex].action === 'function') {
       list[selectedIndex].action();
       close();
     }
@@ -717,7 +742,8 @@ window.addEventListener('keydown', e => {
   // Desktop-only effect: skip on touch devices and for reduced-motion users.
   if (!finePointer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const ctx = canvas.getContext('2d');
-  let width, height;
+  if (!ctx) return;
+  let width = 0, height = 0;
   let trail = [];
   const maxTrail = 40;
   let raf = null;
@@ -726,8 +752,8 @@ window.addEventListener('keydown', e => {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     width = window.innerWidth;
     height = window.innerHeight;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -741,11 +767,22 @@ window.addEventListener('keydown', e => {
 
   // Pause draw loop when tab is backgrounded
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden && raf !== null) {
-      cancelAnimationFrame(raf);
-      raf = null;
+    if (document.hidden) {
+      lastPos = null;
+      if (raf !== null) {
+        cancelAnimationFrame(raf);
+        raf = null;
+      }
     }
   });
+
+  window.addEventListener('mouseout', e => {
+    if (!e.relatedTarget) lastPos = null;
+  }, { passive: true });
+
+  window.addEventListener('blur', () => {
+    lastPos = null;
+  }, { passive: true });
 
   window.addEventListener('mousemove', e => {
     const current = { x: e.clientX, y: e.clientY };
