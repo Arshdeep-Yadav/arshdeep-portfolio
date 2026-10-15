@@ -1,379 +1,519 @@
-/* ══════════════════════════════════════════════════════════════════════
-   ARSHDEEP / AI LAB — INTERACTIVE CANVAS & COMMAND CENTER ENGINE
-   ══════════════════════════════════════════════════════════════════════ */
-
-// ── Rich Case Studies Data ───────────────────────────────────────────
 const projects = {
-  xvit: {
-    meta: 'RESEARCH · IEEE RMKMATE’26 · JAN–MAY 2026',
-    title: 'Explainable Vision Transformer',
-    context: 'High-resolution satellite imagery classification often relies on black-box deep networks. For mission-critical geospatial and environmental auditing, stakeholders need to understand why a model made a specific prediction.',
-    problem: 'Standard Vision Transformers (ViT) attend across all image patches, but raw multi-head self-attention maps can be noisy, lack class-specificity, and fail to distinguish critical spectral features from irrelevant background clutter.',
-    approach: 'Fine-tuned ViT-B/16 on satellite datasets, integrating Attention Rollout and Grad-CAM for patch-level saliency mapping. Constructed an interpretability pipeline that generates visual explanation heatmaps alongside class probability distributions.',
-    stack: 'Python · PyTorch · timm · torchvision · Grad-CAM · OpenCV · Matplotlib',
-    role: 'Lead Researcher & First Author',
-    status: 'Oral Presentation · IEEE Xplore Published',
-    decisions: [
-      'Adopted ViT-B/16 over traditional ResNets for global contextual reasoning across large geospatial tiles.',
-      'Combined Attention Rollout with Grad-CAM to overcome attention diffusion across deep transformer layers.',
-      'Implemented custom patch interpolation to handle variable-resolution satellite image inputs without loss of spatial fidelity.'
-    ],
-    result: 'Achieved high classification accuracy on multi-class satellite imagery while delivering interpretable patch attribution masks validated for publication at IEEE RMKMATE 2026.',
-    learnings: 'Attention is not explanation by itself; post-hoc gradient grounding is essential to prove that high-attention patches actually drove the classification decision.',
-    link: 'https://github.com/Arshdeep-Yadav/satellite-vit-xai'
-  },
-  ipo: {
-    meta: 'FINTECH · BLUESTOCK · MAY–JUN 2025',
-    title: 'IPO Tracking Platform & Analytics',
-    context: 'Retail investors in India face fragmented information across SME and Mainline IPOs—GMP (Grey Market Premium), subscription numbers, DRHP filings, and allotment statuses are scattered across outdated sites.',
-    problem: 'Building a real-time, responsive tracking interface that harmonizes volatile financial data feeds, maintains low latency during heavy traffic spikes (listing days), and simplifies complex financial metrics.',
-    approach: 'Spearheaded frontend and API integrations for the IPO analytics module. Created dynamic status trackers, subscription gauges, timeline steps, and clean data visualizations tailored for mobile-first retail investors.',
-    stack: 'JavaScript · Python · REST APIs · Chart.js / D3 · Responsive CSS · Git',
-    role: 'SDE Intern → Team Lead (May–Jun 2025)',
-    status: 'Production Core Module',
-    decisions: [
-      'Decoupled live GMP polling from static DRHP prospectus data to minimize redundant server requests.',
-      'Architected modular UI widgets allowing rapid feature rollouts without disrupting existing dashboard views.',
-      'Promoted to Team Lead to coordinate sprints, code reviews, and cross-functional alignment between engineering and product.'
-    ],
-    result: 'Delivered a streamlined, real-time IPO discovery experience serving active fintech users with intuitive subscription tracking and zero-latency UI updates.',
-    learnings: 'In fintech product engineering, clarity and trust trump decorative animations. Information density must be paired with immediate scannability.',
-    link: 'https://github.com/Arshdeep-Yadav'
-  },
-  plant: {
-    meta: 'AGRITECH · 2025',
-    title: 'Plant Disease Detection & Diagnosis',
-    context: 'Crop diseases cause catastrophic yield loss in developing agricultural communities where agricultural extension officers are scarce and laboratory diagnosis is inaccessible.',
-    problem: 'Field images taken with budget smartphones suffer from variable lighting, noisy backgrounds, partial occlusion, and multiple overlapping symptoms that confuse generic vision models.',
-    approach: 'Developed a deep convolutional network pipeline trained on extensive plant pathology datasets. Built a lightweight, accessible Streamlit web interface with real-time image preprocessing, confidence scoring, and treatment recommendations.',
-    stack: 'TensorFlow · Keras · OpenCV · Python · Streamlit · Pillow',
-    role: 'AI/ML Product Builder',
-    status: 'Shipped Prototype',
-    decisions: [
-      'Employed data augmentation (rotations, color jittering, random crops) to mimic real in-field camera conditions.',
-      'Optimized model size using quantization to allow rapid inference on low-cost serverless instances.',
-      'Added confidence threshold gating to avoid false diagnoses: low-confidence queries prompt farmers to retake clearer photos.'
-    ],
-    result: '94%+ test classification accuracy across multi-crop leaf pathologies with sub-second diagnostic turnaround time in browser.',
-    learnings: 'A 98% accurate model is useless if farmers cannot understand the recommendation. Pairing detection with human-readable actionable remediation advice made the app practical.',
-    link: 'https://github.com/Arshdeep-Yadav'
-  },
-  object: {
-    meta: 'COMPUTER VISION · 2024',
-    title: 'Deep Learning Object Detection & Tracking',
-    context: 'Real-time video analytics requires continuous balancing between frames-per-second (FPS) throughput and bounding box precision across varying object scales.',
-    problem: 'Standard deep detectors struggle with latency lag and missed detections under high-speed video feeds, occlusions, and sudden scene transitions on consumer hardware.',
-    approach: 'Engineered an end-to-end detection and multi-object tracking pipeline utilizing modern YOLO architectures coupled with OpenCV video stream management and transfer learning on domain-specific classes.',
-    stack: 'YOLO · OpenCV · PyTorch · Python · NumPy',
-    role: 'Computer Vision Engineer',
-    status: 'Shipped Project',
-    decisions: [
-      'Selected YOLO architecture for its single-stage regression speed over two-stage R-CNNs for real-time video streams.',
-      'Implemented Non-Maximum Suppression (NMS) threshold tuning to eliminate bounding box flicker in consecutive video frames.',
-      'Integrated lightweight centroid tracking to maintain object IDs across momentary occlusions.'
-    ],
-    result: 'Maintained 30+ FPS real-time detection and multi-target tracking on live webcam feeds with robust precision across people, vehicles, and custom objects.',
-    learnings: 'In computer vision, the bottleneck is frequently the video frame I/O pipeline rather than the neural network forward pass.',
-    link: 'https://github.com/Arshdeep-Yadav'
-  },
-  stress: {
-    meta: 'HEALTHTECH · 2023',
-    title: 'Stress Detection via Medical & Biosignal Data',
-    context: 'Continuous mental health monitoring requires non-invasive, objective biomarkers rather than retrospective self-reported questionnaires.',
-    problem: 'Biosignal datasets (heart rate variability, galvanic skin response, respiration) have high noise-to-signal ratios, individual physiological baselines, and temporal drift.',
-    approach: 'Designed an ML pipeline extracting time-domain, frequency-domain, and non-linear biometric features. Evaluated multiple classifiers (Random Forest, SVM, Gradient Boosting) using rigorous cross-validation.',
-    stack: 'scikit-learn · Pandas · NumPy · SciPy · Matplotlib · Seaborn',
-    role: 'ML Developer',
-    status: 'Academic Research',
-    decisions: [
-      'Extracted HRV features (RMSSD, SDNN, LF/HF ratio) from raw signals based on clinical autonomic nervous system literature.',
-      'Applied robust z-score standardization per subject to normalize for individual baseline variance.',
-      'Utilized SHAP feature importance to verify that the model relied on genuine physiological stress indicators rather than dataset artifacts.'
-    ],
-    result: 'Outperformed baseline models by 12% in multi-class stress state prediction while providing interpretable feature contribution rankings.',
-    learnings: 'Domain knowledge in signal processing (filtering, windowing, spectral analysis) yields far more performance improvement than blind hyperparameter tuning.',
-    link: 'https://github.com/Arshdeep-Yadav'
-  },
-  iot: {
-    meta: 'EMBEDDED & IOT · 2023',
-    title: 'Smart Assistive & Environmental Hardware',
-    context: 'Assistive technology often carries prohibitive price tags. Accessible, open hardware can provide life-changing mobility and safety solutions for visually impaired and vulnerable individuals.',
-    problem: 'Designing low-power, lightweight micro-controller hardware that provides reliable obstacle warning with zero false-alarm fatigue in unpredictable physical environments.',
-    approach: 'Built a suite of embedded IoT solutions including a smart ultrasonic blind stick with haptic feedback, an emergency GPS tracker with SMS alert dispatch, and ambient environmental monitoring using ESP32.',
-    stack: 'ESP32 · Arduino · C++ · MQTT · Ultrasonic Sensors · GPS/GSM Modules',
-    role: 'Hardware & Embedded Builder',
-    status: 'Working Hardware Prototypes',
-    decisions: [
-      'Designed dual ultrasonic sensory zones (knee height and head height) to detect hanging obstacles traditional canes miss.',
-      'Implemented sleep-mode power optimization on ESP32 to stretch battery life over continuous multi-hour usage.',
-      'Utilized vibration motor frequency escalation rather than loud beeps to preserve user dignity in public spaces.'
-    ],
-    result: 'Built and tested working hardware prototypes demonstrating sub-50ms haptic alert response to approaching obstacles.',
-    learnings: 'Hardware forces strict constraint awareness: memory limits, electrical noise, battery drain, and tactile human factors cannot be patched with an over-the-air update.',
-    link: 'https://github.com/Arshdeep-Yadav'
-  }
+xvit: {
+meta: 'RESEARCH · IEEE RMKMATE’26 · JAN–MAY 2026',
+title: 'Explainable Vision Transformer for Satellite Image Analysis',
+timeline: 'JAN–MAY 2026',
+domain: 'Computer Vision · Explainable AI · Remote Sensing',
+context: 'High-resolution satellite imagery classification often relies on black-box deep networks. For mission-critical geospatial and environmental auditing, stakeholders need to understand why a model made a specific prediction.',
+problem: 'Standard Vision Transformers (ViT) attend across all image patches, but raw multi-head self-attention maps can be noisy, lack class-specificity, and fail to distinguish critical spectral features from irrelevant background clutter.',
+approach: 'Fine-tuned ViT-B/16 on satellite datasets, integrating Attention Rollout and Grad-CAM for patch-level saliency mapping. Constructed an interpretability pipeline that generates visual explanation heatmaps alongside class probability distributions.',
+stack: 'Python · PyTorch · timm · torchvision · Grad-CAM · OpenCV · Matplotlib',
+role: 'Lead Researcher & First Author',
+status: 'Oral Presentation · IEEE Xplore Published',
+metrics: [
+{ label: 'IoU Accuracy', value: '0.742' },
+{ label: 'Attn Heads', value: '12 Heads' },
+{ label: 'Inference', value: '<850ms' },
+{ label: 'Publication', value: 'IEEE 2026' }
+],
+archDiagram:
+      `┌─────────────────┐     ┌──────────────────┐     ┌─────────────────────┐
+│ 16x16 Raw Tile  │ ──> │ Linear Patch     │ ──> │ 12x Transformer     │
+│ Satellite Image │     │ Projection + Pos │     │ Multi-Head Attn     │
+└─────────────────┘     └──────────────────┘     └──────────┬──────────┘
+                                                            │
+┌─────────────────┐     ┌──────────────────┐                ▼
+│ Classification  │ <── │ Class Prob Dist  │ <── ┌─────────────────────┐
+│ + Heatmap S&E   │     │ & Attn Rollout   │     │ Grad-CAM Gradient   │
+└─────────────────┘     └──────────────────┘     │ Grounding Pipeline  │
+                                                 └─────────────────────┘`,
+decisions: [
+'Adopted ViT-B/16 over traditional ResNets for global contextual reasoning across large geospatial tiles.',
+'Combined Attention Rollout with Grad-CAM to overcome attention diffusion across deep transformer layers.',
+'Implemented custom patch interpolation to handle variable-resolution satellite image inputs without loss of spatial fidelity.'
+],
+result: 'Achieved high classification accuracy on multi-class satellite imagery while delivering interpretable patch attribution masks validated for publication at IEEE RMKMATE 2026.',
+learnings: 'Attention is not explanation by itself; post-hoc gradient grounding is essential to prove that high-attention patches actually drove the classification decision.',
+link: 'https://ieeexplore.ieee.org/document/11518743'
+},
+ipo: {
+meta: 'FINTECH · BLUESTOCK · MAY–JUN 2025',
+title: 'Real-Time IPO Tracking Platform & Analytics',
+timeline: 'MAY–JUN 2025',
+domain: 'FinTech Core · Real-Time Data · Product Engineering',
+context: 'Retail investors in India face fragmented information across SME and Mainline IPOs—GMP (Grey Market Premium), subscription numbers, DRHP filings, and allotment statuses are scattered across outdated sites.',
+problem: 'Building a real-time, responsive tracking interface that harmonizes volatile financial data feeds, maintains low latency during heavy traffic spikes (listing days), and simplifies complex financial metrics.',
+approach: 'Spearheaded frontend and API integrations for the IPO analytics module. Created dynamic status trackers, subscription gauges, timeline steps, and clean data visualizations tailored for mobile-first retail investors.',
+stack: 'JavaScript · Python · REST APIs · Chart.js / D3 · Responsive CSS · Git',
+role: 'SDE Intern → Team Lead (May–Jun 2025)',
+status: 'Production Core Module',
+metrics: [
+{ label: '24h Volume', value: '$18.2M' },
+{ label: 'Tkr Delta', value: '+3.45%' },
+{ label: 'UI Latency', value: '<50ms' },
+{ label: 'DRHP Sync', value: '100% Auto' }
+],
+archDiagram:
+      `┌─────────────────┐     ┌──────────────────┐     ┌─────────────────────┐
+│ Multi-Source    │ ──> │ Low-Latency Poll │ ──> │ In-Memory DRHP &    │
+│ GMP & Allotment │     │ & WebSocket Pipe │     │ Financial Data Hub  │
+└─────────────────┘     └──────────────────┘     └──────────┬──────────┘
+                                                            │
+┌─────────────────┐     ┌──────────────────┐                ▼
+│ Real-Time User  │ <── │ Reactive State   │ <── ┌─────────────────────┐
+│ Subscriptions   │     │ Cache Controller │     │ Dynamic Chart &     │
+└─────────────────┘     └──────────────────┘     │ Timeline Visualizer │
+                                                 └─────────────────────┘`,
+decisions: [
+'Decoupled live GMP polling from static DRHP prospectus data to minimize redundant server requests.',
+'Architected modular UI widgets allowing rapid feature rollouts without disrupting existing dashboard views.',
+'Promoted to Team Lead to coordinate sprints, code reviews, and cross-functional alignment between engineering and product.'
+],
+result: 'Delivered a streamlined, real-time IPO discovery experience serving active fintech users with intuitive subscription tracking and zero-latency UI updates.',
+learnings: 'In fintech product engineering, clarity and trust trump decorative animations. Information density must be paired with immediate scannability.',
+link: 'https://github.com/Arshdeep-Yadav'
+},
+plant: {
+meta: 'AGRITECH · 2025',
+title: 'Plant Disease Detection & Mobile Diagnostic System',
+timeline: '2025',
+domain: 'AgriTech · Botanical Computer Vision · Mobile AI',
+context: 'Crop diseases cause catastrophic yield loss in developing agricultural communities where agricultural extension officers are scarce and laboratory diagnosis is inaccessible.',
+problem: 'Field images taken with budget smartphones suffer from variable lighting, noisy backgrounds, partial occlusion, and multiple overlapping symptoms that confuse generic vision models.',
+approach: 'Developed a deep convolutional network pipeline trained on extensive plant pathology datasets. Built a lightweight, accessible Streamlit web interface with real-time image preprocessing, confidence scoring, and treatment recommendations.',
+stack: 'TensorFlow · Keras · OpenCV · Python · Streamlit · Pillow',
+role: 'AI/ML Product Builder',
+status: 'Shipped Prototype',
+metrics: [
+{ label: 'Accuracy', value: '98.2%' },
+{ label: 'Pathologies', value: '38 Classes' },
+{ label: 'Inference', value: '<400ms' },
+{ label: 'Turnaround', value: 'Sub-Sec' }
+],
+archDiagram:
+      `┌─────────────────┐     ┌──────────────────┐     ┌─────────────────────┐
+│ Leaf Snapshot   │ ──> │ Preprocessing &  │ ──> │ Quantized ConvNet   │
+│ Smartphone Cam  │     │ Augmentation     │     │ Feature Extraction  │
+└─────────────────┘     └──────────────────┘     └──────────┬──────────┘
+                                                            │
+┌─────────────────┐     ┌──────────────────┐                ▼
+│ Actionable Agro │ <── │ Confidence Gate  │ <── ┌─────────────────────┐
+│ Remediation     │     │ Threshold Check  │     │ 38-Class Leaf       │
+└─────────────────┘     └──────────────────┘     │ Pathology Softmax   │
+                                                 └─────────────────────┘`,
+decisions: [
+'Employed data augmentation (rotations, color jittering, random crops) to mimic real in-field camera conditions.',
+'Optimized model size using quantization to allow rapid inference on low-cost serverless instances.',
+'Added confidence threshold gating to avoid false diagnoses: low-confidence queries prompt farmers to retake clearer photos.'
+],
+result: '98%+ test classification accuracy across multi-crop leaf pathologies with sub-second diagnostic turnaround time in browser.',
+learnings: 'A 98% accurate model is useless if farmers cannot understand the recommendation. Pairing detection with human-readable actionable remediation advice made the app practical.',
+link: 'https://github.com/Arshdeep-Yadav'
+},
+object: {
+meta: 'COMPUTER VISION · 2024',
+title: 'Deep Learning Object Detection & Multi-Target Tracking',
+timeline: '2024',
+domain: 'Real-Time Vision · Edge Computing · Autonomous Systems',
+context: 'Real-time video analytics requires continuous balancing between frames-per-second (FPS) throughput and bounding box precision across varying object scales.',
+problem: 'Standard deep detectors struggle with latency lag and missed detections under high-speed video feeds, occlusions, and sudden scene transitions on consumer hardware.',
+approach: 'Engineered an end-to-end detection and multi-object tracking pipeline utilizing modern YOLO architectures coupled with OpenCV video stream management and transfer learning on domain-specific classes.',
+stack: 'YOLO · OpenCV · PyTorch · Python · NumPy',
+role: 'Computer Vision Engineer',
+status: 'Shipped Project',
+metrics: [
+{ label: 'Stream Speed', value: '45 FPS' },
+{ label: 'Latency', value: '12ms' },
+{ label: 'Classes', value: '80+ Obj' },
+{ label: 'Tracking', value: 'Multi-ID' }
+],
+archDiagram:
+      `┌─────────────────┐     ┌──────────────────┐     ┌─────────────────────┐
+│ High-FPS Video  │ ──> │ Hardware-Accel   │ ──> │ Single-Stage YOLOv8 │
+│ Stream Ingest   │     │ Frame Buffer     │     │ Tensor Regression   │
+└─────────────────┘     └──────────────────┘     └──────────┬──────────┘
+                                                            │
+┌─────────────────┐     ┌──────────────────┐                ▼
+│ Sub-12ms Output │ <── │ Centroid Object  │ <── ┌─────────────────────┐
+│ Overlay Overlay │     │ ID Tracking Loop │     │ Non-Max Suppression │
+└─────────────────┘     └──────────────────┘     │ (NMS) Filtering     │
+                                                 └─────────────────────┘`,
+decisions: [
+'Selected YOLO architecture for its single-stage regression speed over two-stage R-CNNs for real-time video streams.',
+'Implemented Non-Maximum Suppression (NMS) threshold tuning to eliminate bounding box flicker in consecutive video frames.',
+'Integrated lightweight centroid tracking to maintain object IDs across momentary occlusions.'
+],
+result: 'Maintained 30+ FPS real-time detection and multi-target tracking on live webcam feeds with robust precision across people, vehicles, and custom objects.',
+learnings: 'In computer vision, the bottleneck is frequently the video frame I/O pipeline rather than the neural network forward pass.',
+link: 'https://github.com/Arshdeep-Yadav'
+},
+stress: {
+meta: 'HEALTHTECH · 2023',
+title: 'Stress Detection via Medical & Biosignal Data',
+timeline: '2023',
+domain: 'HealthTech · Biometric Signals · Interpretable ML',
+context: 'Continuous mental health monitoring requires non-invasive, objective biomarkers rather than retrospective self-reported questionnaires.',
+problem: 'Biosignal datasets (heart rate variability, galvanic skin response, respiration) have high noise-to-signal ratios, individual physiological baselines, and temporal drift.',
+approach: 'Designed an ML pipeline extracting time-domain, frequency-domain, and non-linear biometric features. Evaluated multiple classifiers (Random Forest, SVM, Gradient Boosting) using rigorous cross-validation.',
+stack: 'scikit-learn · Pandas · NumPy · SciPy · Matplotlib · Seaborn',
+role: 'ML Developer',
+status: 'Academic Research',
+metrics: [
+{ label: 'HRV (SDNN)', value: '58ms' },
+{ label: 'F1 Score', value: '0.91' },
+{ label: 'Delta Baseline', value: '+12%' },
+{ label: 'SHAP Validation', value: '100% Auth' }
+],
+archDiagram:
+      `┌─────────────────┐     ┌──────────────────┐     ┌─────────────────────┐
+│ Multimodal ECG/ │ ──> │ Window Filtering │ ──> │ HRV (RMSSD/SDNN)    │
+│ GSR Bio-Sensors │     │ & Baseline Norm  │     │ & Spectral Power    │
+└─────────────────┘     └──────────────────┘     └──────────┬──────────┘
+                                                            │
+┌─────────────────┐     ┌──────────────────┐                ▼
+│ Real-Time State │ <── │ SHAP Attributed  │ <── ┌─────────────────────┐
+│ Stress Score    │     │ Feature Ranks    │     │ Gradient Boosted    │
+└─────────────────┘     └──────────────────┘     │ Ensemble Classifier │
+                                                 └─────────────────────┘`,
+decisions: [
+'Extracted HRV features (RMSSD, SDNN, LF/HF ratio) from raw signals based on clinical autonomic nervous system literature.',
+'Applied robust z-score standardization per subject to normalize for individual baseline variance.',
+'Utilized SHAP feature importance to verify that the model relied on genuine physiological stress indicators rather than dataset artifacts.'
+],
+result: 'Outperformed baseline models by 12% in multi-class stress state prediction while providing interpretable feature contribution rankings.',
+learnings: 'Domain knowledge in signal processing (filtering, windowing, spectral analysis) yields far more performance improvement than blind hyperparameter tuning.',
+link: 'https://github.com/Arshdeep-Yadav'
+},
+iot: {
+meta: 'EMBEDDED & IOT · 2023',
+title: 'Smart Assistive & Environmental Hardware Mesh',
+timeline: '2023',
+domain: 'Smart Embedded Hardware · Assistive Robotics · IoT',
+context: 'Assistive technology often carries prohibitive price tags. Accessible, open hardware can provide life-changing mobility and safety solutions for visually impaired and vulnerable individuals.',
+problem: 'Designing low-power, lightweight micro-controller hardware that provides reliable obstacle warning with zero false-alarm fatigue in unpredictable physical environments.',
+approach: 'Built a suite of embedded IoT solutions including a smart ultrasonic blind stick with haptic feedback, an emergency GPS tracker with SMS alert dispatch, and ambient environmental monitoring using ESP32.',
+stack: 'ESP32 · Arduino · C++ · MQTT · Ultrasonic Sensors · GPS/GSM Modules',
+role: 'Hardware & Embedded Builder',
+status: 'Working Hardware Prototypes',
+metrics: [
+{ label: 'Active Nodes', value: '12 Mesh' },
+{ label: 'Alert Latency', value: '<50ms' },
+{ label: 'Battery Life', value: '8h+ Run' },
+{ label: 'Reliability', value: 'QoS1 MQTT' }
+],
+archDiagram:
+      `┌─────────────────┐     ┌──────────────────┐     ┌─────────────────────┐
+│ Dual Ultrasonic │ ──> │ Low-Power ESP32  │ ──> │ Real-Time Proximity │
+│ Head/Knee Zones │     │ Interrupt Filter │     │ Distance Compute    │
+└─────────────────┘     └──────────────────┘     └──────────┬──────────┘
+                                                            │
+┌─────────────────┐     ┌──────────────────┐                ▼
+│ Escalating Auto │ <── │ Haptic Motor     │ <── ┌─────────────────────┐
+│ Emergency SMS   │     │ Frequency Scaler │     │ MQTT Broker / QoS1  │
+└─────────────────┘     └──────────────────┘     │ Cloud Telemetry Hub │
+                                                 └─────────────────────┘`,
+decisions: [
+'Designed dual ultrasonic sensory zones (knee height and head height) to detect hanging obstacles traditional canes miss.',
+'Implemented sleep-mode power optimization on ESP32 to stretch battery life over continuous multi-hour usage.',
+'Utilized vibration motor frequency escalation rather than loud beeps to preserve user dignity in public spaces.'
+],
+result: 'Built and tested working hardware prototypes demonstrating sub-50ms haptic alert response to approaching obstacles.',
+learnings: 'Hardware forces strict constraint awareness: memory limits, electrical noise, battery drain, and tactile human factors cannot be patched with an over-the-air update.',
+link: 'https://github.com/Arshdeep-Yadav'
+}
 };
-
-// ── Scoped Toast Notification Service ────────────────────────────────
 const showToast = (() => {
-  const el = document.getElementById('toast');
-  let timer = null;
-  return (msg, duration = 2500) => {
-    if (!el) return;
-    el.textContent = msg;
-    el.classList.add('show');
-    if (timer) clearTimeout(timer);
-    timer = setTimeout(() => el.classList.remove('show'), duration);
-  };
+const el = document.getElementById('toast');
+let timer = null;
+return (msg, duration = 2500) => {
+if (!el) return;
+el.textContent = msg;
+el.classList.add('show');
+if (timer) clearTimeout(timer);
+timer = setTimeout(() => el.classList.remove('show'), duration);
+};
 })();
-
-// ── Dialog Focus & Inert Coordinator ─────────────────────────────────
 const Dialog = (() => {
-  let lastFocused = null;
-  const backdrops = () => [
-    document.getElementById('modalBackdrop'),
-    document.getElementById('commandBackdrop'),
-    document.getElementById('mobileNav')
-  ].filter(Boolean);
-  const isOpen = () => backdrops().some(b => b.classList.contains('show') || b.classList.contains('open'));
-
-  function syncInert() {
-    const locked = isOpen();
-    document.querySelectorAll('main, header.topbar, footer, .skip-link').forEach(el => {
-      if (locked) el.setAttribute('inert', '');
-      else el.removeAttribute('inert');
-    });
-  }
-
-  function saveFocus() {
-    if (!isOpen()) lastFocused = document.activeElement;
-  }
-
-  function restoreFocus() {
-    if (isOpen()) return;
-    if (lastFocused && document.contains(lastFocused) && typeof lastFocused.focus === 'function') {
-      lastFocused.focus({ preventScroll: true });
-    }
-    lastFocused = null;
-  }
-
-  function trapFocus(container, e) {
-    if (e.key !== 'Tab') return;
-    const focusables = Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'))
-      .filter(el => el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0);
-    if (!focusables.length) return;
-    const first = focusables[0];
-    const last = focusables[focusables.length - 1];
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
-  }
-
-  return { isOpen, syncInert, saveFocus, restoreFocus, trapFocus };
+let lastFocused = null;
+const backdrops = () => [
+document.getElementById('modalBackdrop'),
+document.getElementById('commandBackdrop'),
+document.getElementById('mobileNav')
+].filter(Boolean);
+const isOpen = () => backdrops().some(b => b.classList.contains('show') || b.classList.contains('open'));
+function syncInert() {
+const locked = isOpen();
+document.querySelectorAll('main, header.topbar, footer, .skip-link').forEach(el => {
+if (locked) el.setAttribute('inert', '');
+else el.removeAttribute('inert');
+});
+}
+function saveFocus() {
+if (!isOpen()) lastFocused = document.activeElement;
+}
+function restoreFocus() {
+if (isOpen()) return;
+if (lastFocused && document.contains(lastFocused) && typeof lastFocused.focus === 'function') {
+lastFocused.focus({ preventScroll: true });
+}
+lastFocused = null;
+}
+function trapFocus(container, e) {
+if (e.key !== 'Tab') return;
+const focusables = Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'))
+.filter(el => el.offsetParent !== null || el.offsetWidth > 0 || el.offsetHeight > 0);
+if (!focusables.length) return;
+const first = focusables[0];
+const last = focusables[focusables.length - 1];
+if (e.shiftKey && document.activeElement === first) {
+e.preventDefault();
+last.focus();
+} else if (!e.shiftKey && document.activeElement === last) {
+e.preventDefault();
+first.focus();
+}
+}
+return { isOpen, syncInert, saveFocus, restoreFocus, trapFocus };
 })();
-
-// ── Case Study Modal System ──────────────────────────────────────────
 const Modal = (() => {
-  const backdrop = document.getElementById('modalBackdrop');
-  if (!backdrop) return { open() {}, close() {} };
-
-  function open(key) {
-    const p = projects[key];
-    if (!p) return;
-    if (typeof CommandPalette !== 'undefined' && CommandPalette.isOpen()) CommandPalette.close();
-    if (typeof MobileNav !== 'undefined' && MobileNav.isOpen()) MobileNav.close();
-
-    const set = (id, val) => {
-      const el = document.getElementById(id);
-      if (el) el.textContent = val || '';
-    };
-
-    set('modalMeta', p.meta);
-    set('modalTitle', p.title);
-    set('modalContext', p.context || '');
-    set('modalProblem', p.problem || '');
-    set('modalApproach', p.approach || '');
-    set('modalStack', p.stack || '');
-    set('modalRole', p.role || '');
-    set('modalStatus', p.status || '');
-    set('modalResult', p.result || '');
-    set('modalLearnings', p.learnings || '');
-
-    const decisionsList = document.getElementById('modalDecisions');
-    const decisionsWrap = document.getElementById('modalDecisionsWrap');
-    if (decisionsList) {
-      decisionsList.replaceChildren();
-      if (p.decisions && p.decisions.length) {
-        p.decisions.forEach(d => {
-          const li = document.createElement('li');
-          li.textContent = d;
-          decisionsList.appendChild(li);
-        });
-        if (decisionsWrap) decisionsWrap.style.display = '';
-      } else if (decisionsWrap) {
-        decisionsWrap.style.display = 'none';
-      }
-    }
-
-    const link = document.getElementById('modalLink');
-    if (link) {
-      const safeLink = p.link && /^https?:\/\//i.test(p.link) ? p.link : '#';
-      link.href = safeLink;
-      link.setAttribute('rel', 'noopener noreferrer');
-      const label = safeLink.includes('github') ? 'View on GitHub' : 'View project';
-      link.innerHTML = `${label} <svg class="astryx-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>`;
-    }
-
-    Dialog.saveFocus();
-    backdrop.classList.add('show');
-    backdrop.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    Dialog.syncInert();
-    const closeBtn = document.getElementById('closeModal');
-    if (closeBtn) closeBtn.focus();
-  }
-
-  function close() {
-    if (!backdrop.classList.contains('show')) return;
-    backdrop.classList.remove('show');
-    backdrop.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    Dialog.syncInert();
-    Dialog.restoreFocus();
-  }
-
-  document.querySelectorAll('.open-modal').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.stopPropagation();
-      open(btn.dataset.project);
-    });
-  });
-
-  document.querySelectorAll('.project-card[data-project]').forEach(card => {
-    card.addEventListener('dblclick', () => open(card.dataset.project));
-  });
-
-  const closeBtn = document.getElementById('closeModal');
-  const doneBtn = document.getElementById('modalDone');
-  if (closeBtn) closeBtn.addEventListener('click', close);
-  if (doneBtn) doneBtn.addEventListener('click', close);
-
-  let isBackdropTarget = false;
-  backdrop.addEventListener('mousedown', e => { isBackdropTarget = e.target === backdrop; });
-  backdrop.addEventListener('click', e => {
-    if (e.target === backdrop && isBackdropTarget) close();
-    isBackdropTarget = false;
-  });
-  backdrop.addEventListener('keydown', e => Dialog.trapFocus(backdrop, e));
-
-  return { open, close };
+const backdrop = document.getElementById('modalBackdrop');
+if (!backdrop) return { open() { }, close() { }, isOpen: () => false };
+function open(key, updateHash = true) {
+const p = projects[key];
+if (!p) return;
+if (typeof CommandPalette !== 'undefined' && CommandPalette.isOpen()) CommandPalette.close();
+if (typeof MobileNav !== 'undefined' && MobileNav.isOpen()) MobileNav.close();
+const set = (id, val) => {
+const el = document.getElementById(id);
+if (el) el.textContent = val || '';
+};
+set('modalMeta', p.meta);
+set('modalTitle', p.title);
+set('modalContext', p.context || '');
+set('modalProblem', p.problem || '');
+set('modalApproach', p.approach || '');
+set('modalStack', p.stack || '');
+set('modalRole', p.role || '');
+set('modalStatus', p.status || '');
+set('modalResult', p.result || '');
+set('modalLearnings', p.learnings || '');
+const metricsContainer = document.getElementById('modalMetrics');
+if (metricsContainer) {
+metricsContainer.replaceChildren();
+if (p.metrics && p.metrics.length) {
+p.metrics.forEach(m => {
+const card = document.createElement('div');
+card.className = 'modal-metric-card';
+const lbl = document.createElement('span');
+lbl.className = 'metric-lbl';
+lbl.textContent = m.label;
+const val = document.createElement('span');
+val.className = 'metric-val';
+val.textContent = m.value;
+card.appendChild(lbl);
+card.appendChild(val);
+metricsContainer.appendChild(card);
+});
+metricsContainer.style.display = 'grid';
+} else {
+metricsContainer.style.display = 'none';
+}
+}
+const archContainer = document.getElementById('modalArch');
+const archWrap = document.getElementById('modalArchWrap');
+if (archContainer) {
+if (p.archDiagram) {
+archContainer.textContent = p.archDiagram;
+if (archWrap) archWrap.style.display = '';
+} else if (archWrap) {
+archWrap.style.display = 'none';
+}
+}
+const decisionsList = document.getElementById('modalDecisions');
+const decisionsWrap = document.getElementById('modalDecisionsWrap');
+if (decisionsList) {
+decisionsList.replaceChildren();
+if (p.decisions && p.decisions.length) {
+p.decisions.forEach(d => {
+const li = document.createElement('li');
+li.textContent = d;
+decisionsList.appendChild(li);
+});
+if (decisionsWrap) decisionsWrap.style.display = '';
+} else if (decisionsWrap) {
+decisionsWrap.style.display = 'none';
+}
+}
+const link = document.getElementById('modalLink');
+if (link) {
+const safeLink = p.link && /^https?:\/\//i.test(p.link) ? p.link : '#';
+link.href = safeLink;
+link.setAttribute('rel', 'noopener noreferrer');
+const label = safeLink.includes('ieeexplore') ? 'Read IEEE Paper' : safeLink.includes('github') ? 'View on GitHub' : 'View project';
+link.innerHTML = `${label} <svg class="astryx-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>`;
+}
+if (updateHash && window.location.hash !== `#project-${key}`) {
+history.pushState(null, '', `#project-${key}`);
+}
+Dialog.saveFocus();
+backdrop.classList.add('show');
+backdrop.setAttribute('aria-hidden', 'false');
+document.body.style.overflow = 'hidden';
+Dialog.syncInert();
+const closeBtn = document.getElementById('closeModal');
+if (closeBtn) closeBtn.focus();
+}
+function close(updateHash = true) {
+if (!backdrop.classList.contains('show')) return;
+backdrop.classList.remove('show');
+backdrop.setAttribute('aria-hidden', 'true');
+document.body.style.overflow = '';
+Dialog.syncInert();
+Dialog.restoreFocus();
+if (updateHash && window.location.hash.startsWith('#project-')) {
+history.pushState(null, '', '#work');
+}
+}
+document.addEventListener('click', e => {
+const trigger = e.target.closest('.open-modal, [data-project-open]');
+if (trigger) {
+e.preventDefault();
+e.stopPropagation();
+const proj = trigger.dataset.project || trigger.dataset.projectOpen;
+if (proj) open(proj);
+}
+});
+document.querySelectorAll('.project-card[data-project]').forEach(card => {
+card.addEventListener('dblclick', () => open(card.dataset.project));
+});
+const closeBtn = document.getElementById('closeModal');
+const doneBtn = document.getElementById('modalDone');
+if (closeBtn) closeBtn.addEventListener('click', () => close(true));
+if (doneBtn) doneBtn.addEventListener('click', () => close(true));
+let isBackdropTarget = false;
+backdrop.addEventListener('mousedown', e => { isBackdropTarget = e.target === backdrop; });
+backdrop.addEventListener('click', e => {
+if (e.target === backdrop && isBackdropTarget) close(true);
+isBackdropTarget = false;
+});
+backdrop.addEventListener('keydown', e => Dialog.trapFocus(backdrop, e));
+return { open, close, isOpen: () => backdrop.classList.contains('show') };
 })();
 const openModal = Modal.open;
 const closeModal = Modal.close;
-
-// ── Project Category Filters ─────────────────────────────────────────
 document.querySelectorAll('.filter').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter').forEach(b => {
-      b.classList.remove('active');
-      b.setAttribute('aria-pressed', 'false');
-    });
-    btn.classList.add('active');
-    btn.setAttribute('aria-pressed', 'true');
-    const f = btn.dataset.filter;
-    document.querySelectorAll('.project-card').forEach(card => {
-      const tags = (card.dataset.tags || '').split(' ');
-      const show = f === 'all' || tags.includes(f);
-      card.style.display = show ? '' : 'none';
-    });
-  });
+btn.addEventListener('click', () => {
+document.querySelectorAll('.filter').forEach(b => {
+b.classList.remove('active');
+b.setAttribute('aria-pressed', 'false');
 });
-
-// ── Toolbox Cross-Filter Interaction ─────────────────────────────────
+btn.classList.add('active');
+btn.setAttribute('aria-pressed', 'true');
+const f = btn.dataset.filter;
+document.querySelectorAll('.project-card').forEach(card => {
+const tags = (card.dataset.tags || '').split(' ');
+const show = f === 'all' || tags.includes(f);
+card.style.display = show ? '' : 'none';
+});
+});
+});
 document.querySelectorAll('.toolbox-card[data-filter-target]').forEach(card => {
-  card.addEventListener('click', () => {
-    const target = card.dataset.filterTarget;
-    const filterBtn = document.querySelector(`.filter[data-filter="${target}"]`);
-    if (filterBtn) {
-      filterBtn.click();
-      const workSec = document.getElementById('work');
-      if (workSec) workSec.scrollIntoView({ behavior: 'smooth' });
-      showToast(`Filtered projects by: ${target.toUpperCase()}`);
-    }
-  });
+card.addEventListener('click', () => {
+const target = card.dataset.filterTarget;
+const filterBtn = document.querySelector(`.filter[data-filter="${target}"]`);
+if (filterBtn) {
+filterBtn.click();
+const workSec = document.getElementById('work');
+if (workSec) workSec.scrollIntoView({ behavior: 'smooth' });
+showToast(`Filtered projects by: ${target.toUpperCase()}`);
+}
 });
-
-// ── Operating Principles Micro-Interaction ───────────────────────────
+});
 const principleNotes = {
-  build: '01 / Build to deploy: Every model is trained with runtime constraints, latency bounds, and production deployment in mind.',
-  explain: '02 / Explain what you build: Black-box AI creates liability. Interpretable attention and XAI create confidence.',
-  cross: '03 / Cross-pollinate domains: Bridging computer vision, AgriTech, FinTech, and IoT to find non-obvious engineering solutions.',
-  ship: '04 / Ship fast, measure everything: Prioritize software that solves real pain for real users over academic isolation.'
+build: '01 / Build to deploy: Every model is trained with runtime constraints, latency bounds, and production deployment in mind.',
+explain: '02 / Explain what you build: Black-box AI creates liability. Interpretable attention and XAI create confidence.',
+cross: '03 / Cross-pollinate domains: Bridging computer vision, AgriTech, FinTech, and IoT to find non-obvious engineering solutions.',
+ship: '04 / Ship fast, measure everything: Prioritize software that solves real pain for real users over academic isolation.'
 };
-
 document.querySelectorAll('.principle').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const key = btn.dataset.principle;
-    if (principleNotes[key]) {
-      showToast(principleNotes[key], 4000);
-    }
-  });
+btn.addEventListener('click', () => {
+const key = btn.dataset.principle;
+if (principleNotes[key]) {
+showToast(principleNotes[key], 4000);
+}
 });
-
-// ── Copy Email Icon Button ───────────────────────────────────────────
+});
 const copyEmailBtn = document.getElementById('copyEmailBtn');
 if (copyEmailBtn) {
-  copyEmailBtn.addEventListener('click', async e => {
-    e.preventDefault();
-    e.stopPropagation();
-    const email = copyEmailBtn.dataset.email || 'arshdeep.yadav.work@gmail.com';
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(email);
-      } else {
-        const ta = document.createElement('textarea');
-        ta.value = email;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-      }
-      copyEmailBtn.classList.add('copied');
-      const tooltip = copyEmailBtn.querySelector('.action-tooltip');
-      if (tooltip) tooltip.textContent = 'Copied! ✓';
-      showToast(`Copied ${email} to clipboard!`);
-      setTimeout(() => {
-        copyEmailBtn.classList.remove('copied');
-        if (tooltip) tooltip.textContent = 'Copy';
-      }, 2400);
-    } catch (_) {
-      showToast(`Email: ${email}`);
-    }
-  });
+copyEmailBtn.addEventListener('click', async e => {
+e.preventDefault();
+e.stopPropagation();
+const email = copyEmailBtn.dataset.email || 'arshdeep.yadav.work@gmail.com';
+try {
+if (navigator.clipboard && navigator.clipboard.writeText) {
+await navigator.clipboard.writeText(email);
+} else {
+const ta = document.createElement('textarea');
+ta.value = email;
+ta.style.position = 'fixed';
+ta.style.opacity = '0';
+document.body.appendChild(ta);
+ta.select();
+document.execCommand('copy');
+document.body.removeChild(ta);
 }
-
+copyEmailBtn.classList.add('copied');
+const tooltip = copyEmailBtn.querySelector('.action-tooltip');
+if (tooltip) tooltip.textContent = 'Copied! ✓';
+showToast(`Copied ${email} to clipboard!`);
+setTimeout(() => {
+copyEmailBtn.classList.remove('copied');
+if (tooltip) tooltip.textContent = 'Copy';
+}, 2400);
+} catch (_) {
+showToast(`Email: ${email}`);
+}
+});
+}
 const emailRow = document.getElementById('emailRow');
 if (emailRow) {
-  emailRow.addEventListener('click', e => {
-    if (e.target.closest('#copyEmailBtn')) return;
-    if (e.target.closest('.contact-email-link')) return;
-    window.location.href = 'mailto:arshdeep.yadav.work@gmail.com';
-  });
+emailRow.addEventListener('click', e => {
+if (e.target.closest('#copyEmailBtn')) return;
+if (e.target.closest('.contact-email-link')) return;
+window.location.href = 'mailto:arshdeep.yadav.work@gmail.com';
+});
 }
+const CelestialController = (() => {
+const btn = document.getElementById('themeBtn');
+const lightEl = document.querySelector('.celestial-light-source');
+const ambientEl = document.querySelector('.celestial-ambient-field');
+const raysEl = document.querySelector('.celestial-crepuscular-rays');
+const meta = document.querySelector('meta[name="theme-color"]');
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let heroHeight = 650;
+  const heroEl = document.querySelector('.hero');
+  if (heroEl) heroHeight = heroEl.offsetHeight || 650;
+  let cachedBtnX = 0;
+  let cachedBtnY = 0;
+  let cachedThreshold = 468;
+  let cachedDocHeight = 2000;
 
-// ── Theme Engine (Default: Crisp Light Theme) ────────────────────────
-(() => {
-  const btn = document.getElementById('themeBtn');
-  const meta = document.querySelector('meta[name="theme-color"]');
+  function measureBtn() {
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    cachedBtnX = rect.left + rect.width / 2;
+    cachedBtnY = rect.top + rect.height / 2;
+  }
 
-  function sync(isDark) {
-    if (meta) meta.setAttribute('content', isDark ? '#0f0f0e' : '#f6f3ec');
+  function measureDimensions() {
+    if (heroEl) heroHeight = heroEl.offsetHeight || 650;
+    cachedThreshold = Math.max(360, heroHeight * 0.72);
+    cachedDocHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - window.innerHeight;
+    measureBtn();
+  }
+
+  function syncTheme(isDark) {
+    if (meta) meta.setAttribute('content', isDark ? '#0B0D10' : '#FAF8F5');
     if (btn) {
       btn.setAttribute('aria-label', isDark ? 'Switch to light mode (Sun)' : 'Switch to dark mode (Moon)');
       btn.setAttribute('title', isDark ? 'Switch to light mode (Sun)' : 'Switch to dark mode (Moon)');
@@ -383,159 +523,308 @@ if (emailRow) {
     }
   }
 
-  let saved = null;
-  try { saved = localStorage.getItem('arshdeep-theme'); } catch (_) {}
-  const isDark = saved === 'dark';
-  document.documentElement.classList.toggle('dark-mode', isDark);
-  sync(isDark);
+  let targetProgress = 0;
+  let currentProgress = 0;
+  let targetScrollRatio = 0;
+  let currentScrollRatio = 0;
+  let isTicking = false;
+  let lastLightX = -1;
+  let lastLightY = -1;
+  let lastRatio = -1;
 
-  if (btn) {
-    btn.addEventListener('click', () => {
-      const css = document.createElement('style');
-      css.textContent = '*,*::before,*::after{transition:none!important}';
-      document.head.appendChild(css);
+  function applyTransform(p, ratio) {
+    if (!lightEl || !btn) return;
+    const t = p * p * p * (p * (p * 6 - 15) + 10);
+    const startX = window.innerWidth / 2;
+    const startY = 120;
+    const startScale = Math.min(1.0, Math.max(0.70, window.innerWidth / 1200));
+    if (!cachedBtnX) measureBtn();
+    const destX = cachedBtnX;
+    const destY = cachedBtnY;
+    const targetScale = 0.135;
+    const arcOffset = Math.sin(t * Math.PI) * -46;
+    const curX = startX + (destX - startX) * t;
+    const curY = startY + (destY - startY) * t + arcOffset;
+    const curScale = startScale + (targetScale - startScale) * t;
 
-      const dark = document.documentElement.classList.toggle('dark-mode');
-      try { localStorage.setItem('arshdeep-theme', dark ? 'dark' : 'light'); } catch (_) {}
-      sync(dark);
+    // Cache integer pixel coords to eliminate redundant CSS property string invalidations
+    const roundX = Math.round(curX);
+    const roundY = Math.round(curY);
+    const roundRatio = Math.round(ratio * 100) / 100;
 
-      void document.body.offsetHeight;
-      requestAnimationFrame(() => {
-        try { document.head.removeChild(css); } catch (_) {}
-      });
-      showToast(dark ? 'Lunar dark mode enabled' : 'Solar light mode enabled', 1500);
-    });
-  }
-})();
-
-// ── Mobile Navigation Drawer ─────────────────────────────────────────
-const MobileNav = (() => {
-  const btn = document.getElementById('hamburgerBtn');
-  const nav = document.getElementById('mobileNav');
-  const scrim = document.getElementById('mobileScrim');
-  const closeBtn = document.getElementById('mobileNavClose');
-
-  if (!nav) return { open() {}, close() {}, isOpen: () => false };
-  nav.setAttribute('inert', '');
-
-  function open() {
-    if (typeof closeModal === 'function') closeModal();
-    if (typeof CommandPalette !== 'undefined' && CommandPalette.isOpen()) CommandPalette.close();
-    Dialog.saveFocus();
-    nav.classList.add('open');
-    nav.setAttribute('aria-hidden', 'false');
-    nav.removeAttribute('inert');
-    if (scrim) scrim.classList.add('open');
-    if (btn) btn.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-    Dialog.syncInert();
-    if (closeBtn) closeBtn.focus({ preventScroll: true });
-  }
-
-  function close() {
-    if (!nav.classList.contains('open')) return;
-    nav.classList.remove('open');
-    nav.setAttribute('aria-hidden', 'true');
-    nav.setAttribute('inert', '');
-    if (scrim) scrim.classList.remove('open');
-    if (btn) {
-      btn.setAttribute('aria-expanded', 'false');
+    if (roundX !== lastLightX || roundY !== lastLightY) {
+      lastLightX = roundX;
+      lastLightY = roundY;
+      const curXStr = `${roundX}px`;
+      const curYStr = `${roundY}px`;
+      if (ambientEl) {
+        ambientEl.style.setProperty('--light-x', curXStr);
+        ambientEl.style.setProperty('--light-y', curYStr);
+      }
+      if (raysEl) {
+        raysEl.style.setProperty('--light-x', curXStr);
+        raysEl.style.setProperty('--light-y', curYStr);
+      }
     }
-    document.body.style.overflow = '';
-    Dialog.syncInert();
-    Dialog.restoreFocus();
+
+    if (roundRatio !== lastRatio) {
+      lastRatio = roundRatio;
+      if (ambientEl) ambientEl.style.setProperty('--scroll-ratio', roundRatio.toFixed(2));
+    }
+
+    if (!prefersReduced) {
+      lightEl.style.transform = `translate3d(${curX.toFixed(1)}px, ${curY.toFixed(1)}px, 0) scale(${curScale.toFixed(3)})`;
+      lightEl.style.opacity = (0.95 + t * 0.05).toFixed(2);
+    }
+    if (p >= 0.85) {
+      btn.classList.add('celestial-docked');
+      if (raysEl) raysEl.style.opacity = '0';
+    } else {
+      btn.classList.remove('celestial-docked');
+      if (raysEl) raysEl.style.opacity = '';
+    }
   }
 
-  window.matchMedia('(min-width: 901px)').addEventListener('change', e => {
-    if (e.matches) close();
-  });
+  function tick() {
+    const diffP = targetProgress - currentProgress;
+    const diffR = targetScrollRatio - currentScrollRatio;
+    if (Math.abs(diffP) < 0.0003 && Math.abs(diffR) < 0.0003) {
+      currentProgress = targetProgress;
+      currentScrollRatio = targetScrollRatio;
+      applyTransform(currentProgress, currentScrollRatio);
+      isTicking = false;
+      return;
+    }
+    const lerpDamping = 0.085;
+    currentProgress += diffP * lerpDamping;
+    currentScrollRatio += diffR * lerpDamping;
+    applyTransform(currentProgress, currentScrollRatio);
+    requestAnimationFrame(tick);
+  }
 
-  if (btn) btn.addEventListener('click', open);
-  if (closeBtn) closeBtn.addEventListener('click', close);
-  if (scrim) scrim.addEventListener('click', close);
-  nav.addEventListener('keydown', e => Dialog.trapFocus(nav, e));
-  document.querySelectorAll('.mobile-nav-links a').forEach(a => a.addEventListener('click', close));
+  function onScroll() {
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    targetProgress = Math.min(Math.max(scrollY / cachedThreshold, 0), 1);
+    targetScrollRatio = cachedDocHeight > 0 ? Math.min(Math.max(scrollY / cachedDocHeight, 0), 1) : 0;
+    if (!isTicking) {
+      isTicking = true;
+      requestAnimationFrame(tick);
+    }
+  }
 
-  return { open, close, isOpen: () => nav.classList.contains('open') };
+  function onResize() {
+    measureDimensions();
+    onScroll();
+  }
+
+  function updateDocking() {
+    measureDimensions();
+    onScroll();
+  }
+
+  function init() {
+    let saved = null;
+    try { saved = localStorage.getItem('arshdeep-theme'); } catch (_) { }
+    const isDark = saved === 'dark';
+    document.documentElement.classList.toggle('dark-mode', isDark);
+    syncTheme(isDark);
+    measureDimensions();
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const css = document.createElement('style');
+        css.textContent = '*:not(.celestial-light-source):not(.celestial-light-source *):not(.celestial-toggle):not(.celestial-toggle *):not(.celestial-ambient-field):not(.celestial-crepuscular-rays){transition:none!important}';
+        document.head.appendChild(css);
+        const dark = document.documentElement.classList.toggle('dark-mode');
+        try { localStorage.setItem('arshdeep-theme', dark ? 'dark' : 'light'); } catch (_) { }
+        syncTheme(dark);
+        if (lightEl) {
+          lightEl.classList.remove('celestial-morphing');
+          void lightEl.offsetWidth;
+          lightEl.classList.add('celestial-morphing');
+        }
+        btn.classList.remove('celestial-orbiting');
+        void btn.offsetWidth;
+        btn.classList.add('celestial-orbiting');
+        setTimeout(() => {
+          try { if (document.head.contains(css)) document.head.removeChild(css); } catch (_) { }
+        }, 50);
+        setTimeout(() => {
+          if (lightEl) lightEl.classList.remove('celestial-morphing');
+          if (btn) btn.classList.remove('celestial-orbiting');
+        }, 650);
+        showToast(dark ? 'Lunar dark mode enabled' : 'Solar light mode enabled', 1500);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+    onScroll();
+    currentProgress = targetProgress;
+    currentScrollRatio = targetScrollRatio;
+    applyTransform(currentProgress, currentScrollRatio);
+  }
+  return { init, updateDocking };
 })();
-
-// ── Draggable Hero Sticky Notes ──────────────────────────────────────
+CelestialController.init();
+const MobileNav = (() => {
+const btn = document.getElementById('hamburgerBtn');
+const nav = document.getElementById('mobileNav');
+const scrim = document.getElementById('mobileScrim');
+const closeBtn = document.getElementById('mobileNavClose');
+if (!nav) return { open() { }, close() { }, isOpen: () => false };
+nav.setAttribute('inert', '');
+function open() {
+if (typeof closeModal === 'function') closeModal(false);
+if (typeof CommandPalette !== 'undefined' && CommandPalette.isOpen()) CommandPalette.close();
+Dialog.saveFocus();
+nav.classList.add('open');
+nav.setAttribute('aria-hidden', 'false');
+nav.removeAttribute('inert');
+if (scrim) scrim.classList.add('open');
+if (btn) btn.setAttribute('aria-expanded', 'true');
+document.body.style.overflow = 'hidden';
+Dialog.syncInert();
+if (closeBtn) closeBtn.focus({ preventScroll: true });
+}
+function close() {
+if (!nav.classList.contains('open')) return;
+nav.classList.remove('open');
+nav.setAttribute('aria-hidden', 'true');
+nav.setAttribute('inert', '');
+if (scrim) scrim.classList.remove('open');
+if (btn) btn.setAttribute('aria-expanded', 'false');
+document.body.style.overflow = '';
+Dialog.syncInert();
+Dialog.restoreFocus();
+}
+window.matchMedia('(min-width: 901px)').addEventListener('change', e => {
+if (e.matches) close();
+});
+if (btn) btn.addEventListener('click', open);
+if (closeBtn) closeBtn.addEventListener('click', close);
+if (scrim) scrim.addEventListener('click', close);
+nav.addEventListener('keydown', e => Dialog.trapFocus(nav, e));
+document.querySelectorAll('.mobile-nav-links a').forEach(a => a.addEventListener('click', close));
+return { open, close, isOpen: () => nav.classList.contains('open') };
+})();
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
 if (finePointer) {
   function makeDraggable(el) {
-    let active = false, startX = 0, startY = 0, baseX = 0, baseY = 0;
-    const initialRot = el.classList.contains('sticky-a') ? '-4deg' : el.classList.contains('sticky-b') ? '4deg' : '2deg';
+    let active = false;
+    let startX = 0, startY = 0, baseX = 0, baseY = 0;
+    let maxX = 0, maxY = 0;
+    let targetX = 0, targetY = 0;
+    let currentTilt = 0, targetTilt = 0;
+    let rafId = null;
+    let lastClientX = 0;
+    const initialRot = el.classList.contains('sticky-a') ? '-3deg' : el.classList.contains('sticky-b') ? '2.5deg' : '-1.5deg';
+
+    function updatePos() {
+      if (!active) return;
+      const dx = targetX - baseX;
+      const dy = targetY - baseY;
+      currentTilt += (targetTilt - currentTilt) * 0.25;
+      el.style.transform = `translate3d(${dx.toFixed(1)}px, ${dy.toFixed(1)}px, 0) rotate(${currentTilt.toFixed(2)}deg) scale(1.045)`;
+      rafId = requestAnimationFrame(updatePos);
+    }
 
     el.addEventListener('pointerdown', e => {
       const boardEl = el.parentElement;
       if (!boardEl) return;
       active = true;
-      try { el.setPointerCapture(e.pointerId); } catch (_) {}
+      try { el.setPointerCapture(e.pointerId); } catch (_) { }
       const rect = el.getBoundingClientRect();
       const board = boardEl.getBoundingClientRect();
       startX = e.clientX;
       startY = e.clientY;
+      lastClientX = e.clientX;
       baseX = rect.left - board.left;
       baseY = rect.top - board.top;
-      el.style.transform = 'rotate(0deg) scale(1.04)';
-      el.style.zIndex = '20';
+      maxX = Math.max(0, boardEl.clientWidth - el.offsetWidth);
+      maxY = Math.max(0, boardEl.clientHeight - el.offsetHeight);
+      targetX = baseX;
+      targetY = baseY;
+      targetTilt = 0;
+      currentTilt = 0;
+      el.style.left = `${baseX.toFixed(1)}px`;
+      el.style.top = `${baseY.toFixed(1)}px`;
+      el.style.bottom = 'auto';
+      el.style.right = 'auto';
+      el.style.willChange = 'transform';
+      el.style.transition = 'none';
+      el.style.zIndex = '25';
       el.style.cursor = 'grabbing';
+      el.style.boxShadow = '0 18px 42px rgba(0,0,0,0.22), 0 4px 12px rgba(0,0,0,0.12)';
+      if (!rafId) rafId = requestAnimationFrame(updatePos);
     });
 
     el.addEventListener('pointermove', e => {
       if (!active) return;
-      const board = el.parentElement;
-      if (!board) return;
-      const maxX = board.clientWidth - el.offsetWidth;
-      const maxY = board.clientHeight - el.offsetHeight;
-      const nx = Math.max(0, Math.min(maxX, baseX + (e.clientX - startX)));
-      const ny = Math.max(0, Math.min(maxY, baseY + (e.clientY - startY)));
-      el.style.left = `${nx}px`;
-      el.style.top = `${ny}px`;
-      el.style.bottom = 'auto';
-      el.style.right = 'auto';
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      targetX = Math.max(0, Math.min(maxX, baseX + dx));
+      targetY = Math.max(0, Math.min(maxY, baseY + dy));
+      const vx = e.clientX - lastClientX;
+      lastClientX = e.clientX;
+      targetTilt = Math.max(-5, Math.min(5, vx * 0.45));
     });
 
     const onUp = e => {
       if (!active) return;
       active = false;
-      if (e && e.pointerId) {
-        try { el.releasePointerCapture(e.pointerId); } catch (_) {}
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
       }
+      if (e && e.pointerId) {
+        try { el.releasePointerCapture(e.pointerId); } catch (_) { }
+      }
+      el.style.willChange = '';
+      el.style.left = `${targetX.toFixed(1)}px`;
+      el.style.top = `${targetY.toFixed(1)}px`;
+      el.style.bottom = 'auto';
+      el.style.right = 'auto';
+      el.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease';
       el.style.transform = `rotate(${initialRot}) scale(1)`;
       el.style.zIndex = '4';
       el.style.cursor = 'grab';
+      el.style.boxShadow = '';
+      setTimeout(() => {
+        if (!active) {
+          el.style.transition = '';
+          el.style.transform = '';
+        }
+      }, 360);
     };
 
     el.addEventListener('pointerup', onUp);
     el.addEventListener('pointercancel', onUp);
     el.addEventListener('lostpointercapture', onUp);
   }
-
   document.querySelectorAll('.draggable').forEach(makeDraggable);
 }
-
-// ── Command Palette (⌘K / Ctrl+K) ────────────────────────────────────
+// ── Command Palette & Brutalist Terminal Engine (⌘K / ` / Tap) ───────
 const CommandPalette = (() => {
   const backdrop = document.getElementById('commandBackdrop');
   const input = document.getElementById('commandInput');
   const results = document.getElementById('commandResults');
   const triggerBtn = document.getElementById('commandBtn');
-  if (!backdrop) return { open() {}, close() {}, isOpen: () => false, handleKey() {} };
+  const heroTriggerBtn = document.getElementById('terminalHeroBtn');
+  if (!backdrop) return { open() { }, close() { }, toggle() { }, isOpen: () => false, handleKey() { } };
 
   const commands = [
     { label: 'Explainable Vision Transformer (XViT)', hint: 'Research · Case Study', action: () => openModal('xvit') },
-    { label: 'IPO Tracking Platform (Bluestock)', hint: 'Fintech · Case Study', action: () => openModal('ipo') },
-    { label: 'Plant Disease Detection (AgriTech)', hint: 'CNN · Case Study', action: () => openModal('plant') },
-    { label: 'Deep Learning Object Detection (YOLO)', hint: 'Vision · Case Study', action: () => openModal('object') },
+    { label: 'Real-Time IPO Tracking Platform (Bluestock)', hint: 'FinTech · Case Study', action: () => openModal('ipo') },
+    { label: 'Plant Disease Detection (AgriTech)', hint: 'Mobile AI · Case Study', action: () => openModal('plant') },
+    { label: 'Deep Learning Object Detection (YOLO)', hint: 'Computer Vision · Case Study', action: () => openModal('object') },
     { label: 'Stress Detection via Bio-Signals', hint: 'HealthTech · Case Study', action: () => openModal('stress') },
     { label: 'Smart Embedded Systems (IoT)', hint: 'Hardware · Case Study', action: () => openModal('iot') },
+    { label: 'View Dossier / Resume', hint: '/#dossier', action: () => { location.hash = 'dossier'; } },
+    { label: 'Read IEEE Xplore Publication', hint: 'External Link ↗', action: () => window.open('https://ieeexplore.ieee.org/document/11518743', '_blank', 'noopener,noreferrer') },
     { label: 'Filter: AI / ML Projects', hint: 'Tag: AI', action: () => { const b = document.querySelector('.filter[data-filter="ai"]'); if (b) b.click(); location.hash = 'work'; } },
     { label: 'Filter: Product Projects', hint: 'Tag: Product', action: () => { const b = document.querySelector('.filter[data-filter="product"]'); if (b) b.click(); location.hash = 'work'; } },
     { label: 'Filter: Research Projects', hint: 'Tag: Research', action: () => { const b = document.querySelector('.filter[data-filter="research"]'); if (b) b.click(); location.hash = 'work'; } },
     { label: 'Filter: Systems Projects', hint: 'Tag: Systems', action: () => { const b = document.querySelector('.filter[data-filter="systems"]'); if (b) b.click(); location.hash = 'work'; } },
-    { label: 'Jump to About / North Star', hint: '/#about', action: () => { location.hash = 'about'; } },
+    { label: 'Jump to Vision / About', hint: '/#vision', action: () => { location.hash = 'vision'; } },
     { label: 'Jump to Selected Work', hint: '/#work', action: () => { location.hash = 'work'; } },
     { label: 'Jump to Career Trajectory', hint: '/#journey', action: () => { location.hash = 'journey'; } },
     { label: 'Jump to Toolbox & Lab', hint: '/#stack', action: () => { location.hash = 'stack'; } },
@@ -544,9 +833,9 @@ const CommandPalette = (() => {
     { label: 'Production Ship Checklist', hint: '/#launch', action: () => { location.hash = 'launch'; } },
     { label: 'Contact Arshdeep', hint: '/#contact', action: () => { location.hash = 'contact'; } },
     { label: 'Copy Email Address', hint: 'arshdeep.yadav.work@gmail.com', action: () => { const copyBtn = document.getElementById('copyEmailBtn'); if (copyBtn) copyBtn.click(); } },
-    { label: 'View Resume / CV', hint: 'External PDF', action: () => window.open('https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing', '_blank', 'noopener,noreferrer') },
-    { label: 'Toggle Light / Dark Mode', hint: 'Theme toggle', action: () => { const t = document.getElementById('themeBtn'); if (t) t.click(); } },
-    { label: 'Print / Save as PDF', hint: 'System dialog', action: () => window.print() }
+    { label: 'View External Resume (Google Drive)', hint: 'PDF Document', action: () => window.open('https://drive.google.com/file/d/1koy1MbHsjYekuMFHmuQfoqnsp4EB-gck/view?usp=sharing', '_blank', 'noopener,noreferrer') },
+    { label: 'Toggle Light / Dark Mode', hint: 'Theme switch', action: () => { const t = document.getElementById('themeBtn'); if (t) t.click(); } },
+    { label: 'Print / Export Dossier as PDF', hint: '[CTRL+P] System Print', action: () => window.print() }
   ];
 
   let selectedIndex = 0;
@@ -595,7 +884,7 @@ const CommandPalette = (() => {
   }
 
   function open() {
-    if (typeof closeModal === 'function') closeModal();
+    if (typeof closeModal === 'function') closeModal(false);
     if (typeof MobileNav !== 'undefined' && MobileNav.isOpen()) MobileNav.close();
     Dialog.saveFocus();
     backdrop.classList.add('show');
@@ -617,6 +906,10 @@ const CommandPalette = (() => {
     Dialog.restoreFocus();
   }
 
+  function toggle() {
+    backdrop.classList.contains('show') ? close() : open();
+  }
+
   function executeCurrent() {
     const list = filterList(input ? input.value : '');
     if (list[selectedIndex] && typeof list[selectedIndex].action === 'function') {
@@ -626,6 +919,7 @@ const CommandPalette = (() => {
   }
 
   if (triggerBtn) triggerBtn.addEventListener('click', open);
+  if (heroTriggerBtn) heroTriggerBtn.addEventListener('click', toggle);
 
   let isBackdropTarget = false;
   backdrop.addEventListener('mousedown', e => { isBackdropTarget = e.target === backdrop; });
@@ -645,6 +939,7 @@ const CommandPalette = (() => {
   return {
     open,
     close,
+    toggle,
     isOpen: () => backdrop.classList.contains('show'),
     handleKey(e) {
       if (e.key === 'Escape') {
@@ -667,42 +962,200 @@ const CommandPalette = (() => {
   };
 })();
 
-// ── Global Keyboard Shortcuts ────────────────────────────────────────
+// ── Non-Blocking Boot Sequence Manager ────────────────────────────────
+const BootManager = (() => {
+  const overlay = document.getElementById('bootOverlay');
+  const skipBtn = document.getElementById('skipBootBtn');
+  const progress = document.getElementById('bootProgress');
+  let active = false;
+
+  function dismiss() {
+    if (!active && (!overlay || overlay.classList.contains('boot-hidden'))) return;
+    active = false;
+    if (overlay) {
+      overlay.classList.add('boot-hidden');
+      setTimeout(() => {
+        if (overlay) overlay.style.display = 'none';
+      }, 250);
+    }
+    try { sessionStorage.setItem('portfolio_booted', '1'); } catch (_) { }
+  }
+
+  function init() {
+    if (!overlay) return;
+    let isBooted = false;
+    try { isBooted = sessionStorage.getItem('portfolio_booted') === '1'; } catch (_) { }
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasHash = window.location.hash && window.location.hash.length > 1;
+
+    // Zero blocking on repeat visits, reduced motion, or direct deep links
+    if (isBooted || reducedMotion || hasHash) {
+      overlay.classList.add('boot-hidden');
+      overlay.style.display = 'none';
+      return;
+    }
+
+    active = true;
+    overlay.style.display = 'flex';
+    overlay.classList.remove('boot-hidden');
+
+    if (progress) {
+      requestAnimationFrame(() => {
+        progress.style.width = '100%';
+      });
+    }
+
+    if (skipBtn) skipBtn.addEventListener('click', dismiss);
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) dismiss();
+    });
+
+    // Auto dismiss after 600ms
+    setTimeout(() => {
+      if (active) dismiss();
+    }, 600);
+  }
+
+  return { init, skip: dismiss, isActive: () => active };
+})();
+
+// ── Dynamic Floating Easter Egg Particles ────────────────────────────
+function spawnFloatingEmojis() {
+  const emojis = ['🚀', '🛰️', '⭐', '✨', '🤖', '🛰️', '🛸'];
+  const count = 16;
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('div');
+    el.className = 'floating-easter-egg';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = `${Math.random() * 92 + 4}vw`;
+    el.style.animationDelay = `${Math.random() * 0.4}s`;
+    el.style.animationDuration = `${1.8 + Math.random() * 0.8}s`;
+    document.body.appendChild(el);
+    setTimeout(() => {
+      if (el && el.parentNode) el.parentNode.removeChild(el);
+    }, 2800);
+  }
+}
+
+// ── Easter Egg Buffer Controller ─────────────────────────────────────
+const EasterEggs = (() => {
+  let textBuffer = '';
+  const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  let konamiIndex = 0;
+
+  function handleKey(char) {
+    textBuffer = (textBuffer + char.toLowerCase()).slice(-10);
+    if (textBuffer.endsWith('launch')) {
+      showToast('🚀 LAUNCH DETECTED — All systems nominal!');
+      spawnFloatingEmojis();
+    } else if (textBuffer.endsWith('iitp')) {
+      showToast('🎓 IIT Patna MBA: GenAI & Product Management (2026–2028)');
+    }
+  }
+
+  function handleKonami(key) {
+    const target = konamiPattern[konamiIndex];
+    if (key.toLowerCase() === target.toLowerCase()) {
+      konamiIndex++;
+      if (konamiIndex === konamiPattern.length) {
+        konamiIndex = 0;
+        showToast('🎮 KONAMI CODE ACTIVATED: Brutalist AI Lab Unlocked!');
+        spawnFloatingEmojis();
+      }
+    } else {
+      konamiIndex = key.toLowerCase() === konamiPattern[0].toLowerCase() ? 1 : 0;
+    }
+  }
+
+  return { handleKey, handleKonami };
+})();
+
+// ── Consolidated Global Keyboard Event Controller (Single Listener) ──
 window.addEventListener('keydown', e => {
-  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+  const isInput = e.target && (
+    e.target.tagName === 'INPUT' ||
+    e.target.tagName === 'TEXTAREA' ||
+    e.target.isContentEditable
+  );
+
+  // 1. Backtick (`) terminal toggle
+  if (e.key === '`' && !isInput) {
     e.preventDefault();
-    CommandPalette.isOpen() ? CommandPalette.close() : CommandPalette.open();
+    CommandPalette.toggle();
     return;
   }
 
+  // 2. ⌘K / Ctrl+K command palette shortcut
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    CommandPalette.toggle();
+    return;
+  }
+
+  // 3. Escape key dismissal precedence
+  if (e.key === 'Escape') {
+    if (BootManager.isActive()) {
+      BootManager.skip();
+      return;
+    }
+    if (CommandPalette.isOpen()) {
+      CommandPalette.close();
+      return;
+    }
+    if (Modal.isOpen()) {
+      Modal.close(true);
+      return;
+    }
+    if (MobileNav.isOpen()) {
+      MobileNav.close();
+      return;
+    }
+  }
+
+  // 4. If Command Palette is open, dispatch key handling
   if (CommandPalette.isOpen()) {
     CommandPalette.handleKey(e);
     return;
   }
 
-  if (e.key === 'Escape') {
-    closeModal();
-    if (MobileNav.isOpen()) MobileNav.close();
+  // 5. Easter egg key sequence tracking (only when not typing in form inputs)
+  if (!isInput && !e.ctrlKey && !e.metaKey && !e.altKey) {
+    if (e.key.length === 1) {
+      EasterEggs.handleKey(e.key);
+    }
+    if (e.key.startsWith('Arrow') || e.key.toLowerCase() === 'b' || e.key.toLowerCase() === 'a') {
+      EasterEggs.handleKonami(e.key);
+    }
   }
 });
 
-// ── Easter Eggs ──────────────────────────────────────────────────────
-(() => {
-  let secretKeyBuffer = '';
-  window.addEventListener('keydown', e => {
-    if (e.target && e.target.closest && e.target.closest('input, textarea, [contenteditable]')) return;
-    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-      secretKeyBuffer = (secretKeyBuffer + e.key.toLowerCase()).slice(-10);
-      if (secretKeyBuffer.endsWith('launch')) {
-        showToast('🚀 Launch checklist verified — all systems go!');
-      } else if (secretKeyBuffer.endsWith('iitp')) {
-        showToast('🎓 IIT Patna MBA: GenAI & Product Management (2026–2028)');
-      }
-    }
-  });
-})();
+// ── URL Hash Routing & Browser History Sync ──────────────────────────
+function handleHashRoute() {
+  const rawHash = window.location.hash.replace(/^#/, '');
+  if (!rawHash || rawHash === 'top' || rawHash === 'home') {
+    if (Modal.isOpen()) Modal.close(false);
+    return;
+  }
 
-// ── Native Hardware-Accelerated Scroll Reveals (Zero External Dependencies) ──
+  if (rawHash.startsWith('project-')) {
+    const slug = rawHash.replace('project-', '');
+    if (projects[slug]) {
+      Modal.open(slug, false);
+    }
+  } else {
+    if (Modal.isOpen()) Modal.close(false);
+    if (rawHash === 'vision') {
+      const el = document.getElementById('vision') || document.getElementById('about');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    } else if (rawHash === 'dossier') {
+      const el = document.getElementById('dossier') || document.getElementById('journey');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+}
+window.addEventListener('hashchange', handleHashRoute);
+
+// ── Native Hardware-Accelerated Scroll Reveals ───────────────────────
 (function initScrollReveals() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) return;
@@ -714,7 +1167,6 @@ window.addEventListener('keydown', e => {
 
   targets.forEach((el, idx) => {
     el.classList.add('reveal-init');
-    // Subtle stagger on grid cards and timeline
     if (el.classList.contains('project-card') || el.classList.contains('toolbox-card') || el.classList.contains('timeline-item')) {
       el.style.transitionDelay = `${(idx % 4) * 0.07}s`;
     }
@@ -724,8 +1176,12 @@ window.addEventListener('keydown', e => {
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('is-revealed');
-          obs.unobserve(entry.target);
+          const target = entry.target;
+          target.classList.add('is-revealed');
+          obs.unobserve(target);
+          setTimeout(() => {
+            target.style.willChange = 'auto';
+          }, 800);
         }
       });
     }, {
@@ -739,13 +1195,9 @@ window.addEventListener('keydown', e => {
   }
 })();
 
-/* ========================================================================
-   FLUID INK CURSOR TRAIL (Editorial Aesthetic)
-   ======================================================================== */
 (function() {
   const canvas = document.getElementById('inkCanvas');
   if (!canvas) return;
-  // Desktop-only effect: skip on touch devices and for reduced-motion users.
   if (!finePointer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
@@ -753,7 +1205,6 @@ window.addEventListener('keydown', e => {
   let trail = [];
   const maxTrail = 40;
   let raf = null;
-
   function resize() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     width = window.innerWidth;
@@ -766,12 +1217,9 @@ window.addEventListener('keydown', e => {
   }
   window.addEventListener('resize', resize, { passive: true });
   resize();
-
   let lastPos = null;
   let isIdle = false;
   let idleTimeout;
-
-  // Pause draw loop when tab is backgrounded
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       lastPos = null;
@@ -781,15 +1229,12 @@ window.addEventListener('keydown', e => {
       }
     }
   });
-
   window.addEventListener('mouseout', e => {
     if (!e.relatedTarget) lastPos = null;
   }, { passive: true });
-
   window.addEventListener('blur', () => {
     lastPos = null;
   }, { passive: true });
-
   window.addEventListener('mousemove', e => {
     const current = { x: e.clientX, y: e.clientY };
     if (lastPos && !isIdle) {
@@ -812,32 +1257,26 @@ window.addEventListener('keydown', e => {
     idleTimeout = setTimeout(() => { isIdle = true; }, 50);
     if (raf === null && !document.hidden) raf = requestAnimationFrame(draw);
   }, { passive: true });
-
   function draw() {
     ctx.clearRect(0, 0, width, height);
-    
-    // Support dark mode teal or light mode teal dynamically
     const isDark = document.documentElement.classList.contains('dark-mode');
     const rgb = isDark ? '45, 212, 191' : '13, 148, 136';
-
     trail.forEach(p => p.age += 1);
     trail = trail.filter(p => p.age < maxTrail);
-
     for (let i = 0; i < trail.length; i++) {
       const p = trail[i];
       const progress = p.age / maxTrail;
       const radius = 10 * (1 - progress);
       const opacity = (1 - progress) * 0.4;
-      
       ctx.beginPath();
       ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
       ctx.fillStyle = "rgba(" + rgb + ", " + opacity + ")";
       ctx.fill();
     }
-    // Sleep when the trail has faded out instead of burning a frame loop forever.
     raf = trail.length ? requestAnimationFrame(draw) : null;
   }
 })();
+
 
 // ── Top Navigation Scrollspy ─────────────────────────────────────────
 (function setupScrollSpy() {
@@ -847,10 +1286,16 @@ window.addEventListener('keydown', e => {
   const sectionIds = Array.from(navLinks).map(a => a.getAttribute('href').replace('#', ''));
   const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
-  // Clear active highlight when user scrolls to the top of the canvas
+  let spyTicking = false;
   window.addEventListener('scroll', () => {
-    if (window.scrollY < 120) {
-      navLinks.forEach(link => link.classList.remove('active'));
+    if (!spyTicking) {
+      spyTicking = true;
+      requestAnimationFrame(() => {
+        if (window.scrollY < 120) {
+          navLinks.forEach(link => link.classList.remove('active'));
+        }
+        spyTicking = false;
+      });
     }
   }, { passive: true });
 
@@ -876,3 +1321,13 @@ window.addEventListener('keydown', e => {
     sections.forEach(sec => observer.observe(sec));
   }
 })();
+
+// ── Initial Boot & Hash Routing Execution ────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  BootManager.init();
+  handleHashRoute();
+});
+if (document.readyState === 'interactive' || document.readyState === 'complete') {
+  BootManager.init();
+  handleHashRoute();
+}

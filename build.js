@@ -17,32 +17,51 @@ function minifyCSS(css) {
     .trim();
 }
 
-// 2. Minify JS helper
+// 2. Minify JS helper (preserving multiline template literals and ASCII schematics)
 function minifyJS(js) {
   const lines = js.split('\n');
   const cleaned = [];
   let inMulti = false;
+  let inBacktick = false;
 
   for (let line of lines) {
-    let s = line.trim();
+    let s = line;
+
     if (inMulti) {
       if (s.includes('*/')) {
         inMulti = false;
-        s = s.split('*/')[1].trim();
+        s = s.split('*/')[1];
       } else {
         continue;
       }
     }
-    if (s.includes('/*') && !inMulti) {
+    if (s.includes('/*') && !inMulti && !inBacktick) {
       if (s.includes('*/')) {
-        s = s.replace(/\/\*[\s\S]*?\*\//g, '').trim();
+        s = s.replace(/\/\*[\s\S]*?\*\//g, '');
       } else {
         inMulti = true;
-        s = s.split('/*')[0].trim();
+        s = s.split('/*')[0];
       }
     }
-    if (s.startsWith('//') || !s) continue;
-    cleaned.push(s);
+
+    const backticks = (s.match(/(?<!\\)`/g) || []).length;
+    if (inBacktick) {
+      if (backticks % 2 === 1) {
+        inBacktick = false;
+      }
+      cleaned.push(s);
+      continue;
+    }
+
+    if (backticks % 2 === 1) {
+      inBacktick = true;
+      cleaned.push(s);
+      continue;
+    }
+
+    const trimmed = s.trim();
+    if (trimmed.startsWith('//') || !trimmed) continue;
+    cleaned.push(trimmed);
   }
 
   return cleaned.join('\n');
@@ -60,29 +79,30 @@ const minJS = minifyJS(rawJS);
 fs.writeFileSync('styles.min.css', minCSS, 'utf8');
 fs.writeFileSync('app.min.js', minJS, 'utf8');
 
-// Update index.html to ensure clean link to styles.min.css
-let html = fs.readFileSync('index.html', 'utf8');
-
-// Remove brittle inline critical-css block to let styles.min.css render cleanly and deterministically
-const critRegex = /<style id="critical-css">[\s\S]*?<\/style>\s*/;
-if (critRegex.test(html)) {
-  html = html.replace(critRegex, '');
-}
-
-// Ensure clean link rel="stylesheet"
-html = html.replace(
-  /(<link rel="preload" href="styles\.min\.css[^"]*" as="style"[^>]*>\s*(<noscript><link rel="stylesheet"[^>]*><\/noscript>)?|<link rel="stylesheet" href="styles\.min\.css[^"]*">)/,
-  '<link rel="stylesheet" href="styles.min.css?v=3.7">'
-);
-
-// Ensure clean app.min.js version query
-html = html.replace(/app\.min\.js\?v=[0-9\.]+/, 'app.min.js?v=3.7');
-
-fs.writeFileSync('index.html', html, 'utf8');
+// Update all HTML files to ensure clean link to styles.min.css and app.min.js
+['index.html', '404.html', 'privacy.html', 'terms.html'].forEach(filePath => {
+  if (!fs.existsSync(filePath)) return;
+  let doc = fs.readFileSync(filePath, 'utf8');
+  if (filePath === 'index.html') {
+    const critRegex = /<style id="critical-css">[\s\S]*?<\/style>\s*/;
+    if (critRegex.test(doc)) {
+      doc = doc.replace(critRegex, '');
+    }
+    doc = doc.replace(
+      /(<link rel="preload" href="styles\.min\.css[^"]*" as="style"[^>]*>\s*(<noscript><link rel="stylesheet"[^>]*><\/noscript>)?|<link rel="stylesheet" href="styles\.min\.css[^"]*">)/,
+      '<link rel="stylesheet" href="styles.min.css?v=4.5">'
+    );
+  } else {
+    doc = doc.replace(/styles\.min\.css(\?v=[0-9\.]+)?/, 'styles.min.css?v=4.5');
+  }
+  doc = doc.replace(/app\.min\.js(\?v=[0-9\.]+)?/, 'app.min.js?v=4.5');
+  fs.writeFileSync(filePath, doc, 'utf8');
+});
 
 // Measure and report
 console.log('\n=== BUILD REPORT & PACKET BUDGET ===');
-['index.html', 'styles.min.css', 'app.min.js'].forEach(f => {
+['index.html', 'styles.min.css', 'app.min.js', 'print.css'].forEach(f => {
+  if (!fs.existsSync(f)) return;
   const buf = fs.readFileSync(f);
   const gz = zlib.gzipSync(buf, { level: 9 });
   const br = zlib.brotliCompressSync(buf);

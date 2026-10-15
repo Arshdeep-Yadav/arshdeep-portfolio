@@ -2,6 +2,41 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.arshdeep.works"
+        }
+      ],
+      "destination": "https://arshdeep.works/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "arshdeepyadav.cv"
+        }
+      ],
+      "destination": "https://arshdeep.works/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.arshdeepyadav.cv"
+        }
+      ],
+      "destination": "https://arshdeep.works/$1",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -42,7 +77,7 @@
       ]
     },
     {
-      "source": "/(styles\\.css|app\\.js|styles\\.min\\.css|app\\.min\\.js)",
+      "source": "/(styles\\.css|app\\.js|styles\\.min\\.css|app\\.min\\.js|print\\.css)",
       "headers": [
         {
           "key": "Cache-Control",

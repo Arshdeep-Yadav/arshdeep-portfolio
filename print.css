@@ -1,0 +1,53 @@
+/* ══════════════════════════════════════════════════════════════════════
+   ARSHDEEP PORTFOLIO — STANDALONE PRINT STYLESHEET
+   Extracted from styles.css for non-blocking rendering performance.
+   Loaded exclusively via: <link rel="stylesheet" href="print.css" media="print" />
+   ══════════════════════════════════════════════════════════════════════ */
+
+@media print {
+  .topbar,
+  #inkCanvas,
+  .grain,
+  .hero-cta-row,
+  .hero-recruiter-bar,
+  .filter-row,
+  .floating-caption,
+  .footer-links,
+  .modal-backdrop,
+  .command-backdrop,
+  .mobile-nav,
+  .mobile-nav-scrim,
+  .hamburger,
+  .board-chip,
+  .rank-tape,
+  .boot-overlay,
+  .toast {
+    display: none !important;
+  }
+
+  .hero {
+    min-height: 0;
+    padding: 20px 0;
+  }
+
+  .project-card,
+  .check-card,
+  .timeline-item,
+  .toolbox-card {
+    break-inside: avoid;
+  }
+
+  .section-shell {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .marquee-band {
+    display: none !important;
+  }
+}
